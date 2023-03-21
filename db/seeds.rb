@@ -28,7 +28,9 @@ elise_item_1.save
 elise_item_2.save
 elise_request = Request.create(title: "Hiking Boots", description: "I am going hiking in Patagonia in July, does anyone have any size 6 hiking boots I could borrow?", user_id: elise.id)
 
-
 emma = User.create(email: "emma@example.com", password: "emma_password", first_name: "Emma", last_name: "M")
-emma_request = Request.create(title: "Red Dress", description: "I need a dress for Charles birthday party next weekend. I want to wear my new red heels so would love a red dress to go with", user_id: emma.id)
+emma_request = Request.create(title: "Red Dress", description: "I need a dress for Charles birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id)
 emma_request.save
+
+suggestion_1 = Suggestion.create(request_id: emma_request.id, item_id: marie_item.id)
+suggestion_2 = Suggestion.create(request_id: emma_request.id, item_id: paul_item.id)
