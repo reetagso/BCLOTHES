@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # before_action :configure_permitted_parameters, if: :devise_controller?
   has_many :items
   has_many :requests
+  has_many :messages
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
@@ -15,5 +16,4 @@ class User < ApplicationRecord
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name])
   end
-
 end
