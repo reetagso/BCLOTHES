@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :requests, through: :suggestions
 
   COLOURS = %w[Multi Black White Green Pink Blue Red Brown Yellow Orange Purple Navy Grey Gold Silver]
-  OCCASIONS = %w[Wedding]
+  OCCASIONS = %w[Wedding Festival Workwear Modest Partywear Summer Winter Other]
   # CATEGORIES = %w[Clothing Accessories]
   CATEGORY_TYPES = %w[Coats Jackets Knitwear Dresses Tracksuits Tops Shirts Shorts Trousers Denim Sportswear Suits Skirt Bag Shoes Jewellery]
   CONDITIONS = ["Past its best", "Used but good", "Like new"]

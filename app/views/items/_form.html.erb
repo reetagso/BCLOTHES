@@ -2,12 +2,12 @@
 
 <%= simple_form_for(item) do |f| %>
   <%= f.input :size %>
-  <%= f.input :colour %>
-  <%= f.input :occasion %>
-  <%= f.input :category %>
-  <%= f.input :category_type %>
+  <%= f.input :colour, as: :select, collection: Item::COLOURS %>
+  <%= f.input :occasion, as: :select, collection: Item::OCCASIONS %>
+  <%= f.input :category, as: :select %>
+  <%= f.input :category_type, as: :select, collection: Item::CATEGORY_TYPES %>
   <%= f.input :brand %>
-  <%= f.input :condition %>
+  <%= f.input :condition, as: :select, collection: Item::CONDITIONS %>
   <%= f.input :description, as: :text %>
-  <%= f.submit 'New item' %>
+  <%= f.submit 'Add item to wardrobe' %>
 <% end %>
