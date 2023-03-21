@@ -19,7 +19,11 @@
 
   <body>
   <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
+  <%= render partial: 'shared/request_card_preview' %>
+  <%= render "shared/flashes" %>
+ 
+
+
 
     <%= yield %>
   </body>

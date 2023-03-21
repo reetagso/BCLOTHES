@@ -1,0 +1,88 @@
+body {
+    font-family: Inter, sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.card {
+    background-color: #f2f2f2;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.bg-grey {
+    background-color: #ccc;
+}
+
+.row {
+    height: 100%;
+    width: 100%;
+}
+
+.col-md-2 {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.col-md-2 .profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid#ffff;
+    background-color: #000;
+}
+
+.col-md-2 .name {
+    margin-bottom: 5px;
+}
+
+.col-md-8 {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #ffff;
+}
+
+.col-md-8 .title {
+    margin-bottom: 5px;
+}
+
+.col-md-2 {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    width: 79px;
+    height: 41px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+}
