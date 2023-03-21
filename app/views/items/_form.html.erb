@@ -9,5 +9,6 @@
   <%= f.input :brand %>
   <%= f.input :condition %>
   <%= f.input :description, as: :text %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true }, wrapper_html: { class: 'form-inputs' } %>
   <%= f.submit 'New item' %>
 <% end %>
