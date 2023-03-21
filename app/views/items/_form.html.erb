@@ -8,7 +8,6 @@
   <%= f.input :category_type %>
   <%= f.input :brand %>
   <%= f.input :condition %>
-  <%= f.input :description %>
-  <%= f.input :picture %>
-  <%= f.submit %>
+  <%= f.input :description, as: :text %>
+  <%= f.submit 'New item' %>
 <% end %>
