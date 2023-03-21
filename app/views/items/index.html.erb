@@ -1,12 +1,17 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<%# Code to check seed and view working %>
 
 <ul>
 
   <% @items.each do |item| %>
-    <li> <%= User.find(item.user_id)[first_name]%>'s <%= item.category_type%>,
+    <li> <%= User.find(item.user_id)[:first_name]%>'s <%= item.category_type%>,
     <br> <small> <%= item.description%> </small>
+    item id = <%= item.id%><small>
     </li>
   <% end %>
 
 </ul>
+
+<%# TO DO
+
+Create cards
+Add links %>

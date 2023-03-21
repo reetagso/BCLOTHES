@@ -4,6 +4,6 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @request = Item.find(params[:id])
+    @request = Request.find(params[:id])
   end
 end
