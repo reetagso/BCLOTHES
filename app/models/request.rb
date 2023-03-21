@@ -1,5 +1,6 @@
 class Request < ApplicationRecord
   belongs_to :user
+  has_many :suggestions
   # belongs_to :item
   STATUSES = ["Open", "Item Requested", "Closed"]
 
