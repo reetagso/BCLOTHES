@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 Item.destroy_all
+Request.destroy_all
 User.destroy_all
 
 louis = User.create(email: "louis_dupont@example.com", password: "louis_password", first_name: "Louis", last_name: "Dupont")
@@ -21,5 +22,13 @@ paul_item = Item.create(size: "L", colour: "Black", occasion: "Formal", category
 paul_item.save
 
 elise = User.create(email: "elise_girard@example.com", password: "elise_password", first_name: "Elise", last_name: "Girard")
-elise_item = Item.create(size: "M", colour: "Green", occasion: "Sport", category: "Clothes", category_type: "Tops", brand: "Adidas", condition: "Past its best", description: "Adidas green athletic t-shirt", user_id: elise.id)
-elise_item.save
+elise_item_1 = Item.create(size: "M", colour: "Green", occasion: "Sport", category: "Clothes", category_type: "Tops", brand: "Adidas", condition: "Past its best", description: "Adidas green athletic t-shirt", user_id: elise.id)
+elise_item_2 = Item.create(size: "L", colour: "Black", occasion: "Sport", category: "Clothes", category_type: "Trousers", brand: "Adidas", condition: "Past its best", description: "Adidas black athletic trousers", user_id: elise.id)
+elise_item_1.save
+elise_item_2.save
+elise_request = Request.create(title: "Hiking Boots", description: "I am going hiking in Patagonia in July, does anyone have any size 6 hiking boots I could borrow?", user_id: elise.id)
+
+
+emma = User.create(email: "emma@example.com", password: "emma_password", first_name: "Emma", last_name: "M")
+emma_request = Request.create(title: "Red Dress", description: "I need a dress for Charles birthday party next weekend. I want to wear my new red heels so would love a red dress to go with", user_id: emma.id)
+emma_request.save
