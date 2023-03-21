@@ -1,0 +1,14 @@
+<%# input form for creating (new) or editing an item %>
+
+<%= simple_form_for(item) do |f| %>
+  <%= f.input :size %>
+  <%= f.input :colour %>
+  <%= f.input :occasion %>
+  <%= f.input :category %>
+  <%= f.input :category_type %>
+  <%= f.input :brand %>
+  <%= f.input :condition %>
+  <%= f.input :description %>
+  <%= f.input :picture %>
+  <%= f.submit %>
+<% end %>
