@@ -48,7 +48,6 @@ louis_request = Request.create(title: "Wedding suit", description: "Hi Paul, I h
 paul_request = Request.create(title: "Sport shirt", description: "Hola amigo, love this top, could I borrow it from you next Weds?", user_id: paul.id, item_id: louis_item.id, status: "Closed")
 marie_request = Request.create(title: "Beach holiday", description: "Hey does anyone have something I could borrow for beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed")
 
-
 #suggestion seeds
 
 suggestion_1 = Suggestion.create(request_id: emma_request.id, item_id: marie_item.id)
