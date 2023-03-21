@@ -28,5 +28,4 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:size, :colour, :occasion, :category, :brand, :description, photos: [])
   end
 
-
 end
