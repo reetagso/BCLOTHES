@@ -21,18 +21,18 @@ emma = User.create(email: "emma_mannion@example.com", password: "emma_password",
 
 #item seeds
 
-louis_item = Item.create(size: "M", colour: "Blue", occasion: "Casual", category: "Clothes", category_type: "Shirts", brand: "Nike", condition: "Like new", description: "New Nike blue polo shirt", user_id: louis.id)
+louis_item = Item.create(size: 10, colour: "Blue", occasion: "Casual", category: "Clothes", category_type: "Shirts", brand: "Nike", condition: "Like new", description: "New Nike blue polo shirt", user_id: louis.id)
 louis_item.save
-marie_item = Item.create(size: "S", colour: "Red", occasion: "Party", category: "Clothes", category_type: "Dresses", brand: "Gucci", condition: "Used but good", description: "Gucci red cocktail dress", user_id: marie.id)
+marie_item = Item.create(size: 14, colour: "Red", occasion: "Party", category: "Clothes", category_type: "Dresses", brand: "Gucci", condition: "Used but good", description: "Gucci red cocktail dress", user_id: marie.id)
 marie_item.save
-paul_item = Item.create(size: "L", colour: "Black", occasion: "Formal", category: "Clothes", category_type: "Suits", brand: "Armani", condition: "Like new", description: "Armani two-piece black suit", user_id: paul.id)
+paul_item = Item.create(size: 40, colour: "Black", occasion: "Formal", category: "Clothes", category_type: "Suits", brand: "Armani", condition: "Like new", description: "Armani two-piece black suit", user_id: paul.id)
 paul_item.save
-elise_item_1 = Item.create(size: "M", colour: "Green", occasion: "Sport", category: "Clothes", category_type: "Tops", brand: "Adidas", condition: "Past its best", description: "Adidas green athletic t-shirt", user_id: elise.id)
-elise_item_2 = Item.create(size: "L", colour: "Black", occasion: "Sport", category: "Clothes", category_type: "Trousers", brand: "Adidas", condition: "Past its best", description: "Adidas black athletic trousers", user_id: elise.id)
+elise_item_1 = Item.create(size: 8, colour: "Green", occasion: "Sport", category: "Clothes", category_type: "Tops", brand: "Adidas", condition: "Past its best", description: "Adidas green athletic t-shirt", user_id: elise.id)
+elise_item_2 = Item.create(size: 10, colour: "Black", occasion: "Sport", category: "Clothes", category_type: "Trousers", brand: "Adidas", condition: "Past its best", description: "Adidas black athletic trousers", user_id: elise.id)
 elise_item_1.save
 elise_item_2.save
-emma_item_1 = Item.create(size: "S", colour: "White", occasion: "Sport", category: "Shoes", category_type: "Trainers", brand: "Nike", condition: "Used but good", description: "White Nike air force ones", user_id: emma.id)
-emma_item_2 = Item.create(size: "S", colour: "Multi", occasion: "Summer", category: "Skirt", category_type: "Skirt", brand: "Zara", condition: "Used but good", description: "Floaty floral summer dress, loose fit", user_id: emma.id)
+emma_item_1 = Item.create(size: 38, colour: "White", occasion: "Sport", category: "Shoes", category_type: "Trainers", brand: "Nike", condition: "Used but good", description: "White Nike air force ones", user_id: emma.id)
+emma_item_2 = Item.create(size: 8, colour: "Multi", occasion: "Summer", category: "Skirt", category_type: "Skirt", brand: "Zara", condition: "Used but good", description: "Floaty floral summer dress, loose fit", user_id: emma.id)
 
 #request seeds
 
