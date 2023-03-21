@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id
-    authorize @item
     if @item.save
       redirect_to item_path(@item)
     else
