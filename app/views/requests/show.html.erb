@@ -13,7 +13,7 @@
   <% @request.items.each do |item| %>
     <li>
     <%= User.find(item.user_id)[:first_name]%>
-    <%= item.category_type%>,
+    <%= item.category%>,
 
     </li>
   <% end %>
