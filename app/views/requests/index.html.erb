@@ -3,6 +3,13 @@
 
 <ul>
   <% @requests.each do |request| %>
-    <li><%= request.user_id%> - <%= request.start_date%></li>
+    <li><%= User.find(request.user_id)[:first_name]%>
+    <br>
+    <%= request.title%> -
+    <small><%= request.description%></small>
+    <br>
+    request id = <%= request.id%>
+    </li>
   <% end %>
 </ul>
+k
