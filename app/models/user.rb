@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # before_action :configure_permitted_parameters, if: :devise_controller?
+  has_many :items
+  has_many :requests
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
