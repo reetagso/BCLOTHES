@@ -3,7 +3,7 @@
 <ul>
 
   <% @items.each do |item| %>
-    <li> <%= User.find(item.user_id)[:first_name]%>'s <%= item.category_type%>,
+    <li> <%= User.find(item.user_id)[:first_name]%>'s <%= item.category%>,
     <br> <small> <%= item.description%> </small>
     item id = <%= item.id%>
     <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
