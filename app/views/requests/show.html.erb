@@ -7,14 +7,23 @@
 <%= @request.description%> <br>
 <%= @request.status%> <br>
 
-<h2>Suggestions</h2>
 
+<% if @request.status == "Closed" %>
+  <% choice = Item.find(@request.item_id) %>
+  <%= User.find(choice.user_id) %> - <%= choice.category %>
+<% end %>
+
+
+<h2>Suggestions</h2>
+<% console %>
 <ol>
 
   <% @request.items.each do |item| %>
     <li>
     <%= User.find(item.user_id)[:first_name]%>
     <%= item.category%>,
+    <%= link_to "View", item_path(item), class: "btn" %>
+
 
     </li>
   <% end %>
@@ -22,7 +31,6 @@
 </ol>
 
   <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
-  <%= link_to "View", edit_request_path(@request), class: "btn" %>
 
 
 
