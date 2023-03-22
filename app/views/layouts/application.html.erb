@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -21,11 +22,8 @@
   <%= render "shared/navbar" %>
   <%= render partial: 'shared/request_card_preview' %>
   <%= render "shared/flashes" %>
- 
-
 
 
     <%= yield %>
   </body>
 </html>
-
