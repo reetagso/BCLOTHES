@@ -21,9 +21,12 @@
 <% if @item.user_id != current_user.id %>
   <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_request_path, class: "btn" %>
 <% elsif @requests.count < 1 %>
-  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete} %>
+  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "btn"  %>
+  <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
 <% else %>
   <p> Cannot be deleted requests attached (add archive button?) </p>
+  <%= link_to "View your requests", requests_path, class: "btn" %>
+  <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
 <% end %>
 
 
