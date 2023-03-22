@@ -35,6 +35,12 @@ class RequestsController < ApplicationController
     end
   end
 
+  def destroy
+    @request = Request.find(params[:id])
+    @request.destroy
+    redirect_to requests_path, status: :see_other
+  end
+
   private
 
   def request_params
