@@ -1,4 +1,6 @@
 <%# Code to check seed and view working %>
+
+
 <%= @item.user_id%> <br>
 <%= @item.size%> <br>
 <%= @item.colour%> <br>
@@ -14,13 +16,21 @@
                 data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<% if @item.requests %>
-  <p> Cannot be deleted requests attached (add arcive button) </p>
+
+
+<% if @item.user_id != current_user.id %>
+  <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_request_path, class: "btn" %>
+<% elsif @requests.count < 1 %>
+  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "btn"  %>
+  <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
 <% else %>
-  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete} %>
+  <p> Cannot be deleted requests attached (add archive button?) </p>
+  <%= link_to "View your requests", requests_path, class: "btn" %>
+  <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
 <% end %>
 
-<%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", specific_request_item_path(@item), class: "btn" %>
+
+
 
 <%# TO DO
 Add card
