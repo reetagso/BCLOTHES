@@ -1,2 +1,114 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+  <div class="container-fluid">
+    <div class="row h-100 no-gutters">
+      <div class="col-md-6 left-part">
+        <header class="d-flex align-items-center justify-content-center">
+          <h1 class="text">Bclothes</h1>
+        </header>
+        <div class="content-wrapper d-flex flex-column">
+          <h2 class="title">A wardrobe full of clothes, but nothing to wear?</h2>
+          <p class="subtitle">An eco-conscious, affordable and flexible solution to expand your own wardrobe by combining with your friends</p>
+          <button class="btn btn-dark">Log in</button>
+          <button class="btn btn-dark">Sign up</button>
+          <form class="d-flex mt-5">
+            <button class="btn btn-dark find-btn">Find...</button>
+            <span class="example-text">e.g. blue minidress size 10</span>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 right-part h-100">
+        <%= image_tag asset_path("people-2567915.png"), alt: "People", class: "people-image" %>
+      </div>
+    </div>
+  </div>
+
+<style>
+.container-fluid {
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+    .left-part {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+   .left-part header {
+      flex-basis: 25%;
+      flex-shrink: 0;
+    }
+
+    .content-wrapper {
+      padding : 50px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+.left-part {
+  background-color: white;
+}
+
+.right-part {
+  background-color: #f8f9fa;
+}
+
+header {
+  background-color: lightgrey;
+}
+
+h2.title{
+  margin-bottom: 30px;
+
+}
+
+
+p.subtitle{
+  margin-bottom: 50px;
+}
+
+
+h1 {
+  font-size: 75px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.find-btn {
+  width: calc(100% * 2 / 3);
+  max-width: calc(200px * 2 / 3);
+}
+
+.btn {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  max-width: 200px;
+  height: 38px;
+  margin-bottom: 20px;
+}
+
+.example-text {
+  font-size: 16px;
+  margin-left: 40px;
+  padding-top: 8px;
+}
+
+.people-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
