@@ -5,7 +5,7 @@
   <% @requests.each do |request| %>
     <li><%= User.find(request.user_id)[:first_name]%>
     <br>
-    <%= request.title%> -
+    <%= request.title%> - <%= request.status%>
     <small><%= request.description%></small>
     <br>
     request id = <%= request.id%>

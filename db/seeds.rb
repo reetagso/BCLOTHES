@@ -101,5 +101,5 @@ suggestion_1 = Suggestion.create(request_id: emma_request.id, item_id: marie_ite
 suggestion_2 = Suggestion.create(request_id: emma_request.id, item_id: paula_item.id)
 
 suggestion_3 = Suggestion.create(request_id: marie_request.id, item_id: louise_item.id)
-suggestion_3 = Suggestion.create(request_id: marie_request.id, item_id: emma_item_2.id)
-suggestion_3 = Suggestion.create(request_id: marie_request.id, item_id: elise_item_1.id)
+suggestion_4 = Suggestion.create(request_id: marie_request.id, item_id: emma_item_2.id)
+suggestion_5 = Suggestion.create(request_id: marie_request.id, item_id: elise_item_1.id)
