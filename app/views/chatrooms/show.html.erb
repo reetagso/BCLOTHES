@@ -2,7 +2,8 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
 >
-  <h1><%= @chatroom.request_id %></h1>
+  <h1><%= @request.description %></h1>
+  <h5><%= "Posted by #{@user.first_name}" %></h5>
 
   <div class="messages" data-chatroom-subscription-target="messages">
     <% @chatroom.messages.each do |message| %>

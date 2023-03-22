@@ -14,5 +14,6 @@ class Item < ApplicationRecord
   validates :colour, inclusion: { in: COLOURS }
   validates :category, inclusion: { in: CATEGORIES }
   validates :condition, inclusion: { in: CONDITIONS }
+  validates :size, numericality: { greater_than: 0 }
 
 end
