@@ -41,6 +41,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def specific_request
+    @item = Item.find(params[:id])
+    @specific_request = Request.new
+  end
+
   #not working
   # def delete_image_attachment
   #   @item = Item.find(params[:id])
