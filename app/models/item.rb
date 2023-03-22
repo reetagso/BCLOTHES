@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   OCCASIONS = %w[Wedding Festival Workwear Modest Partywear Summer Winter Other]
   CATEGORIES = %w[Coats Jackets Knitwear Dresses Tracksuits Tops Shirts Shorts Trousers Denim Sportswear Suits Skirt Swimwear Bag Shoes Jewellery]
   CONDITIONS = ["Past its best", "Used but good", "Like new"]
+  
   validates_presence_of :size, :colour, :occasion, :category, :brand, :condition, :description, :photos
   validates :colour, inclusion: { in: COLOURS }
   validates :category, inclusion: { in: CATEGORIES }

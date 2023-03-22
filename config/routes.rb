@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   resources :items, only: [ :index, :show, :new, :create, :edit, :destroy ]
   resources :requests, only: [ :index, :show, :new, :create, :edit, :destroy ]
+  resources :chatrooms, only: :show
 end
