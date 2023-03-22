@@ -9,7 +9,6 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -19,10 +18,7 @@
   </head>
 
   <body>
-  <%= render "shared/navbar" %>
-  <%= render partial: 'shared/request_card_preview' %>
   <%= render "shared/flashes" %>
-
 
     <%= yield %>
   </body>
