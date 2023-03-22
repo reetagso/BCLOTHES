@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Message.destroy_all
+Chatroom.destroy_all
 Suggestion.destroy_all
 Request.destroy_all
 Item.destroy_all
@@ -92,14 +94,14 @@ emma_request.save!
 louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have a wedding to attend next week, please could I borrow your jacket?", user_id: louise.id, item_id: paula_item.id, status: "Item Requested")
 
 #closed
+
 paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed")
-marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed")
+marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed")
 
 #suggestion seeds
 
 suggestion_1 = Suggestion.new(request_id: emma_request.id, item_id: marie_item_2.id)
 suggestion_2 = Suggestion.new(request_id: emma_request.id, item_id: paula_item.id)
-
 suggestion_3 = Suggestion.new(request_id: marie_request.id, item_id: louise_item.id)
 suggestion_4 = Suggestion.new(request_id: marie_request.id, item_id: emma_item_2.id)
 suggestion_5 = Suggestion.new(request_id: marie_request.id, item_id: elise_item_1.id)
@@ -109,3 +111,11 @@ suggestion_2.save
 suggestion_3.save
 suggestion_4.save
 suggestion_5.save
+
+#chatroom seeds
+
+chatroom1 = Chatroom.create(request_id: marie_request.id)
+
+#message seeds
+
+message1 = Message.create(content: "What do you think of this?", chatroom_id: chatroom1.id, user_id:elise.id)
