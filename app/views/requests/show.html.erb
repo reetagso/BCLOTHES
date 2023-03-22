@@ -5,6 +5,7 @@
 <%= @request.user_id%> <br>
 <%= @request.title%> <br>
 <%= @request.description%> <br>
+<%= @request.status%> <br>
 
 <h2>Suggestions</h2>
 
@@ -19,6 +20,11 @@
   <% end %>
 
 </ol>
+
+  <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
+  <%= link_to "View", edit_request_path(@request), class: "btn" %>
+
+
 
 <%# TO DO
 

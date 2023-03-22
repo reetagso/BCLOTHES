@@ -9,7 +9,7 @@
   <%= f.input :brand %>
   <%= f.input :condition, as: :select, collection: Item::CONDITIONS %>
   <%= f.input :description, as: :text %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true }, wrapper_html: { class: 'form-inputs' } %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
 
-  <%= f.submit 'Add item to wardrobe' %>
+  <%= f.submit submit_text %>
 <% end %>

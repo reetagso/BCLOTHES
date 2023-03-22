@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'requests/index'
-  get 'requests/show'
+  # get 'requests/index'
+  # get 'requests/show'
   # get 'items/index'
   # get 'items/show'
   devise_for :users
@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :items, only: [ :index, :show, :new, :create, :edit, :destroy ]
-  resources :requests, only: [ :index, :show, :new, :create, :edit, :destroy ]
+  resources :items do
+    member do
+      delete :delete_image_attachment
+    end
+  end
+  resources :requests, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
   resources :chatrooms, only: :show do
     resources :messages, only: :create
   end
