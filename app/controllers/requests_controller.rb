@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
+    @items = Item.where(request_id: params[:id])
   end
 
   def new

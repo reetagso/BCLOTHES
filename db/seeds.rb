@@ -31,7 +31,7 @@ louise_item.save!
 marie_item_1 = Item.new(size: 14, colour: "Black", occasion: "Party", category: "Dresses", brand: "Gucci", condition: "Like new", description: "Gucci black and red cocktail dress", user_id: marie.id)
 marie_item_1_photo_1 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426739/Blcothes/1670414235_xfvk4h.jpg")
 marie_item_1_photo_2 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426739/Blcothes/1670414235_1_jqdt75.jpg")
-marie_item_1_photo_3 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426739/Blcothes/1670414235_2_qsiqdo.jpg")
+# marie_item_1_photo_3 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426739/Blcothes/1670414235_2_qsiqdo.jpg")
 marie_item_1.photos.attach([io: marie_item_1_photo_1, filename: "marie_item_1_photo_1", content_type: "image/jeg"])
 marie_item_1.photos.attach([io: marie_item_1_photo_2, filename: "marie_item_1_photo_2", content_type: "image/jeg"])
 # marie_item_1.photos.attach([io: marie_item_1_photo_3, filename: "marie_item_1_photo_3", content_type: "image/jeg"])
@@ -68,7 +68,7 @@ elise_item_2.save!
 emma_item_1 = Item.new(size: 38, colour: "White", occasion: "Sport", category: "Shoes", brand: "Nike", condition: "Used but good", description: "White Nike air force ones", user_id: emma.id)
 emma_item_1_photo_1 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426740/Blcothes/1679385639_1_knywdb.jpg")
 emma_item_1_photo_2 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426740/Blcothes/1679385639_3_dm7cjr.jpg")
-emma_item_1_photo_3 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426740/Blcothes/1679385639_2_vkrhsl.jpg")
+# emma_item_1_photo_3 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426740/Blcothes/1679385639_2_vkrhsl.jpg")
 emma_item_1.photos.attach([io: emma_item_1_photo_1, filename: "emma_item_1_photo_1", content_type: "image/jeg"])
 emma_item_1.photos.attach([io: emma_item_1_photo_2, filename: "emma_item_1_photo_2", content_type: "image/jeg"])
 # emma_item_1.photos.attach([io: emma_item_1_photo_3, filename: "emma_item_1_photo_3", content_type: "image/jeg"])
@@ -104,8 +104,8 @@ suggestion_3 = Suggestion.new(request_id: marie_request.id, item_id: louise_item
 suggestion_4 = Suggestion.new(request_id: marie_request.id, item_id: emma_item_2.id)
 suggestion_5 = Suggestion.new(request_id: marie_request.id, item_id: elise_item_1.id)
 
-puts suggestion_1.errors.messages unless suggestion_1.save
-puts suggestion_2.errors.messages unless suggestion_2.save
-puts suggestion_3.errors.messages unless suggestion_3.save
-puts suggestion_4.errors.messages unless suggestion_4.save
-puts suggestion_5.errors.messages unless suggestion_5.save
+suggestion_1.save
+suggestion_2.save
+suggestion_3.save
+suggestion_4.save
+suggestion_5.save
