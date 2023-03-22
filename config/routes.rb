@@ -15,6 +15,6 @@ Rails.application.routes.draw do
       delete :delete_image_attachment
     end
   end
-  resources :requests, only: [ :index, :show, :new, :create, :edit, :destroy ]
+  resources :requests, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
   resources :chatrooms, only: :show
 end
