@@ -1,2 +1,18 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<%# Code to check seed and view working %>
+
+<%= @item.user_id%> <br>
+<%= @item.size%> <br>
+<%= @item.colour%> <br>
+<%= @item.occasion%> <br>
+<%= @item.category%> <br>
+<%= @item.brand%> <br>
+<%= @item.condition%> <br>
+<%= @item.description%> <br>
+<% @item.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
+<%# TO DO
+
+Add card
+Add link %>

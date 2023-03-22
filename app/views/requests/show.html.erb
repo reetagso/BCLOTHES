@@ -1,2 +1,26 @@
 <h1>Requests#show</h1>
 <p>Find me in app/views/requests/show.html.erb</p>
+
+
+<%= @request.user_id%> <br>
+<%= @request.title%> <br>
+<%= @request.description%> <br>
+
+<h2>Suggestions</h2>
+
+<ol>
+
+  <% @request.items.each do |item| %>
+    <li>
+    <%= User.find(item.user_id)[:first_name]%>
+    <%= item.category%>,
+
+    </li>
+  <% end %>
+
+</ol>
+
+<%# TO DO
+
+Add card
+Add link %>
