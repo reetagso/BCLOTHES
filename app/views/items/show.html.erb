@@ -10,9 +10,21 @@
 <%= @item.description%> <br>
 <% @item.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+  <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<% if @item.requests %>
+  <p> Cannot be deleted requests attached (add arcive button) </p>
+<% else %>
+  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete} %>
 <% end %>
 
 <%# TO DO
-
 Add card
-Add link %>
+Add link
+How does delete work when it is connected to a suggetsoin/requets
+make item unavilable
+item status = archived
+%>
