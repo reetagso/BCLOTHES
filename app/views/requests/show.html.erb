@@ -2,11 +2,11 @@
 
 <%# #Request info %>
 
-  <% if User.find(@request.user_id) == current_user %>
-    Your request
-  <% else %>
-   <%= User.find(@request.user_id)[:first_name]%>'s request
-  <% end %>
+<% if User.find(@request.user_id) == current_user %>
+  Your request
+<% else %>
+<%= User.find(@request.user_id)[:first_name]%>'s request
+<% end %>
 <h3> <%= @request.title%> <br> </h3>
 <%= @request.start_date%>-<%= @request.end_date%> <br>
 <%= @request.description%> <br>
