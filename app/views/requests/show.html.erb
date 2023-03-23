@@ -7,7 +7,7 @@
 <%= @request.start_date%>-<%= @request.end_date%> <br>
 <%= @request.description%> <br>
 
-
+<%# Link display %>
 
 <% if  @request.status == "Closed"  %>
   <%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
@@ -21,7 +21,7 @@
   link to suggest item
 <% end %>
 
-<%# Closed request choice display %>
+<%# Closed request display %>
 
 <% if @request.status == "Closed" %>
 <% choice = Item.find(@request.item_id) %>
@@ -36,6 +36,8 @@
 <% end %>
 
 <% console %>
+
+<%# Suggestions display %>
 
 <% if @request.suggestions.length > 0 %>
   <h2>Suggestions</h2>
@@ -61,4 +63,6 @@
 <%# TO DO
 
 Add card
-Add link %>
+Add link
+Add forms here to ass javascript to?
+%>

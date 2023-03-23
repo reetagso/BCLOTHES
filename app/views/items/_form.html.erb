@@ -4,12 +4,10 @@
   <%= f.input :size %>
   <%= f.input :colour, as: :select, collection: Item::COLOURS %>
   <%= f.input :occasion, as: :select, collection: Item::OCCASIONS %>
-
   <%= f.input :category, as: :select, collection: Item::CATEGORIES %>
   <%= f.input :brand %>
   <%= f.input :condition, as: :select, collection: Item::CONDITIONS %>
   <%= f.input :description, as: :text %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-
   <%= f.submit submit_text %>
 <% end %>
