@@ -1,0 +1,21 @@
+
+You have received X Bclothes requests
+<ul>
+<% @requests.each do |request| %>
+  <% if request.status != "Open" && User.find(Item.find(request.item_id).user_id).id == current_user.id %>
+    <% item = Item.find(request.item_id) %>
+    <li>
+      <div>
+        <%= User.find(request.user_id)[:first_name]%> requested
+        <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
+      </div>
+      <%= request.title%>
+      <%= request.start_date%>-<%= request.end_date%>
+      <%= request.description%>
+      <%= request.status %>
+      <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn" %>
+      <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
+    </li>
+  <% end %>
+<% end %>
+</ul>

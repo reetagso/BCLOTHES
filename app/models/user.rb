@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :items
   has_many :requests
   has_many :messages
+  has_one_attached :photo
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
