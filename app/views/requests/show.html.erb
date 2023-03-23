@@ -5,31 +5,62 @@
 <% if User.find(@request.user_id) == current_user %>
   Your request
 <% else %>
-<%= User.find(@request.user_id)[:first_name]%>'s request
+  <%= User.find(@request.user_id)[:first_name]%>'s request
 <% end %>
 <h3> <%= @request.title%> <br> </h3>
 <%= @request.start_date%>-<%= @request.end_date%> <br>
 <%= @request.description%> <br>
 
-<%# "Item requested"  display %>
+<%# "Closed" request display %><%# "Item requested"  display %>
 
-<% selected = Item.find(@request.item_id) %>
-<% if @request.status == "Item Requested" && @request.user_id == current_user.id %>
-  You have sent a Bclothes request to <%=User.find(selected.user_id)[:first_name]%> for:
-  <%= cl_image_tag selected.photos.first.key, height: 300, width: 400, crop: :fill %>
-  <%= selected.category %>
-  <%=selected.size%>
-  <%= link_to "View", item_path(selected), class: "btn" %>
+<% if @request.user_id != current_user.id && @request.status == "Open" %>
+  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn" %>
+
+<% elsif @request.status == "Closed" %>
+<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
+  <% choice = Item.find(@request.item_id) %>
+  <%= User.find(@request.user_id)[:first_name]%> went with <%=User.find(choice.user_id)[:first_name]%>'s choice
+  <div>
+    <%= User.find(choice.user_id)[:first_name]%>'s choice
+    <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
+    <%= choice.category %>
+    <%= choice.size %>
+  </div>
+  <%= link_to "View", item_path(choice), class: "btn" %>
+
+<% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
+  <% choice = Item.find(@request.item_id) %>
+  <div>
+    You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
+    <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
+    <%= choice.category %>
+    <%=choice.size%>
+  </div>
+  <%= link_to "View", item_path(choice), class: "btn" %>
   <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
   <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn"  %>
-<% else @request.status == "Item Requested" && User.find(selected.user_id) == current_user %>
-  <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
-  <%= cl_image_tag selected.photos.first.key, height: 300, width: 400, crop: :fill %>
-  <%= selected.category %>
-  <%=selected.size%>
-  <%= link_to "View", item_path(selected), class: "btn" %>
+
+<% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
+  <div>
+    <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
+    <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+    <%= Item.find(@request.item_id).category %>
+    <%= Item.find(@request.item_id).size%>
+  </div>
+  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
   <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+
+<% else %>
+  <div>
+    <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
+    <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+    <%= Item.find(@request.item_id).category %>
+    <%= Item.find(@request.item_id).size%>
+  </div>
+  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
+  <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn" %>
 <% end %>
+
 
   <%# owner of requested item link to accept request %>
 <%# <% elsif @request.item_id != "" && User.find(choice.user_id) == current_user %>
@@ -38,23 +69,8 @@
 
 <%# "Open" display %>
 
-<% if @request.user_id != current_user.id && @request.status != "Closed" %>
-  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn" %>
-<% end %>
 
-<%# "Closed" request display %>
 
-<% if @request.status == "Closed" %>
-<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
-<% choice = Item.find(@request.item_id) %>
-    <h2> <%= User.find(@request.user_id)[:first_name]%> went with <%=User.find(choice.user_id)[:first_name]%>'s choice </h2>
-    <div class="item-card">
-    <%= User.find(choice.user_id)[:first_name]%>'s choice
-    <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-    <%= choice.category %>
-    <%= choice.size %>
-    <%= link_to "View", item_path(choice), class: "btn" %>
-<% end %>
 
 <% console %>
 

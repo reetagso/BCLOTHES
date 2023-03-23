@@ -1,9 +1,9 @@
 <h1>edit request</h1>
 
-<%= render :partial => 'edit_form_request_owner',
-           :locals => {request: @request, submit_text: "Edit request"} %>
-
-<%= render :partial => 'edit_form_request_owner',
-           :locals => {request: @request, submit_text: "Edit request"} %>
-
-<%# if @request.user == current_user %>
+<% if @request.user == current_user %>
+  <%= render :partial => 'edit_form_request_owner',
+            :locals => {request: @request, submit_text: "Edit request"} %>
+<% else %>
+  <%= render :partial => 'edit_form_item_owner',
+            :locals => {request: @request, submit_text: "Edit request"} %>
+<% end %>
