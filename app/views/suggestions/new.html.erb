@@ -1,0 +1,7 @@
+<h1>New suggestion for <%= @request.title %> </h1>
+<%= simple_form_for [@request, @suggestion] do |f| %>
+  <%= f.input :item_id , as: :select, collection: @items, label_method: :description, value_method: :id ,:include_blank => false  %>
+  <%= f.submit "Make suggestion", class: "btn btn-primary" %>
+<% end %>
+
+<% console %>

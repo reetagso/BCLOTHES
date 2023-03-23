@@ -1,7 +1,7 @@
 class Request < ApplicationRecord
   belongs_to :user
   belongs_to :item, optional: true
-  has_many :suggestions
+  has_many :suggestions, dependent: :destroy
   has_many :items, through: :suggestions
   # belongs_to :item
   STATUSES = ["Open", "Item Requested", "Closed"]
