@@ -2,14 +2,18 @@
 
 <%# #Request info %>
 
-<%= @request.user_id%> <br>
+<% if User.find(@request.user_id) == current_user %>
+  Your request
+<% else %>
+<%= User.find(@request.user_id)[:first_name]%>'s request
+<% end %>
 <h3> <%= @request.title%> <br> </h3>
 <%= @request.start_date%>-<%= @request.end_date%> <br>
 <%= @request.description%> <br>
 
 <%# Link display %>
 
-<% if  @request.status == "Closed"  %>
+<% if @request.status == "Closed"  %>
   <%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
 <% elsif @request.user_id == current_user.id %>
   <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
@@ -56,9 +60,6 @@
   </ol>
 
 <% end %>
-
-
-
 
 <%# TO DO
 
