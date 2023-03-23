@@ -1,6 +1,16 @@
 <%# Code to check seed and view working %>
 
 <div>
+
+  <div>
+    <h3>Is this what you were looking for?</h3>
+    <div>
+      <p>Not quite, </p>
+      <%= link_to "return to search", items_path, class: "btn" %>
+    </div>
+
+  </div>
+
   <% if User.find(@item.user_id) == current_user %>
     From your wardrobe
   <% else%>
