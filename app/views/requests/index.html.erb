@@ -3,13 +3,16 @@
 
 <ul>
   <% @requests.each do |request| %>
-    <li><%= User.find(request.user_id)[:first_name]%>
-    <br>
-    <%= request.title%> - <%= request.status%>
-    <small><%= request.description%></small>
-    <br>
+    <li>
+    <% if User.find(request.user_id) == current_user %>
+      Your request
+    <% else %>
+      <%= User.find(request.user_id)[:first_name]%>'s request
+    <% end %>
+    <h3> <%= request.title%> <br> </h3>
+    <%= request.start_date%>-<%= request.end_date%> <br>
+    <%= request.description%> <br>
     request id = <%= request.id%>
     </li>
   <% end %>
 </ul>
-k

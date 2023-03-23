@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :items do
     member do
       delete :delete_image_attachment
-      resources :requests, only: [:new, :create]
+      # resources :requests, only: [:new, :create]
     end
   end
 

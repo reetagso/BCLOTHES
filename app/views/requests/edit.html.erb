@@ -2,3 +2,8 @@
 
 <%= render :partial => 'edit_form_request_owner',
            :locals => {request: @request, submit_text: "Edit request"} %>
+
+<%= render :partial => 'edit_form_request_owner',
+           :locals => {request: @request, submit_text: "Edit request"} %>
+
+<%# if @request.user == current_user %>
