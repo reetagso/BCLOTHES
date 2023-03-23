@@ -22,41 +22,9 @@
 
 
   <%# search %>
-  <div class="search_results_list">
+   <%= render :partial => 'search', :locals => {item: @item, submit_text: "Available!"} %>
 
-    <ul>
-
-      <% if @items.any? %>
-
-        <% @items.each do |item| %>
-          <li>
-          <% if User.find(item.user_id) == current_user %>
-            <strong> From your wardrobe </strong>
-          <% else%>
-            <%= User.find(item.user_id)[:first_name]%>'s
-          <% end %>
-          <%= item.colour%>
-          <%= item.category%>
-          <%= ": Size #{item.size}" %>
-          <%# <%= item.description%>
-          <%# item id = <%= item.id%>
-          <div>
-            <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
-          </div>
-          <div class="view_link">
-            <%= link_to "View", item_path(item), class: "btn" %>
-          </div>
-          </li>
-        <% end %>
-      <% else %>
-        <em>Sorry, no items found.</em>
-      <% end %>
-
-    </ul>
-  </div>
 
 
 </div>
-<%# TO DO
-
-Styling %>
+<%# TO DO Styling %>
