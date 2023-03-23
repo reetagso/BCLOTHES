@@ -13,6 +13,9 @@
     <%= request.start_date%>-<%= request.end_date%> <br>
     <%= request.description%> <br>
     request id = <%= request.id%>
+    <div class="view_link">
+      <%= link_to "View", request_path(request), class: "btn" %>
+    </div>
     </li>
   <% end %>
 </ul>
