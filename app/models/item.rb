@@ -15,4 +15,11 @@ class Item < ApplicationRecord
   validates :condition, inclusion: { in: CONDITIONS }
   validates :size, numericality: { greater_than: 0 }
 
+  include PgSearch::Model
+  pg_search_scope :search_by_attributes,
+  against: [ :size, :colour, :occasion, :category, :brand ],
+  using: {
+    tsearch: { prefix: true }
+  }
+
 end
