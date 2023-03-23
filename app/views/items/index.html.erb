@@ -3,11 +3,18 @@
 <ul>
 
   <% @items.each do |item| %>
-    <li> <%= User.find(item.user_id)[:first_name]%>'s <%= item.category%>,
-    <br> <small> <%= item.description%> </small>
-    item id = <%= item.id%>
-    <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
+    <li>
+    <% if User.find(item.user_id) == current_user %>
+      <strong> From your wardrobe </strong>
+    <% else%>
+      <%= User.find(item.user_id)[:first_name]%>'s
+    <% end %>
     <%= link_to "View", item_path(item), class: "btn" %>
+    <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
+    <%= item.category%>
+    <%= item.size%>
+    <%= item.description%>
+    item id = <%= item.id%>
     </li>
   <% end %>
 
