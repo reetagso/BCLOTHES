@@ -17,7 +17,6 @@ class RequestsController < ApplicationController
   def create
     #add conditional on whether item id came from params or form input
     @request = Request.new(request_params)
-    raise
     @request.user_id = current_user.id
     if @request.save
       redirect_to request_path(@request)
