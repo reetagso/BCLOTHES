@@ -1,21 +1,31 @@
-
-
-<%# #Request info %>
-
-<% if User.find(@request.user_id) == current_user %>
-  Your request
-<% else %>
-  <%= User.find(@request.user_id)[:first_name]%>'s request
-<% end %>
-<h3> <%= @request.title%> <br> </h3>
-<%= @request.start_date%>-<%= @request.end_date%> <br>
-<%= @request.description%> <br>
+<%# #Request info for everyone %>
+<div class="main-container">
+  <div class="request-info-container">
+    <p class="request-owner">
+      <% if User.find(@request.user_id) == current_user %>
+       Your request
+      <% else %>
+        <%= User.find(@request.user_id)[:first_name]%>'s request
+      <% end %>
+    </p>
+    <h3 class="request-title"> <%= @request.title%> </h3>
+    <p class="request-dates"><%= @request.start_date%>-<%= @request.end_date%></p>
+    <p class="request-description"><%= @request.description%></p>
 
 <%# "Closed" request display %><%# "Item requested"  display %>
 
+<%# visitor%>
 <% if @request.user_id != current_user.id && @request.status == "Open" %>
-  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn" %>
+  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %> 
+<%# everyone%>
+    <%# Chatroom placeholder %>
+  <h2 class="chatbox-title">What do you think</h2>
+  <div class="chatroom-placeholder">
+    <p>Chatroom will be here</p>
+  </div>
+</div>
 
+<%# visitor or everyone?%>
 <% elsif @request.status == "Closed" %>
 <%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
   <% choice = Item.find(@request.item_id) %>
@@ -26,8 +36,9 @@
     <%= choice.category %>
     <%= choice.size %>
   </div>
-  <%= link_to "View", item_path(choice), class: "btn" %>
 
+<%# suggestion owner%>
+<%# does not work because of choice variable%>
 <% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
   <% choice = Item.find(@request.item_id) %>
   <div>
@@ -40,6 +51,7 @@
   <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
   <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn"  %>
 
+<%# request owner%>
 <% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
   <div>
     <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
@@ -50,6 +62,7 @@
   <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
   <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
 
+<%# visitor%>
 <% else %>
   <div>
     <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
@@ -61,7 +74,6 @@
   <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn" %>
 <% end %>
 
-
   <%# owner of requested item link to accept request %>
 <%# <% elsif @request.item_id != "" && User.find(choice.user_id) == current_user %>
   <%# <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
@@ -71,31 +83,33 @@
 
 
 
-
-<% console %>
-
-<%# Suggestions display %>
-
-<% if @request.suggestions.length > 0 %>
+<%# Everyone %>
+  <%# Suggestions display %>
+<div class="suggestions-container">
   <h2>Suggestions</h2>
 
-  <ol>
-    <% @request.items.each do |item| %>
-      <li>
-      <%= User.find(item.user_id)[:first_name]%>'s choice
-      <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
-      <%= item.category %>
-      <%= item.size %>
-      <%= link_to "View", item_path(item), class: "btn" %>
-      </li>
-    <% end %>
-  </ol>
+  <% if @request.suggestions.empty? %>
+    <p>No suggestions yet. Be the first one to suggest an outfit!</p>
+  <% else %>
+    <ol>
+      <% @request.items.each do |item| %>
+        <li>
+          <%= User.find(item.user_id)[:first_name]%>'s choice
+          <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
+          <%= item.category %>
+          <%= item.size %>
+          <%= link_to "View", item_path(item), class: "btn" %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+</div>
 
-<% end %>
-
+</div>
 <%# TO DO
 
 Add card
 Add link
 Add forms here to ass javascript to?
 %>
+
