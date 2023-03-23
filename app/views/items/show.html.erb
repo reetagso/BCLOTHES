@@ -1,22 +1,27 @@
 <%# Code to check seed and view working %>
 
-
-<%= @item.user_id%> <br>
-<%= @item.size%> <br>
-<%= @item.colour%> <br>
-<%= @item.occasion%> <br>
-<%= @item.category%> <br>
-<%= @item.brand%> <br>
-<%= @item.condition%> <br>
-<%= @item.description%> <br>
-<% @item.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-  <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-<% end %>
-
-
+<div>
+  <% if User.find(@item.user_id) == current_user %>
+    From your wardrobe
+  <% else%>
+    <%= User.find(@item.user_id)[:first_name]%>'s
+  <% end %>
+  <% @item.photos.each do |photo| %>
+    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <%= @item.category%> <br>
+  <%= @item.size%> <br>
+  <%= @item.description%> <br>
+</div>
+<div>
+  <%= @item.colour%> <br>
+  <%= @item.occasion%> <br>
+  <%= @item.brand%> <br>
+  <%= @item.condition%> <br>
+</div>
 
 <% if @item.user_id != current_user.id %>
   <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_request_path, class: "btn" %>
@@ -29,13 +34,8 @@
   <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
 <% end %>
 
-
-
-
 <%# TO DO
-Add card
-Add link
-How does delete work when it is connected to a suggetsoin/requets
+Add css
 make item unavilable
 item status = archived
 %>
