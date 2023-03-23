@@ -4,7 +4,7 @@
   <% if User.find(@item.user_id) == current_user %>
     From your wardrobe
   <% else%>
-    <%= User.find(@item.user_id)[:first_name]%>'s
+    From <%= User.find(@item.user_id)[:first_name]%>'s wardrobe
   <% end %>
   <% @item.photos.each do |photo| %>
     <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
