@@ -11,19 +11,31 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- Load the Google API Platform Client library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+    <!-- Initialize the Google API client with your client ID -->
+    <script>
+      window.onload = function() {
+        gapi.load('auth2', function() {
+          gapi.auth2.init({
+            client_id: 'YOUR_CLIENT_ID'
+          });
+        });
+      };
+    </script>
+
   </head>
 
   <body>
-  <% if user_signed_in? %>
     <%= render 'shared/navbar' %>
-  <% end %>
-  <%= render "shared/flashes" %>
+    <%= render "shared/flashes" %>
 
     <%= yield %>
   </body>

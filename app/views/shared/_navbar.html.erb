@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid d-flex justify-content-around w-100">
 <%= link_to root_path, class: "navbar-brand" do %>
@@ -28,12 +29,13 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <style>
 
 .navbar {
   width: 100%;
-  height: 15vh;
+  height: 20vh;
   margin: 0;
   padding: 0;
 }

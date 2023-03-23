@@ -1,20 +1,201 @@
-<h2>Log in</h2>
+add a Log in with google button on the style model of the login button. Make it work with google.
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<div class="container-all">
+  <div class="left-container">
+    <header>
+      <h1 class="brand-name">Bclothes</h1>
+    </header>
+    <div class="form-container-wrapper">
+      <div class="form-container" style="padding: 10px;">
+        <h2>Log in</h2>
+        <div class="register-link">
+          <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+            <%= link_to "Or register now", new_registration_path(resource_name), class: "register-link" %><br />
+          <% end %>
+        </div>
+
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
+          <div class="form-inputs">
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" } %>
+            <%= f.input :password,
+                        required: false,
+                        input_html: { autocomplete: "current-password" } %>
+            <div class="remember-me-container">
+              <%= f.input :remember_me, as: :boolean, label: "Remember me", label_html: { class: "remember-me-label" } %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Log in" %>
+          </div>
+
+          <div class="form-links">
+            <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <%= link_to "Forgot your password?", new_password_path(resource_name), class: "form-links" %><br />
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+  <div class="right-container">
+    <%= image_tag asset_path("people-2567915.png"), alt: "People", class: "people-image" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+
+<style>
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 44px;
+}
+
+
+.container-all {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  justify-content: space-evenly; /* Add this line */
+}
+
+
+.right-container {
+  width: 50%;
+  height: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  background-color: gray;
+}
+
+.brand-name {
+  font-family: 'Jost', sans-serif;
+  font-size: 75px;
+  color: white;
+  margin: 0;
+}
+
+.brand-name span {
+  color: black;
+}
+
+.form-container-wrapper{
+  height: 80%;
+  width: 80%;
+  margin-left: 50px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80%;
+  padding: 100px;
+}
+
+.form-container h2 {
+  margin-top: 0;
+}
+
+
+.people-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn{
+  background-color: black;
+  color: white;
+  width: 300px;
+}
+
+.register-link{
+  margin-bottom: 30px;
+}
+
+.form-links {
+  margin-top: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  align-self: flex-end;
+}
+
+.register-link a,
+.form-links a {
+  color: black;
+  text-decoration: underline;
+}
+
+.form-inputs input[type="email"],
+.form-inputs input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: 'Jost', sans-serif;
+  outline: none;
+}
+
+.form-inputs input[type="email"]:focus,
+.form-inputs input[type="password"]:focus {
+  border-color: black;
+}
+
+.form-inputs input[type=checkbox] {
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.form-inputs input[type=checkbox]:checked {
+  background-color: #000000;
+}
+
+
+.form-inputs input:focus {
+  border-color: black;
+  caret-color: black;
+}
+
+.remember-me-container {
+  display: flex;
+  align-items: center;
+}
+
+.remember-me-label {
+  margin-left: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 8px;
+
+}
+
+
+
+</style>
