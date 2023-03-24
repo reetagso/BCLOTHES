@@ -1,36 +1,135 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="edit-user-container">
+  <h2 class="edit-user-title">Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p class="confirmation-message">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <% end %>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :photo %>
+      <%= f.input :password,
+                  hint: "Leave it blank if you don't want to change it",
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :current_password,
+                  hint: "Please provide your current password to confirm your changes",
+                  required: true,
+                  input_html: { autocomplete: "current-password" } %>
+      <%= f.input :photo %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Update", class: "update-btn" %>
+    </div>
+  <% end %>
+
+  <div class="cancel-account-btn-container">
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "cancel-account-btn" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
+  <%= link_to "Back", :back, class: "back-link" %>
+</div>
 
-<h3>Cancel my account</h3>
+<style>
+/* app/assets/stylesheets/registrations.scss */
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+*{
+  font-family: Inter;
+}
+.edit-user-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
 
-<%= link_to "Back", :back %>
+.edit-user-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.confirmation-message {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Changed from 'center' to 'flex-start' */
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.update-btn {
+  width: 180px; /* Changed from '50%' to '100%' */
+  padding: 0.5rem;
+  background-color: #000000; /* Changed from '#007bff' to '#000000' */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.update-btn:hover {
+  background-color: #444444; /* Changed from '#0056b3' to '#444444' */
+}
+
+.cancel-account-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+}
+
+.cancel-account-btn-container {
+  display: flex;
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+.cancel-account-btn {
+  width: 180px; /* Changed from '50%' to '100%' */
+  padding: 0.5rem;
+  background-color: #000000; /* Changed from '#007bff' to '#000000' */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.cancel-account-btn:hover {
+  background-color: #c82333;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #0056b3;
+}
+
+
+</style>
