@@ -17,6 +17,14 @@ class RequestsController < ApplicationController
     end
 
   end
+  def assign_item
+    raise
+    @request = Request.find(params[:id])
+    @item = Item.find(params[:item_id])
+    request.update(item: @item)
+    redirect_to request_path(@request)
+  end
+
 
   def show
     @request = Request.find(params[:id])
