@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     collection do
       get :my_requests
     end
-    resources :suggestions, only: [:new]
+    resources :suggestions, only: [:new, :create]
   end
 
   resources :items do
