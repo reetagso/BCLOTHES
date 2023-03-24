@@ -10,10 +10,6 @@
     <% @requests_sent_open.each do |request| %>
       <li>
       <div>
-        Request to <%= User.find(Item.find(request.item_id).user_id)[:first_name]%>
-        <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-      </div>
-      <div>
       <%= request.title%>
       <%= request.start_date%>-<%= request.end_date%>
       <%= request.description%>
