@@ -7,6 +7,8 @@ class RequestsController < ApplicationController
     @user = User.new
     @requests_sent = Request.where(user_id: current_user.id)
     @requests_sent_open = @requests_sent.where(status: "Open")
+    @requests_sent_closed = @requests_sent.where(status: "Closed")
+    @requests_sent_pending = @requests_sent.where(status: "Item Requested")
 
     items = Item.where(user_id: current_user.id)
     @requests_received = []

@@ -91,10 +91,11 @@ emma_request = Request.create!(title: "Red Dress", description: "I need a dress 
 emma_request.save!
 
 #item requested
-louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have a wedding to attend next week, please could I borrow your jacket?", user_id: louise.id, item_id: paula_item.id, status: "Item Requested")
+louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have another wedding please could I borrow this again?", user_id: louise.id, item_id: paula_item.id, status: "Item Requested")
 
 #closed
 
+louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have a wedding to attend next week, please could I borrow your jacket?", user_id: louise.id, item_id: paula_item.id, status: "Closed")
 paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed")
 marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed")
 
