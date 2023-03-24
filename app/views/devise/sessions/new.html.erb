@@ -1,9 +1,9 @@
-add a Log in with google button on the style model of the login button. Make it work with google.
+<%# add a Log in with google button on the style model of the login button. Make it work with google. %>
 
 <div class="container-all">
   <div class="left-container">
-    <header>
-      <h1 class="brand-name">Bclothes</h1>
+    <header style="justify-content: center; padding: 18px 38px;">
+      <h1 class="brand-name" style="font-size: xxx-large;">Bclothes</h1>
     </header>
     <div class="form-container-wrapper">
       <div class="form-container" style="padding: 10px;">
@@ -42,7 +42,7 @@ add a Log in with google button on the style model of the login button. Make it 
     </div>
   </div>
 
-  <div class="right-container">
+  <div class="right-container one-round-corner">
     <%= image_tag asset_path("people-2567915.png"), alt: "People", class: "people-image" %>
   </div>
 </div>
@@ -70,6 +70,7 @@ h2 {
   width: 50%;
   height: 100%;
   justify-content: space-evenly; /* Add this line */
+  background: gray;
 }
 
 
@@ -88,7 +89,7 @@ header {
 
 .brand-name {
   font-family: 'Jost', sans-serif;
-  font-size: 75px;
+  font-size: 45px;
   color: white;
   margin: 0;
 }
@@ -119,6 +120,7 @@ header {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 500px 0px 0px 0px;
 }
 
 .btn{

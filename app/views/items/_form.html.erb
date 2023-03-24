@@ -1,13 +1,400 @@
 <%# input form for creating (new) or editing an item %>
+<div style="padding: 23px 188px; background-color: #F4F4F4;">
+  <%= simple_form_for(item) do |f| %>
 
-<%= simple_form_for(item) do |f| %>
-  <%= f.input :size %>
-  <%= f.input :colour, as: :select, collection: Item::COLOURS %>
-  <%= f.input :occasion, as: :select, collection: Item::OCCASIONS %>
-  <%= f.input :category, as: :select, collection: Item::CATEGORIES %>
-  <%= f.input :brand %>
-  <%= f.input :condition, as: :select, collection: Item::CONDITIONS %>
-  <%= f.input :description, as: :text %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.submit submit_text %>
-<% end %>
+    <%= f.input :category,
+          as: :radio_buttons,
+          collection_wrapper_tag: 'div',
+          collection_wrapper_class: 'category-wrapper',
+          item_wrapper_class: 'category-item',
+          input_html: {class: 'category-selector'},
+          collection: Item::CATEGORIES %>
+
+    <%= f.input :colour,
+              as: :radio_buttons,
+              collection_wrapper_tag: 'div',
+              collection_wrapper_class: 'colour-wrapper',
+              item_wrapper_class: 'colour-item',
+              input_html: {class: 'colour-selector'},
+              collection: Item::COLOURS %>
+
+    <%= f.input :occasion,
+          as: :radio_buttons,
+          collection_wrapper_tag: 'div',
+          collection_wrapper_class: 'occasion-wrapper',
+          item_wrapper_class: 'occasion-item',
+          input_html: {class: 'occasion-selector'},
+          collection: Item::OCCASIONS %>
+
+    <%= f.input :condition,
+      as: :radio_buttons,
+      collection_wrapper_tag: 'div',
+      collection_wrapper_class: 'condition-wrapper',
+      item_wrapper_class: 'condition-item',
+      input_html: {class: 'condition-selector'},
+      collection: Item::CONDITIONS %>
+
+    <div class="container" style="padding:  0px;">
+
+      <div class="row">
+        <div class="col">
+            <%= f.input :brand %>
+        </div>
+        <div class="col">
+            <%= f.input :size %>
+        </div>
+      </div>
+    </div>
+
+    <%= f.input :description, as: :text %>
+
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+
+    <div>
+      <%= f.submit submit_text, class: "button-56", role: "button" %>
+    </div>
+
+  <% end %>
+</div>
+
+
+
+
+<style>
+
+/* CATEGORIES */
+
+.category-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.category-item {
+  flex: 0 0 30%;
+}
+
+.category-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.category-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.category-selector:checked + label {
+  color: #FFC65A !important;
+}
+
+
+#item_category_ruby + label {
+  color: #FD1015;
+}
+
+#item_category_ruby:checked + label {
+  background-color: #FFC65A;
+  border-color: #FD1015;
+}
+
+
+#item_category_javascript + label {
+  color: #FFC65A;
+}
+
+#item_category_javascript:checked + label {
+  background-color: #FFC65A;
+  border-color: #FFC65A;
+}
+
+
+#item_category_css + label {
+  color: #62DDF5;
+}
+
+#item_category_css:checked + label {
+  background-color: #FFC65A;
+  border-color: #62DDF5;
+}
+
+/* COLOURS */
+
+.colour-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.colour-item {
+  flex: 0 0 30%;
+}
+
+.colour-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.colour-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.colour-selector:checked + label {
+  color: #FFC65A !important;
+}
+
+
+#item_colour_ruby + label {
+  color: #FD1015;
+}
+
+#item_colour_ruby:checked + label {
+  background-color: #71A9F7;
+  border-color: #FD1015;
+}
+
+
+#item_colour_javascript + label {
+  color: #FFC65A;
+}
+
+#item_colour_javascript:checked + label {
+  background-color: #71A9F7;
+  border-color: #FFC65A;
+}
+
+
+#item_colour_css + label {
+  color: #62DDF5;
+}
+
+#item_colour_css:checked + label {
+  background-color: #71A9F7;
+  border-color: #62DDF5;
+}
+
+/* OCCASIONS */
+
+.occasion-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.occasion-item {
+  flex: 0 0 30%;
+}
+
+.occasion-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.occasion-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.occasion-selector:checked + label {
+  color: #FFC65A !important;
+}
+
+
+#item_occasion_ruby + label {
+  color: #FD1015;
+}
+
+#item_occasion_ruby:checked + label {
+  background-color: #FFC65A;
+  border-color: #FD1015;
+}
+
+
+#item_occasion_javascript + label {
+  color: #FFC65A;
+}
+
+#item_occasion_javascript:checked + label {
+  background-color: #FFC65A;
+  border-color: #FFC65A;
+}
+
+
+#item_occasion_css + label {
+  color: #62DDF5;
+}
+
+#item_occasion_css:checked + label {
+  background-color: #FFC65A;
+  border-color: #62DDF5;
+}
+
+/* CONDITIONS */
+
+.condition-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.condition-item {
+  flex: 0 0 30%;
+}
+
+.condition-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.condition-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.condition-selector:checked + label {
+  color: #FFC65A !important;
+}
+
+
+#item_condition_ruby + label {
+  color: #FD1015;
+}
+
+#item_condition_ruby:checked + label {
+  background-color: #71A9F7;
+  border-color: #FD1015;
+}
+
+
+#item_condition_javascript + label {
+  color: #FFC65A;
+}
+
+#item_condition_javascript:checked + label {
+  background-color: #71A9F7;
+  border-color: #FFC65A;
+}
+
+
+#item_condition_css + label {
+  color: #62DDF5;
+}
+
+#item_condition_css:checked + label {
+  background-color: #71A9F7;
+  border-color: #62DDF5;
+}
+
+
+
+/* BUTTON */
+/* CSS */
+.button-56 {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+}
+
+/* COLOUR-SCHEME */
+
+$red: #F38181;
+$light-blue: #71A9F7;
+$dark-blue: #18206F;
+$yellow: #FFD966;
+$dark-orange: #F1C232;
+$gray: #DADCE0;
+$white: #FEFFFE;
+$red: #FD1015;
+$blue: #0D6EFD;
+$yellow: #FFC65A;
+$orange: #E67E22;
+$green: #1EDD88;
+$gray: #0E0000;
+$light-gray: #F4F4F4;
+
+</style>
