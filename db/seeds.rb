@@ -14,11 +14,11 @@ User.destroy_all
 
 #user seeds
 
-louise = User.create!(email: "louise_dupont@example.com", password: "louise_password", first_name: "Louise", last_name: "Dupont")
-marie = User.create!(email: "marie_martin@example.com", password: "marie_password", first_name: "Marie", last_name: "Martin")
-paula = User.create!(email: "paula_dubois@example.com", password: "paula_password", first_name: "Paula", last_name: "Dubois")
-elise = User.create!(email: "elise_girard@example.com", password: "elise_password", first_name: "Elise", last_name: "Girard")
-emma = User.create!(email: "emma_mannion@example.com", password: "emma_password", first_name: "Emma", last_name: "Mannion")
+louise = User.create!(email: "louise@example.com", password: "louise_password", first_name: "Louise", last_name: "Dupont")
+marie = User.create!(email: "marie@example.com", password: "marie_password", first_name: "Marie", last_name: "Martin")
+paula = User.create!(email: "paula@example.com", password: "paula_password", first_name: "Paula", last_name: "Dubois")
+elise = User.create!(email: "elise@example.com", password: "elise_password", first_name: "Elise", last_name: "Girard")
+emma = User.create!(email: "emma@example.com", password: "emma_password", first_name: "Emma", last_name: "Mannion")
 
 
 #item seeds
