@@ -3,6 +3,19 @@ class RequestsController < ApplicationController
     @requests = Request.all
   end
 
+  def my_requests
+    @user = User.new
+    @requests_sent = Request.where(user_id: current_user.id)
+    @requests_sent_open = @requests_sent.where(status: "Open")
+
+    items = Item.where(user_id: current_user.id)
+    @requests_received = []
+    items.each do |item|
+      @requests_received << Request.where(item_id: item.id)
+    end
+
+  end
+
   def show
     @request = Request.find(params[:id])
     # @items = Item.where(request_id: params[:id])

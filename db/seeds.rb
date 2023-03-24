@@ -20,12 +20,11 @@ paula = User.create!(email: "paula_dubois@example.com", password: "paula_passwor
 elise = User.create!(email: "elise_girard@example.com", password: "elise_password", first_name: "Elise", last_name: "Girard")
 emma = User.create!(email: "emma_mannion@example.com", password: "emma_password", first_name: "Emma", last_name: "Mannion")
 
-
 #item seeds
 
 louise_item = Item.new(size: 10, colour: "Multi", occasion: "Casual", category: "Swimwear", brand: "Other", condition: "Used but good", description: "H&M colourful swimming costume", user_id: louise.id)
-louise_pic1 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679596606/development/ox0s36n3rybkajt3znke30hbnxtk.jpg")
-louise_pic2 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426740/Blcothes/1679414158_1_fgxh4x.jpg")
+louise_pic1 = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg")
+louise_pic2 = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg")
 louise_item.photos.attach([io: louise_pic1, filename: "louise_pic1.jpg", content_type: "image/jeg"])
 louise_item.photos.attach([io: louise_pic2, filename: "louise_pic2.jpg", content_type: "image/jeg"])
 louise_item.save!

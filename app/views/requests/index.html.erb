@@ -1,3 +1,23 @@
+<%# Add search? %>
 
-<%= render :partial => 'received_requests',
-            :locals => {request: @requests} %>
+<ul>
+<% @requests.each do |request| %>
+    <li>
+      <% if current_user == User.find(request.user_id) %>
+        <div class="bg-warning bg-gradient">
+        You requested
+        </div>
+      <% else %>
+        <div>
+        <%= User.find(request.user_id)[:first_name]%> requested
+        </div>
+      <% end %>
+      <%= request.title%>
+      <%= request.start_date%>-<%= request.end_date%>
+      <%= request.description%>
+      <%= request.status %>
+      <%= link_to "View", request_path(request), class: "btn" %>
+    </li>
+
+<% end %>
+</ul>
