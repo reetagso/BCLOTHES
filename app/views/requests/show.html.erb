@@ -35,6 +35,7 @@
     <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
     <%= choice.category %>
     <%= choice.size %>
+    <%= link_to "View", item_path(choice), class: "btn" %>
   </div>
 
 <%# suggestion owner%>
