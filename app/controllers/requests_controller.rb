@@ -30,10 +30,13 @@ class RequestsController < ApplicationController
   end
 
   def create
-    #add conditional on whether item id came from params or form input
     @request = Request.new(request_params)
     @request.user_id = current_user.id
-    if @request.save
+    if @request.save && params[:request][:item_id]
+      @item = Item.find(params[:request][:item_id])
+      @request.item = @item
+      redirect_to request_path(@request)
+    elsif @request.save
       redirect_to request_path(@request)
     else
       render "new", status: :unprocessable_entity
@@ -62,7 +65,11 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:start_date, :end_date, :status, :description, :title, :item_id)
+    params.require(:request).permit(:start_date, :end_date, :status, :description, :title, :item_id, :id)
+  end
+
+  def item_params
+    params.require(:item).permit(:id, :size, :colour, :occasion, :category, :brand, :description, :condition, photos: [])
   end
 
 end

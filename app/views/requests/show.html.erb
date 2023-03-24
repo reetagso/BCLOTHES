@@ -16,7 +16,7 @@
 
 <%# visitor%>
 <% if @request.user_id != current_user.id && @request.status == "Open" %>
-  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %> 
+  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
 <%# everyone%>
     <%# Chatroom placeholder %>
   <h2 class="chatbox-title">What do you think</h2>
@@ -91,6 +91,7 @@
 
   <% if @request.suggestions.empty? %>
     <p>No suggestions yet. Be the first one to suggest an outfit!</p>
+    <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
   <% else %>
     <ol>
       <% @request.items.each do |item| %>
@@ -113,4 +114,3 @@ Add card
 Add link
 Add forms here to ass javascript to?
 %>
-

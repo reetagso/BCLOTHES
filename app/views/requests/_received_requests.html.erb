@@ -23,7 +23,8 @@
       <%= request.first.status %>
       </div>
       <div>
-      <%= link_to "View", item_path(Item.find(request.first.item_id)), class: "btn"  %>
+      <%= link_to "View Item", item_path(Item.find(request.first.item_id)), class: "btn"  %>
+      <%= link_to "View Request", request_path(request), class: "btn" %>
       <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
       <div>
       </li>

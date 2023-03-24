@@ -1,4 +1,4 @@
-<% if @requests_sent_open.empty? %>
+<% if @requests_sent_open == nil %>
   <div>
   You have no open Bclothes requests
   </div>
@@ -16,7 +16,9 @@
       <%= request.status %>
       </div>
       <div>
-      <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %>
+      <%# line below can be reinstated when new specific requests are workign  %>
+      <%# <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %> %>
+      <%= link_to "View Request", request_path(request), class: "btn" %>
       <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
       <div>
       </li>

@@ -1,7 +1,7 @@
 <%= simple_form_for request, data: { controller: 'flatpickr' } do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
-  <%= f.collection_select :item_id, Item.all, :id, :description, prompt: true %>
+  <%# <%= f.collection_select :item_id, Item.all, :id, :description, prompt: true %>
   <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } }  %>
   <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" } }   %>
   <%= f.submit submit_text %>
