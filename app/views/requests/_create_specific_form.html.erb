@@ -1,0 +1,8 @@
+<%= simple_form_for request, data: { controller: 'flatpickr' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.hidden_field :item_id, value: params[:item_id] %>
+  <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } }  %>
+  <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" } }   %>
+  <%= f.submit submit_text %>
+<% end %>

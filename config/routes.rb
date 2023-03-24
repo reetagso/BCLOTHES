@@ -9,19 +9,22 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get "/items/:id/requests", to: "requests#new", as: :new_item_requests
 
-  resources :items do
-    member do
-      delete :delete_image_attachment
-      # resources :requests, only: [:new, :create]
-    end
-  end
+  get "requests", to: "requests#index", as: :all_requests
+  post "/items/:id/requests", to: "requests#create", as: :item_requests
 
-  resources :requests do
+  resources :requests, only: [:show, :new, :create, :edit, :update, :destroy] do
     collection do
       get :my_requests
     end
     resources :suggestions, only: [:new, :create]
+  end
+
+  resources :items do
+    member do
+      delete :delete_image_attachment
+    end
   end
 
   resources :chatrooms, only: :show do

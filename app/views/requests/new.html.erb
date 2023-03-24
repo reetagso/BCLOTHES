@@ -1,4 +1,11 @@
 <h1>create new request</h1>
 
-<%= render :partial => 'create_form',
-           :locals => {request: @request, submit_text: "Post request"} %>
+<% if params[:id] %>
+  <%= render :partial => 'create_specific_form',
+            :locals => {request: @request, submit_text: "Post request"} %>
+  <% console%>
+<% else %>
+  <%= render :partial => 'create_open_form',
+            :locals => {request: @request, submit_text: "Post request"} %>
+  <% console%>
+<% end %>

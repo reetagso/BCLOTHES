@@ -32,8 +32,8 @@
   <div>
     <h3>Is this what you were looking for?</h3>
         <div>
-      Très chic!
-      <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_request_path, class: "text-decoration-none" %>
+      Très chic!:
+      <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "text-decoration-none" %>
     </div>
     <div>
       Not quite?
