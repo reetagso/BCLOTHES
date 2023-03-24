@@ -2,14 +2,7 @@
 
 <div>
 
-  <div>
-    <h3>Is this what you were looking for?</h3>
-    <div>
-      <p>Not quite, </p>
-      <%= link_to "return to search", items_path, class: "btn" %>
-    </div>
 
-  </div>
 
   <% if User.find(@item.user_id) == current_user %>
     From your wardrobe
@@ -36,14 +29,27 @@
 </div>
 
 <% if @item.user_id != current_user.id %>
-  <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_request_path, class: "btn" %>
+  <div>
+    <h3>Is this what you were looking for?</h3>
+        <div>
+      Très chic!
+      <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_request_path, class: "text-decoration-none" %>
+    </div>
+    <div>
+      Not quite?
+      <%= link_to "Return to search", items_path, class: "text-decoration-none"%>
+    </div>
+  </div>
+
 <% elsif @requests.count < 1 %>
   <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "btn"  %>
   <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
+  <%= link_to "Return to search", items_path, class: "text-decoration-none"%>
 <% else %>
   <p> Cannot be deleted requests attached (add archive button?) </p>
   <%= link_to "View your requests", requests_path, class: "btn" %>
   <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
+  <%= link_to "Return to search", items_path, class: "text-decoration-none"%>
 <% end %>
 
 <%# TO DO

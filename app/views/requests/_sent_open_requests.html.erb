@@ -1,0 +1,29 @@
+<% if @requests_sent_open.empty? %>
+  <div>
+  You have no open Bclothes requests
+  </div>
+<% else %>
+  <div>
+  You have <%=@requests_sent_open.length%> open Bclothes requests
+  </div>
+  <ul>
+    <% @requests_sent_open.each do |request| %>
+      <li>
+      <div>
+        Requested from <%= User.find(Item.find(request.item_id).user_id)[:first_name]%>
+        <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+      </div>
+      <div>
+      <%= request.title%>
+      <%= request.start_date%>-<%= request.end_date%>
+      <%= request.description%>
+      <%= request.status %>
+      </div>
+      <div>
+      <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %>
+      <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
+      <div>
+      </li>
+      <% end %>
+  </ul>
+<% end %>
