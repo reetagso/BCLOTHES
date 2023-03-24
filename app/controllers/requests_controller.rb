@@ -4,12 +4,14 @@ class RequestsController < ApplicationController
   end
 
   def my_requests
-    @requests = Request.where(user_id: current_user.id)
+    @user = User.new
+    @requests_sent = Request.where(user_id: current_user.id)
+    @requests_sent_open = @requests_sent.where(status: "Open")
 
     items = Item.where(user_id: current_user.id)
-    @received_requests = []
+    @requests_received = []
     items.each do |item|
-      @received_requests << Request.where(item_id: item.id)
+      @requests_received << Request.where(item_id: item.id)
     end
 
   end
@@ -58,7 +60,7 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:start_date, :end_date, :status, :description, :title, :item_id, :user_id)
+    params.require(:request).permit(:start_date, :end_date, :status, :description, :title, :item_id)
   end
 
 end
