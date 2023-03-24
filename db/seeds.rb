@@ -24,7 +24,7 @@ emma = User.create!(email: "emma_mannion@example.com", password: "emma_password"
 #item seeds
 
 louise_item = Item.new(size: 10, colour: "Multi", occasion: "Casual", category: "Swimwear", brand: "Other", condition: "Used but good", description: "H&M colourful swimming costume", user_id: louise.id)
-louise_pic1 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426741/Blcothes/1679414158_fcusd7.jpg")
+louise_pic1 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679596606/development/ox0s36n3rybkajt3znke30hbnxtk.jpg")
 louise_pic2 = URI.open("https://res.cloudinary.com/dtvlnkce6/image/upload/v1679426740/Blcothes/1679414158_1_fgxh4x.jpg")
 louise_item.photos.attach([io: louise_pic1, filename: "louise_pic1.jpg", content_type: "image/jeg"])
 louise_item.photos.attach([io: louise_pic2, filename: "louise_pic2.jpg", content_type: "image/jeg"])
