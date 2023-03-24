@@ -3,6 +3,10 @@ class RequestsController < ApplicationController
     @requests = Request.all
   end
 
+  def my_requests
+    @requests = Request.where(params[user_id] == current_user)
+  end
+
   def show
     @request = Request.find(params[:id])
     # @items = Item.where(request_id: params[:id])
