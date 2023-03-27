@@ -19,7 +19,7 @@
   <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
 
 <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
-  No suggestions yet
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn"  %>
 <%# everyone%>
     <%# Chatroom placeholder %>
   <h2 class="chatbox-title">What do you think?</h2>
