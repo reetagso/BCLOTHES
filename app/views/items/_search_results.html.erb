@@ -1,45 +1,43 @@
-<div class="container">
-  <div>
-    <div class="cards">
-          <% if @items.any? %>
-            <% @items.each do |item| %>
-              <div>
-                  <div class="clothing-card-main">
-                    <div class="group-3">
-                      <div class="">
-                        <h4 class="name">
-                          <%= item.colour%>
-                          <%= item.category%>
-                        </h4>
-                      </div>
-                      <div class="frame-4" style="text-decoration: none;">
-                        <button class="button"><%= link_to "View", item_path(item), {:style=>'color:#FFFFFF;'} %></button>
-                      </div>
-                      </div>
-                    <div>
-                      <%= cl_image_tag item.photos.first.key, crop: :fill, style: "max-width: 263px; max-height: 356px;" %>
-                    </div>
-                    <div class="group-2">
-                      <h3 class="subheader">
-                        <div>
-                          <% if User.find(item.user_id) == current_user %>
-                            <strong> From your wardrobe </strong>
-                          <% else%>
-                            From <%= User.find(item.user_id)[:first_name]%>'s wardrobe
-                          <% end %>
-                        </div>
-                      </h3>
-                      <p class="size"><%= "Size #{item.size}" %></p>
-                    </div>
+
+<div class="cards">
+      <% if @items.any? %>
+        <% @items.each do |item| %>
+          <div>
+              <div class="clothing-card-main shadow">
+                <div class="group-3">
+                  <div class="">
+                    <h4 class="name">
+                      <%= item.colour%>
+                      <%= item.category%>
+                    </h4>
                   </div>
+                  <div class="frame-4" style="text-decoration: none;">
+                    <button class="button"><%= link_to "View", item_path(item), {:style=>'color:#FFFFFF;'} %></button>
+                  </div>
+                  </div>
+                <div>
+                  <%= cl_image_tag item.photos.first.key,  crop: :fill, style: "max-width: 263px; max-height: 356px;" %>
+                </div>
+                <div class="group-2">
+                  <h3 class="subheader">
+                    <div>
+                      <% if User.find(item.user_id) == current_user %>
+                        <strong> Your wardrobe </strong>
+                      <% else%>
+                        <%= User.find(item.user_id)[:first_name]%>'s wardrobe
+                      <% end %>
+                    </div>
+                  </h3>
+                  <p class="size"><%= "Size #{item.size}" %></p>
+                </div>
               </div>
-            <% end %>
-          <% else %>
-            <em>Sorry, no items found, would you like to make a request?</em>
-          <% end %>
-    </div>
-  </div>
+          </div>
+        <% end %>
+      <% else %>
+        <em>Sorry, no items found, would you like to make a request?</em>
+      <% end %>
 </div>
+
 
 <style>
 /* CSS */
@@ -114,7 +112,6 @@
     min-width: 303px;
     max-height: height: 420px;
     background: #F8F7F7;
-    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     margin: 5px;
 }
@@ -235,7 +232,12 @@
 }
 
 img {
-  border-radius: 50px;
+  border-radius: 5px;
+  width:300px;
+  height:300px;
+  min-width:100%;
+  position:relative;
+  overflow: hidden;
 }
 
 </style>
