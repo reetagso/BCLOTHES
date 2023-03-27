@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
 
   end
   def assign_item
-    raise
+
     @request = Request.find(params[:id])
     @item = Item.find(params[:item_id])
     request.update(item: @item)
