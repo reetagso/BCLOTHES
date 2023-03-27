@@ -3,9 +3,7 @@
 <% if params[:id] %>
   <%= render :partial => 'create_specific_form',
             :locals => {request: @request, submit_text: "Post request"} %>
-  <% console%>
 <% else %>
   <%= render :partial => 'create_open_form',
             :locals => {request: @request, submit_text: "Post request"} %>
-  <% console%>
 <% end %>

@@ -17,16 +17,13 @@
     </div>
   </div>
     <% end %>
+    <%= link_to "Create an open request", new_request_path, class: "btn" %>
       <%# search %>
     <%= render :partial => 'search', :locals => {item: @item, submit_text: "Available!"} %>
 </div>
 <%# TO DO Styling %>
 
-
-
-
 <style>
 /* CSS */
-
-
 </style>
+<%# TO DO Styling %>

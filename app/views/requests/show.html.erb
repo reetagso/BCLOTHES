@@ -17,9 +17,12 @@
 <%# visitor%>
 <% if @request.user_id != current_user.id && @request.status == "Open" %>
   <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
+
+<% elsif @request.user_id == current_user.id && @request.status == "Open" %>
+  No suggestions yet
 <%# everyone%>
     <%# Chatroom placeholder %>
-  <h2 class="chatbox-title">What do you think</h2>
+  <h2 class="chatbox-title">What do you think?</h2>
   <div class="chatroom-placeholder">
     <p>Chatroom will be here</p>
   </div>
@@ -86,10 +89,10 @@
   <%# Suggestions display %>
 <div class="suggestions-container">
   <h2>Suggestions</h2>
-
-  <% if @request.suggestions.empty? %>
-    <p>No suggestions yet. Be the first one to suggest an outfit!</p>
-    <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
+  <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
+    <p>Be the first one to suggest an outfit! </p>
+  <% elsif  @request.suggestions.empty? %>
+    <p>No suggestions yet</p>
   <% else %>
     <ol>
       <% @request.items.each do |item| %>
@@ -99,6 +102,7 @@
           <%= item.category %>
           <%= item.size %>
           <%= link_to "View", item_path(item), class: "btn" %>
+          <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn" %>
         </li>
       <% end %>
     </ol>
@@ -112,3 +116,5 @@ Add card
 Add link
 Add forms here to ass javascript to?
 %>
+
+<%console%>
