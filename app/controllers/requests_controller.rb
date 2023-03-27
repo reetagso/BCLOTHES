@@ -10,11 +10,16 @@ class RequestsController < ApplicationController
     @requests_sent_closed = @requests_sent.where(status: "Closed")
     @requests_sent_pending = @requests_sent.where(status: "Item Requested")
 
-    items = Item.where(user_id: current_user.id)
-    @requests_received = []
-    items.each do |item|
-      @requests_received << Request.where(item_id: item.id)
-    end
+    @requests_received = Request.joins(:item).where( :items => { :user_id => current_user.id })
+
+  end
+
+  def assign_item
+    @request = Request.find(params[:id])
+    @item = Item.find(params[:item_id])
+    @request.update(item: @item)
+    @request.update(status: "Item Requested")
+    redirect_to request_path(@request)
 
   end
 

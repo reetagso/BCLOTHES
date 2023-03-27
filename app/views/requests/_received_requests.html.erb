@@ -1,7 +1,7 @@
 
 
 
-<% if @requests_received.sum == [] %>
+<% if @requests_received == nil %>
   <div>
   You haven't receieved any Bclothes requests
   </div>
@@ -13,17 +13,17 @@
     <% @requests_received.each do |request| %>
       <li>
       <div>
-        <%= User.find(request.first.user_id)[:first_name]%> requested
-        <%= cl_image_tag Item.find(request.first.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+        <%= User.find(request.user_id)[:first_name]%> requested
+        <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
       </div>
       <div>
-      <%= request.first.title%>
-      <%= request.first.start_date%>-<%= request.first.end_date%>
-      <%= request.first.description%>
-      <%= request.first.status %>
+      <%= request.title%>
+      <%= request.start_date%>-<%= request.end_date%>
+      <%= request.description%>
+      <%= request.status %>
       </div>
       <div>
-      <%= link_to "View Item", item_path(Item.find(request.first.item_id)), class: "btn"  %>
+      <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "btn"  %>
       <%= link_to "View Request", request_path(request), class: "btn" %>
       <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
       <div>

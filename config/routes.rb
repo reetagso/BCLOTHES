@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get "/items/:id/requests", to: "requests#new", as: :new_item_requests
 
   get "requests", to: "requests#index", as: :all_requests
-  post "/items/:id/requests", to: "requests#create", as: :item_requests
+  post "items/:id/requests", to: "requests#create", as: :item_requests
+  get "items/requests/:id", to: "requests#assign_item", as: :assign_item
 
   resources :requests, only: [:show, :new, :create, :edit, :update, :destroy] do
     collection do
