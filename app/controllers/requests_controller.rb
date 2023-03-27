@@ -26,6 +26,13 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
     # @items = Item.where(request_id: params[:id])
+    if @request.chatroom.nil?
+      @chatroom = Chatroom.create(request: @request)
+    else
+      @chatroom = @request.chatroom
+    end
+    @user = @request.user
+    @message = Message.new
   end
 
   def new

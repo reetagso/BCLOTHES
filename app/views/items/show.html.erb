@@ -1,59 +1,146 @@
-<%# Code to check seed and view working %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <% if User.find(@item.user_id) == current_user %>
+        <p class="text-muted wardrobe-info">From your wardrobe</p>
+      <% else %>
+        <p class="text-muted wardrobe-info">From <%= User.find(@item.user_id)[:first_name]%>'s wardrobe</p>
+      <% end %>
 
-<div>
+      <% @item.photos.each do |photo| %>
+        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+        <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </div>
 
+    <div class="col-md-6">
+      <div class="question">Is this what you were looking for?</div>
+      <div class="item-details">
+        <p><span>Category:</span> <%= @item.category%></p>
+        <p><span>Size:</span> <%= @item.size%></p>
+        <p><span>Description:</span> <%= @item.description%></p>
+        <p><span>Colour:</span> <%= @item.colour%></p>
+        <p><span>Occasion:</span> <%= @item.occasion%></p>
+        <p><span>Brand:</span> <%= @item.brand%></p>
+        <p><span>Condition:</span> <%= @item.condition%></p>
+      </div>
 
-
-  <% if User.find(@item.user_id) == current_user %>
-    From your wardrobe
-  <% else%>
-    From <%= User.find(@item.user_id)[:first_name]%>'s wardrobe
-  <% end %>
-  <div>
-    <% @item.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-      <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-    <% end %>
-  </div>
-  <%= @item.category%> <br>
-  <%= @item.size%> <br>
-  <%= @item.description%> <br>
-</div>
-<div>
-  <%= @item.colour%> <br>
-  <%= @item.occasion%> <br>
-  <%= @item.brand%> <br>
-  <%= @item.condition%> <br>
-</div>
 
 <% if @item.user_id != current_user.id %>
   <div>
-    <h3>Is this what you were looking for?</h3>
-        <div>
-      Très chic!:
-      <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "text-decoration-none" %>
-    </div>
-    <div>
-      Not quite?
-      <%= link_to "Return to search", items_path, class: "text-decoration-none"%>
-    </div>
+    <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "text-decoration-none item-btn" %>
   </div>
-
+  <div>
+    <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
+  </div>
 <% elsif @requests.count < 1 %>
-  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "btn"  %>
-  <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
-  <%= link_to "Return to search", items_path, class: "text-decoration-none"%>
+  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %>
+  <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
+  <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
 <% else %>
   <p> Cannot be deleted requests attached (add archive button?) </p>
-  <%= link_to "View your requests", requests_path, class: "btn" %>
-  <%= link_to "Edit", edit_item_path(@item), class: "btn" %>
-  <%= link_to "Return to search", items_path, class: "text-decoration-none"%>
+  <%= link_to "View your requests", requests_path, class: "item-btn" %>
+  <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
+  <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
 <% end %>
 
-<%# TO DO
-Add css
-make item unavilable
-item status = archived
-%>
+    </div>
+  </div>
+</div>
+
+<style>
+
+*{
+  font: Inter;
+}
+
+.container{
+  margin-top: 60px;
+}
+
+.wardrobe-info {
+  font-style: bold !important;
+  color: black !important;
+  font-weight: bold;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+  .item-info {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .question{
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .item-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .item-info span {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .item-info .col-md-6 {
+    padding: 20px;
+  }
+
+  .item-info .col-md-6 p:last-child {
+    margin-bottom: 0;
+  }
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-details p {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+}
+
+
+  .item-details p span {
+    margin-right: 10px;
+    font-weight: bold !important;
+    font-size: 20px;
+  }
+
+.btn {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  height: 60px;
+}
+
+
+.item-btn {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-top: 20px;
+  text-align: center;
+  width: 300px;
+}
+
+.btn:hover {
+  background-color: yellow;
+  color: #fff;
+}
+
+
+</style>
