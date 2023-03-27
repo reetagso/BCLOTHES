@@ -1,29 +1,69 @@
-<%# Code to check seed and view working %>
-<div class="container">
+<style>
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 15px;
+  max-width: 800px;
 
-    <%# search %>
-  <div class="d-flex justify-content-evenly" style="margin: 15px;">
-    <div style="padding: 5px; min-width: 500px;">
-      <%= form_with url: items_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "I have nothing to wear" %>
-              <div style="padding: 5px;">
-                <%= submit_tag "Search", name: ""%>
-              </div>
-      <% end %>
-      <%= link_to "Create an open request", new_request_path, class: "btn" %>
-      <%# search results %>
-    </div>
+}
+
+.search-input {
+  flex-grow: 1;
+  width: 800px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.search-btn,
+.create-request-btn {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.create-request-btn {
+  background-color: #28a745;
+  margin-left: 10px;
+}
+
+.search-btn:hover,
+.create-request-btn:hover {
+  background-color: #0069d9;
+}
+
+@media screen and (max-width: 767px) {
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .create-request-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+</style>
+
+<div class="container">
+  <div class="search-container">
+    <%= form_with url: items_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control search-input",
+        placeholder: "I have nothing to wear" %>
+      <%= submit_tag "Search", name: "", class: "btn search-btn" %>
+    <% end %>
+    <%= link_to "Create an open request", new_request_path, class: "btn create-request-btn" %>
   </div>
 
   <div>
     <%= render :partial => 'search_results', :locals => {item: @item, submit_text: "Available!"} %>
   </div>
 </div>
-
-<style>
-/* CSS */
-</style>
-<%# TO DO Styling %>
