@@ -1,23 +1,83 @@
 <%# Add search? %>
-
-<ul>
-<% @requests.each do |request| %>
-    <li>
+<div class="request-list">
+  <% @requests.each do |request| %>
+    <div class="request-item">
       <% if current_user == User.find(request.user_id) %>
-        <div class="bg-warning bg-gradient">
-        You requested
+        <div class="bg-warning bg-gradient request-owner">
+          You requested
         </div>
       <% else %>
-        <div>
-        <%= User.find(request.user_id)[:first_name]%> requested
+        <div class="request-user">
+          <%= User.find(request.user_id)[:first_name].upcase %> REQUESTED | <div class="request-title">
+            <h3><%= request.title %></h3>
+          </div>
         </div>
       <% end %>
-      <%= request.title%>
-      <%= request.start_date%>-<%= request.end_date%>
-      <%= request.description%>
-      <%= request.status %>
-      <%= link_to "View", request_path(request), class: "btn" %>
-    </li>
+      <div class="request-details">
+  
+        <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">Duration:</p>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;"><%= request.start_date %> - <%= request.end_date %></p>
+        <p><strong>Description:</strong> <%= request.description %></p>
+        <p><strong>Status:</strong> <%= request.status %></p>
+        <%= link_to "View", request_path(request), class: "btn btn-black btn-view" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<style>
 
-<% end %>
-</ul>
+  .request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .request-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #f7f7f7;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+
+  .request-owner {
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+
+  .request-user {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+  }
+
+  .request-details h3 {
+    margin-top: 0;
+  }
+
+  .btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    width: 200px;
+    display: inline-block;
+  }
+
+  .btn:hover {
+    background-color: #333;
+  }
+
+  .btn-view {
+    margin-top: 1rem;
+  }
+</style>
