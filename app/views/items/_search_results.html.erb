@@ -16,7 +16,7 @@
                   </div>
                   </div>
                 <div>
-                  <%= cl_image_tag item.photos.first.key,  crop: :fill, style: "max-width: 263px; max-height: 356px;" %>
+                  <%= cl_image_tag item.photos.first.key,  crop: :scale, style: "width: 200px; max-height: 356px;" %>
                 </div>
                 <div class="group-2">
                   <h3 class="subheader">
@@ -233,11 +233,7 @@
 
 img {
   border-radius: 5px;
-  width:300px;
-  height:300px;
-  min-width:100%;
-  position:relative;
-  overflow: hidden;
+  width: 100%;
 }
 
 </style>
