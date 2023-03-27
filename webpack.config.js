@@ -17,7 +17,5 @@ module.exports = {
       maxChunks: 1
     })
   ]
-  resolve: {
-    extensions: ['.js', '.jsx']
-  }
+
 }
