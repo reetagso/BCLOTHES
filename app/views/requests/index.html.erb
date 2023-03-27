@@ -8,16 +8,15 @@
         </div>
       <% else %>
         <div class="request-user">
+          <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <%= User.find(request.user_id)[:first_name].upcase %> REQUESTED | <div class="request-title">
-            <h3><%= request.title %></h3>
+            <span><%= request.title %></span>
           </div>
         </div>
       <% end %>
       <div class="request-details">
-  
-        <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">Duration:</p>
-        <p style="font-size: 1.2rem; margin-bottom: 1rem;"><%= request.start_date %> - <%= request.end_date %></p>
-        <p><strong>Description:</strong> <%= request.description %></p>
+          <p style="font-size: 1.2rem; margin-bottom: 1rem;"><%= request.start_date %> - <%= request.end_date %></p>
+        <p> <%= request.description %></p>
         <p><strong>Status:</strong> <%= request.status %></p>
         <%= link_to "View", request_path(request), class: "btn btn-black btn-view" %>
       </div>
@@ -61,6 +60,9 @@
     margin-top: 0;
   }
 
+#navbarDropdown{
+  margin-right: 12px;
+}
   .btn {
     background-color: #000;
     color: #fff;
@@ -80,4 +82,33 @@
   .btn-view {
     margin-top: 1rem;
   }
+
+  .request-user {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.user-name {
+  margin-right: 1rem;
+}
+
+.request-text {
+  margin-right: 0.5rem;
+}
+
+.request-title {
+  font-weight: normal;
+  font-size : 20px;
+  margin-left : 8px;
+}
+
 </style>
