@@ -1,8 +1,16 @@
-<%= simple_form_for request, data: { controller: 'flatpickr' } do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.hidden_field :item_id, value: params[:item_id] %>
-  <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } }  %>
-  <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" } }   %>
-  <%= f.submit submit_text %>
+<%= simple_form_for request, data: { controller: 'flatpickr' }, html: { class: 'form' } do |f| %>
+  <div class="form-group">
+    <%= f.input :title, input_html: { class: 'form-control' } %>
+  </div>
+  <div class="form-group">
+    <%= f.input :description, input_html: { class: 'form-control' } %>
+  </div>
+  <%# <%= f.collection_select :item_id, Item.all, :id, :description, prompt: true, input_html: { class: 'form-control' } %>
+  <div class="form-group">
+    <%= f.input :start_date, as: :string, input_html: { class: 'form-control', data: { flatpickr_target: "startTime" } }  %>
+  </div>
+  <div class="form-group">
+    <%= f.input :end_date, as: :string, input_html: { class: 'form-control', data: { flatpickr_target: "endTime" } }   %>
+  </div>
+  <%= f.submit submit_text, class: 'btn btn-primary btn-block', style: 'background-color: black; color: white; border-radius: 10px; border: none; margin-bottom: 30px; width: 300px;' %>
 <% end %>
