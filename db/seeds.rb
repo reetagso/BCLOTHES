@@ -85,18 +85,18 @@ emma_item_2.save!
 #request seeds
 
 #open
-elise_request = Request.create!(title: "Hiking Boots", description: "I am going hiking in Patagonia in July, does anyone have any size 6 hiking boots I could borrow?", user_id: elise.id)
-emma_request = Request.create!(title: "Red Dress", description: "I need a dress for Charles birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id)
+elise_request = Request.create!(title: "Hiking Boots", description: "I am going hiking in Patagonia in July, does anyone have any size 6 hiking boots I could borrow?", user_id: elise.id, start_date: "04/01/2022", end_date: "04/01/2022")
+emma_request = Request.create!(title: "Red Dress", description: "I need a dress for Charles birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id, start_date: "04/01/2022", end_date: "04/01/2022")
 emma_request.save!
 
 #item requested
-louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have another wedding please could I borrow this again?", user_id: louise.id, item_id: paula_item.id, status: "Item Requested")
+louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have another wedding please could I borrow this again?", user_id: louise.id, item_id: paula_item.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
 
 #closed
 
-louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have a wedding to attend next week, please could I borrow your jacket?", user_id: louise.id, item_id: paula_item.id, status: "Closed")
-paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed")
-marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed")
+louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have a wedding to attend next week, please could I borrow your jacket?", user_id: louise.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
+paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
+marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 
 #suggestion seeds
 
