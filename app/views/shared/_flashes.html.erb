@@ -1,14 +1,25 @@
 <% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+  <div class="alert alert-info alert-dismissible fade show position-fixed bottom-0 start-0 m-1" role="alert" style="max-width: 300px; margin-bottom: 10px; margin-left: 10px;">
     <%= notice %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
     </button>
   </div>
+  <script>
+    setTimeout(function() {
+      $('.alert-info').fadeOut();
+    }, 3000);
+  </script>
 <% end %>
+
 <% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+  <div class="alert alert-warning alert-dismissible fade show position-fixed bottom-0 start-0 m-1" role="alert" style="max-width: 500px; margin-bottom: 10px; margin-left: 10px;">
     <%= alert %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
     </button>
   </div>
+  <script>
+    setTimeout(function() {
+      $('.alert-warning').fadeOut();
+    }, 3000);
+  </script>
 <% end %>
