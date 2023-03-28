@@ -37,6 +37,9 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
+    if params[:item_id]
+      @item = Item.find(params[:item_id])
+    end
     #find item id
     #in view conditoinal on fields displayed
   end
@@ -44,9 +47,10 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.user_id = current_user.id
-    if @request.save && params[:request][:item_id].nil?
-      @item = Item.find(params[:request][:item_id])
+    if @request.save && Item.find_by(id: params[:id])
+      @item = Item.find(params[:id])
       @request.item = @item
+      @request.save
       redirect_to request_path(@request)
     elsif @request.save
       redirect_to request_path(@request)
