@@ -71,6 +71,7 @@ class RequestsController < ApplicationController
   def destroy
     @request = Request.find(params[:id])
     @request.destroy
+    #chnage to my wardrobe?
     redirect_to requests_path, status: :see_other
   end
 
