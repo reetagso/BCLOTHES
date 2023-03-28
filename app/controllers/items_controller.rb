@@ -47,9 +47,13 @@ class ItemsController < ApplicationController
     end
   end
 
-  def archive
+  def archive!
     @item = Item.find(params[:id])
-    @item.update(archived: true)
+    if @item.archived == false
+      @item.update(archived: true)
+    else
+      @item.update(archived: false)
+    end
     redirect_to item_path(@item)
   end
 
