@@ -6,8 +6,17 @@
           params[:query],
           class: "form-control search-input",
           placeholder: "I have nothing to wear" %>
-        <button class="btn search-btn" type="submit">Search</button>
+          <div style="padding: 5px;">
+            <%= submit_tag "Search", name: ""%>
+          </div>
+      <% end %>
+      <div>
+        <%= link_to "Create an open request", new_request_path, class: "btn frame-5" %>
       </div>
+        <%# search results %>
+      </div>
+        <button class="btn search-btn" type="submit">Search</button>
+    </div>
     <% end %>
   </div>
 
@@ -17,6 +26,21 @@
 </div>
 
 <style>
+
+/* CSS */
+.frame-5 {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  height: 33px;
+  background: #000000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
   .search-container {
     display: flex;
     flex-direction: column;
