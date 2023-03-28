@@ -44,7 +44,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     @request.user_id = current_user.id
-    if @request.save && params[:request][:item_id]
+    if @request.save && params[:request][:item_id].nil?
       @item = Item.find(params[:request][:item_id])
       @request.item = @item
       redirect_to request_path(@request)

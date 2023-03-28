@@ -59,7 +59,8 @@
   <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
   <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
 <% else %>
-  <p> Cannot be deleted requests attached (add archive button?) </p>
+
+  <%= link_to "Archive", archive_item_path(@item), class: "item-btn" %>
   <%= link_to "View your requests", requests_path, class: "item-btn" %>
   <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
   <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
@@ -68,7 +69,6 @@
     </div>
   </div>
 </div>
-
 <style>
 
 *{
@@ -161,5 +161,8 @@
   color: #fff;
 }
 
-
+.carousel-item{
+    float:none;
+    transition: 0.15s !important;
+}
 </style>

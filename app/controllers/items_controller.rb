@@ -40,13 +40,17 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-
     if @item.update(item_params)
-
       redirect_to item_path(@item)
     else
       render "new", status: :unprocessable_entity
     end
+  end
+
+  def archive
+    @item = Item.find(params[:id])
+    @item.update(archived: true)
+    redirect_to item_path(@item)
   end
 
 
@@ -61,7 +65,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:size, :colour, :occasion, :category, :brand, :description, :condition, photos: [])
+    params.require(:item).permit(:size, :colour, :occasion, :category, :brand, :description, :condition, :archived, photos: [])
   end
 
 end
