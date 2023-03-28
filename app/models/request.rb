@@ -3,7 +3,7 @@ class Request < ApplicationRecord
   belongs_to :item, optional: true
   has_many :suggestions, dependent: :destroy
   has_many :items, through: :suggestions
-  has_one :chatroom
+  has_one :chatroom, dependent: :destroy
   # belongs_to :item
   STATUSES = ["Open", "Item Requested", "Closed"]
 
