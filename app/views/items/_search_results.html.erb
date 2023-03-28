@@ -1,9 +1,8 @@
-
 <div class="cards">
       <% if @items.any? %>
         <% @items.each do |item| %>
           <div>
-              <div class="clothing-card-main shadow">
+              <div class="clothing-card-main <%= 'your-wardrobe' if User.find(item.user_id) == current_user %>">
                 <div class="group-3">
                   <div class="">
                     <h4 class="name">
@@ -11,7 +10,7 @@
                       <%= item.category%>
                     </h4>
                   </div>
-                  <div class="frame-4" style="text-decoration: none;">
+                  <div class="button-class">
                     <button class="button"><%= link_to "View", item_path(item), {:style=>'color:#FFFFFF;'} %></button>
                   </div>
                   </div>
@@ -43,7 +42,6 @@
 /* CSS */
 .button-56 {
   align-items: center;
-  background-color: #F38181;
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
@@ -66,7 +64,7 @@
 }
 
 .button-56:after {
-  background-color: #111;
+    display: none;
   border-radius: 8px;
   content: "";
   display: block;
@@ -112,8 +110,12 @@
     min-width: 303px;
     max-height: height: 420px;
     background: #F8F7F7;
-    border-radius: 5px;
     margin: 5px;
+    border:none;
+}
+
+.clothing-card-main.your-wardrobe {
+  background-color: #F9A2A2;
 }
 
 .group-3 {
@@ -133,35 +135,30 @@
     color: #000000;
 }
 
-.frame-4 {
-    display: flex;
-    flex-direction: row;
-    width: 69px;
-    height: 33px;
-    background: #000000;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .button {
-    width: 49px;
-    height: 21px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    color: #FFFFFF;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  color: white;
+  border: none;
+  outline: none;
+  width: 100px;
+    opacity: 0;
+    border-radius: 10px;
+    transition: opacity 0.2s ease-in-out;
+    background-color: #F38181;
 }
+
+.clothing-card-main:hover .button {
+  opacity: 1;
+}
+
+.button:active {
+  outline: 0;
+}
+
+.button:hover {
+  outline: 0;
+}
+
 
 .rectangle-10 {
     width: 263px;
