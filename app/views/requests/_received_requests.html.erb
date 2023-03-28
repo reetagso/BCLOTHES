@@ -13,10 +13,10 @@
         <h4 class="pl-2"><%= User.find(request.user_id)[:first_name]%></h4>
       </div>
       <div class="d-flex shadow rounded">
-        <div class="shadow">
-          <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+        <div class="shadow m-3">
+          <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 300, crop: :pad, background: "auto" %>
         </div>
-        <div class="ms-4">
+        <div class="ms-4 my-3">
           <h5><%= request.title%></h5>
           <p class="text-secondary">(<%= request.status %>)</p>
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>

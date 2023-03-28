@@ -6,15 +6,15 @@
 </div>
   <div class="rounded-3">
     <% @requests_sent_closed.each do |request| %>
-      <div class="d-flex align-items-center pl-3 my-4 h5">
+      <div class="d-flex align-items-center my-4 pl-3 h5">
+        <h4 class="pr-2">Request to <%= User.find(Item.find(request.item_id).user_id)[:first_name]%></h4>
         <%= image_tag User.find(request.user_id).photo.key ? User.find(request.user_id).photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-        <h4 class="pl-2">Request to <%= User.find(Item.find(request.item_id).user_id)[:first_name]%></h4>
       </div>
       <div class="d-flex shadow rounded">
-        <div class="shadow">
-          <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+        <div class="shadow m-3">
+          <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 300, crop: :pad, background: "auto" %>
         </div>
-        <div class="ms-4">
+        <div class="ms-4 my-3">
           <h5><%= request.title%></h5>
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
           <p><%= request.description%><p>

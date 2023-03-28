@@ -1,11 +1,10 @@
+<div class="h5 my-4">
 <% if @requests_sent_open == nil %>
-  <div>
   You have no open Bclothes requests
-  </div>
 <% else %>
-  <div>
   You have <%=@requests_sent_open.length%> open Bclothes requests
-  </div>
+</div>
+
   <ul>
     <% @requests_sent_open.each do |request| %>
       <li>
@@ -17,7 +16,7 @@
       </div>
       <div>
       <%# line below can be reinstated when new specific requests are workign  %>
-      <%# <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %> %>
+      <%# <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %>
       <%= link_to "View Request", request_path(request), class: "btn" %>
       <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
       <%= link_to "Cancel Request", request_path(request), data: {turbo_method: :delete}, class: "btn"  %>
