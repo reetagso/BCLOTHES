@@ -1,143 +1,134 @@
-<%# #Request info for everyone %>
-<div class="main-container center-content">
-  <div class="request-info-container">
+<div>
+  <div class="header">
     <p class="request-owner">
       <% if User.find(@request.user_id) == current_user %>
-       Your request
+        Your request:
       <% else %>
         <%= User.find(@request.user_id)[:first_name]%>'s request
       <% end %>
     </p>
-    <h3 class="request-title"> <%= @request.title%> </h3>
-    <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
+    <h3 class="request-chatbox-title"> <%= @request.title%> </h3>
     <p class="request-description"><%= @request.description%></p>
-
-<%# "Closed" request display %><%# "Item requested"  display %>
-
-<%# visitor%>
-<% if @request.user_id != current_user.id && @request.status == "Open" %>
-  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button frame-5" %>
-
-<% elsif @request.user_id == current_user.id && @request.status == "Open" %>
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
-<%# everyone%>
-
-</div>
-
-<%# visitor or everyone?%>
-<% elsif @request.status == "Closed" %>
-<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma!
-
-  <% choice = Item.find(@request.item_id) %>
-  <%=User.find(choice.user_id)[:first_name]%>'s choice!
-  <div>
-    <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-    <div>
-      <%= choice.category %>
-      <%= choice.size %>
-    </div>
-      <%= link_to "View", item_path(choice), class: "btn frame-5 padding-5" %>
+    <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
   </div>
 
-<%# suggestion owner%>
-<%# does not work because of choice variable%>
-<% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
-  <% choice = Item.find(@request.item_id) %>
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
-  <div>
+  <%# #Request info for everyone %>
+  <div class="main-container">
+    <div class="request-info-container">
+
+  <%# "Closed" request display %><%# "Item requested"  display %>
+
+  <%# visitor%>
+  <% if @request.user_id != current_user.id && @request.status == "Open" %>
+    <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
+
+  <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
+    <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5 frame-6"  %>
+  <%# everyone%>
+
+  </div>
+
+  <%# visitor or everyone?%>
+  <% elsif @request.status == "Closed" %>
+  <%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma by going with
+    <% choice = Item.find(@request.item_id) %>
+    <%=User.find(choice.user_id)[:first_name]%>'s choice!
+    <div>
+      <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
+      <%= link_to "View", item_path(choice), class: "btn frame-5" %>
+    </div>
+
+  <%# suggestion owner%>
+  <%# does not work because of choice variable%>
+  <% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
+    <% choice = Item.find(@request.item_id) %>
+    <p>
+      I've changed my mind
+    </p>
+    <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
     <div>
       You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
+      <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
       <%= choice.category %>
       <%=choice.size%>
     </div>
-    <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-  </div>
 
-  <div>
-    <%= link_to "View", item_path(choice), class: "btn frame-5" %>
-    <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
-  </div>
-
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn frame-5"  %>
-
-
-
-<%# request owner%>
-<% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
-  <div>
-  <div>
-      <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
-      <%= Item.find(@request.item_id).category %>
-      <%= Item.find(@request.item_id).size%>
-    </div>
-    <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-  </div>
-  <div>
-    <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
-    <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
-  </div>
-
-
-<%# visitor%>
-<% else %>
-  <div>
     <div>
-      <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
+      <%= link_to "View", item_path(choice), class: "btn frame-5" %>
+      <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
+    </div>
+    <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn frame-5"  %>
+
+
+  <%# request owner%>
+  <% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
+    <div>
+      <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
+      <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
       <%= Item.find(@request.item_id).category %>
       <%= Item.find(@request.item_id).size%>
     </div>
-    <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-  </div>
-  <div>
     <div>
       <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
+      <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame -5" %>
     </div>
 
-    <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn frame-5" %>
-  </div>
-<% end %>
+  <%# visitor%>
+  <% else %>
+    <div>
+      <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
+      <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+      <%= Item.find(@request.item_id).category %>
+      <%= Item.find(@request.item_id).size%>
+    </div>
+    <div>
+      <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
+      <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn frame-5" %>
+    </div>
+  <% end %>
 
-  <%# owner of requested item link to accept request %>
-<%# <% elsif @request.item_id != "" && User.find(choice.user_id) == current_user %>
-  <%# <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
-  <%# <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn" %>
+    <%# owner of requested item link to accept request %>
+  <%# <% elsif @request.item_id != "" && User.find(choice.user_id) == current_user %>
+    <%# <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
+    <%# <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn" %>
 
-<%# "Open" display %>
+  <%# "Open" display %>
 
-<%# Everyone %>
-  <%# Suggestions display %>
-  <div class="suggestions-container" style="padding: 5px; margin: 15px;">
-    <h2>Suggestions</h2>
-    <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
-      <p>Be the first one to suggest an outfit! </p>
-    <% elsif  @request.suggestions.empty? %>
-      <p>No suggestions yet</p>
-    <% else %>
-        <% @request.items.each do |item| %>
-            <div>
-              <%= User.find(item.user_id)[:first_name]%>'s choice:
-              <%= item.category %>
-              <%= item.size %>
-            </div>
-            <div>
-              <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
-            </div>
-            <div class="group-4">
+  <%# Everyone %>
+    <%# Suggestions display %>
+    <div class="suggestions-container">
+      <h3 class="request-chatbox-title">Suggestions</h3>
+      <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
+        <p>Be the first one to suggest an outfit! </p>
+      <% elsif  @request.suggestions.empty? %>
+        <p>No suggestions yet</p>
+      <% else %>
+          <% @request.items.each do |item| %>
               <div>
-                <%= link_to "View", item_path(item), class: "btn frame-5" %>
+                <%= User.find(item.user_id)[:first_name]%>'s choice:
+                <%= item.category %>
+                <%= item.size %>
               </div>
               <div>
-                <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn frame-5" %>
+                <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
               </div>
-            </div>
-        <% end %>
-    <% end %>
+              <div class="group-4">
+                <div>
+                  <%= link_to "View", item_path(item), class: "btn frame-5" %>
+                </div>
+                <div>
+                  <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn frame-5" %>
+                </div>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div class="chatroom-div">
-  <h2 class="chatbox-title">What do you think?</h2>
-  <%= render :partial => 'shared/chatroom_requests',
-  :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
+  <div class="chatroom-div">
+    <h2 class="request-chatbox-title">What do you think?</h2>
+    <%= render :partial => 'shared/chatroom_requests',
+    :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
+  </div>
 </div>
 <%# TO DO
 
@@ -148,22 +139,11 @@ Add forms here to ass javascript to?
 
 <style>
 
-.center-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.padding-5 {
-  padding: 5px;
-
 .main-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   height: 100%;
-  margin-top: 5%;
   gap: 60px;
 }
 
@@ -172,13 +152,23 @@ Add forms here to ass javascript to?
   flex-direction: row;
   width: 140px;
   height: 33px;
-  background: #000000;
+  background-color: #F38181;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   color: white;
+}
+
+.frame-5:hover {
+  background-color: #F16262;
+  cursor: pointer;
+  color: white;
+}
+
+.frame-6 {
+  width: 170px;
 }
 
 .request-info-container,
@@ -193,12 +183,24 @@ Add forms here to ass javascript to?
   display: flex;
   /* justify-content: space-evenly; */
   align-items: center;
+  margin: 10px 10px 10px;
+  padding: 10px;
 }
 
 .request-info-container {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 10px;
+  margin: 10px 10px 10px;
+}
+
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 10px 10px;
 }
 
 .chatroom-placeholder {
@@ -223,22 +225,7 @@ Add forms here to ass javascript to?
     font-size: 36px;
 }
 
-.request-title,
-.request-description {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    /* Light */
-    font-size: 20px;
-}
-
-.request-dates {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    /* Light */
-    font-size: 12px;
-}
-
-.chatbox-title {
+.request-chatbox-title {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   /* Semi Bold */
@@ -246,6 +233,20 @@ Add forms here to ass javascript to?
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.request-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  /* Light */
+  font-size: 20px;
+}
+
+.request-dates {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  /* Light */
+  font-size: 12px;
 }
 
 .group-4 {
@@ -258,11 +259,7 @@ Add forms here to ass javascript to?
 .chatroom-div {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-}
-
-.suggestions-container,
-.chatroom-div {
-  margin: 60px 10px 10px;
+  margin: 10px 10px 10px;
   padding: 10px;
 }
 
