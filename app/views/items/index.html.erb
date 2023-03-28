@@ -1,69 +1,52 @@
-<style>
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 15px;
-  max-width: 800px;
-
-}
-
-.search-input {
-  flex-grow: 1;
-  width: 800px;
-  border-radius: 10px;
-  border: 1px solid #ced4da;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.search-btn,
-.create-request-btn {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 10px;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.create-request-btn {
-  background-color: #28a745;
-  margin-left: 10px;
-}
-
-.search-btn:hover,
-.create-request-btn:hover {
-  background-color: #0069d9;
-}
-
-@media screen and (max-width: 767px) {
-  .search-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .create-request-btn {
-    margin-left: 0;
-    margin-top: 10px;
-  }
-}
-</style>
-
 <div class="container">
   <div class="search-container">
-    <%= form_with url: items_path, method: :get, class: "d-flex" do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control search-input",
-        placeholder: "I have nothing to wear" %>
-      <%= submit_tag "Search", name: "", class: "btn search-btn" %>
+    <%= form_with url: items_path, method: :get, class: "search-form" do %>
+      <div class="input">
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control search-input",
+          placeholder: "I have nothing to wear" %>
+        <button class="btn search-btn" type="submit">Search</button>
+      </div>
     <% end %>
-    <%= link_to "Create an open request", new_request_path, class: "btn create-request-btn" %>
   </div>
 
-  <div>
+  <div class="search-results-container mt-4 mb-4">
     <%= render :partial => 'search_results', :locals => {item: @item, submit_text: "Available!"} %>
   </div>
 </div>
+
+<style>
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  .search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .search-input {
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .search-btn {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    border: none;
+    outline: none;
+  }
+</style>
