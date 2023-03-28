@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   end
 
   resources :items do
+    collection do
+      get :my_items
+    end
     member do
       delete :delete_image_attachment
     end

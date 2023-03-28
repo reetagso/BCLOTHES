@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="search-container">
+    <%= form_with url: items_path, method: :get, class: "search-form" do %>
+      <div class="input">
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control search-input",
+          placeholder: "I have nothing to wear" %>
+        <button class="btn search-btn" type="submit">Search</button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="search-results-container mt-4 mb-4">
+    <%= render :partial => 'search_results', :locals => {item: @item, submit_text: "Available!"} %>
+  </div>
+</div>
+
+<style>
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  .search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .search-input {
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .search-btn {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    border: none;
+    outline: none;
+  }
+</style>
+
+<%console%>

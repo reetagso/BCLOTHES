@@ -22,7 +22,7 @@
                 <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                   <%= link_to "Browse all wardrobes", items_path, class: "dropdown-item" %>
-                  <%= link_to "My wardrobe", "#", class: "dropdown-item" %>
+                  <%= link_to "My wardrobe", my_items_items_path, class: "dropdown-item" %>
                   <%= link_to "All Requests", all_requests_path, class: "dropdown-item" %>
                   <%= link_to "My Requests", my_requests_requests_path, class: "dropdown-item" %>
                   <%= link_to "Settings", "/users/edit", class: "dropdown-item" %>
