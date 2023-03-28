@@ -2,7 +2,7 @@
   <div>
   <% if @item.archived == true %>
     <div class="text-center my-4 bg-warning rounded shadow py-2 text-light fs-5" >
-    Item archived
+    Item has been archived and is no longer available.
     </div>
   <% end %>
   </div>
@@ -80,25 +80,34 @@
             </tr>
           </tbody>
         </table>
-        <div>
+        <div class="text-center">
           <% if @item.user_id != current_user.id %>
-            <br>
-            <h3>Is this what you're looking for?</h3>
-            <div>
-              Trés chic! <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "text-decoration-none" %>
-            </div>
-            <div>
-              Not quite <%= link_to "Return to search", items_path, class: "text-decoration-none" %>
-            </div>
+            <% if @item.archived == true %>
+              <%= link_to "Return to search", items_path, class: "item-btn" %>
+            <% else %>
+              <br>
+              <h3>Is this what you're looking for?</h3>
+              <div class="my-2 pt-2">
+                <h5>Trés chic!</h5>
+                <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "item-btn" %>
+              </div>
+              <div>
+                <h5>Not quite?</h5>
+                <%= link_to "Return to search", items_path, class: "item-btn" %>
+              </div>
+            <% end %>
           <% elsif @requests.count < 1 %>
             <p><%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %></p>
             <p><%= link_to "Edit", edit_item_path(@item), class: "item-btn" %></p>
-            <p><%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %></p>
+            <p><%= link_to "Return to search", items_path, class: "item-btn" %></p>
           <% else %>
-            <p><%= link_to "Archive", archive_item_path(@item), class: "item-btn" %></p>
-            <p><%= link_to "View your requests", requests_path, class: "item-btn" %></p>
+            <% if @item.archived == false %>
+              <p><%= link_to "Archive", archive_item_path(@item), class: "item-btn" %></p>
+            <% else %>
+              <p><%= link_to "Undo archive", archive_item_path(@item), class: "item-btn" %></p>
+            <% end %>
             <p><%= link_to "Edit", edit_item_path(@item), class: "item-btn" %></p>
-            <p><%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %></p>
+            <p><%= link_to "Return to search", items_path, class: "item-btn" %></p>
           <% end %>
         </div>
       </div>
@@ -133,10 +142,10 @@
   color: black;
   background: #e9e2e2;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 10px 5px;
 
   text-align: center;
-  width: 200px;
+  width: 250px;
 }
 
 .item-btn:hover {
