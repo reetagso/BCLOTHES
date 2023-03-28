@@ -8,6 +8,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def my_items
+    @items = Item.where(user_id: current_user)
+  end
+
   def show
     @item = Item.find(params[:id])
     @requests = Request.where(item_id: params[:id])
