@@ -1,31 +1,32 @@
-<%# Code to check seed and view working %>
 <div class="container">
-
-    <%# search %>
-  <div class="d-flex justify-content-evenly" style="margin: 15px;">
-    <div style="padding: 5px; min-width: 500px;">
-      <%= form_with url: items_path, method: :get, class: "d-flex" do %>
+  <div class="search-container">
+    <%= form_with url: items_path, method: :get, class: "search-form" do %>
+      <div class="input">
         <%= text_field_tag :query,
           params[:query],
-          class: "form-control",
+          class: "form-control search-input",
           placeholder: "I have nothing to wear" %>
-              <div style="padding: 5px;">
-                <%= submit_tag "Search", name: ""%>
-              </div>
+          <div style="padding: 5px;">
+            <%= submit_tag "Search", name: ""%>
+          </div>
       <% end %>
       <div>
         <%= link_to "Create an open request", new_request_path, class: "btn frame-5" %>
       </div>
-      <%# search results %>
+        <%# search results %>
+      </div>
+        <button class="btn search-btn" type="submit">Search</button>
     </div>
+    <% end %>
   </div>
 
-  <div>
+  <div class="search-results-container mt-4 mb-4">
     <%= render :partial => 'search_results', :locals => {item: @item, submit_text: "Available!"} %>
   </div>
 </div>
 
 <style>
+
 /* CSS */
 .frame-5 {
   color: white;
@@ -40,6 +41,36 @@
   justify-content: center;
   text-decoration: none;
 }
-
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  .search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .search-input {
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .search-btn {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    border: none;
+    outline: none;
+  }
 </style>
-<%# TO DO Styling %>
