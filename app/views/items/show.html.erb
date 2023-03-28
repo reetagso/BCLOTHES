@@ -1,4 +1,11 @@
 <div class="container">
+  <div>
+  <% if @item.archived == true %>
+    <div class="text-center my-4 bg-warning rounded shadow py-2 text-light fs-5" >
+    Item archived
+    </div>
+  <% end %>
+  </div>
   <div class="row">
     <div class="col-md-6 clothing-card-main shadow rounded">
       <div class="h2 pt-2 text-center">
@@ -84,14 +91,14 @@
               Not quite <%= link_to "Return to search", items_path, class: "text-decoration-none" %>
             </div>
           <% elsif @requests.count < 1 %>
-            <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %>
-            <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
-            <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
+            <p><%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %></p>
+            <p><%= link_to "Edit", edit_item_path(@item), class: "item-btn" %></p>
+            <p><%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %></p>
           <% else %>
-            <%= link_to "Archive", archive_item_path(@item), class: "item-btn" %>
-            <%= link_to "View your requests", requests_path, class: "item-btn" %>
-            <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
-            <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
+            <p><%= link_to "Archive", archive_item_path(@item), class: "item-btn" %></p>
+            <p><%= link_to "View your requests", requests_path, class: "item-btn" %></p>
+            <p><%= link_to "Edit", edit_item_path(@item), class: "item-btn" %></p>
+            <p><%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %></p>
           <% end %>
         </div>
       </div>
@@ -119,6 +126,23 @@
 
 .item-info {
     background-color: #f5ead5;
+}
+
+.item-btn {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  padding: 10px 20px;
+
+  text-align: center;
+  width: 200px;
+}
+
+.item-btn:hover {
+  background-color: #cfcdcd;
+  color: #fff;
+  text-decoration: none;
 }
 
 .carousel-item{
