@@ -1,7 +1,7 @@
 <div class="container-all">
   <div class="left-container">
     <header style="justify-content: center; padding: 18px 38px;">
-      <h1 class="brand-name" style="font-size: xxx-large;">Bclothes</h1>
+      <h1 class="brand-name" style="font-family: Satisfy, sans-serif; font-size: 80px; font-weight: 400; color: #F38181;">Bclothes</h1>
     </header>
     <div class="form-container-wrapper">
       <div class="form-container" style="padding: 10px;">
@@ -47,6 +47,11 @@
 
 
 <style>
+
+* {
+  color: #F38181;
+}
+
 h2 {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -68,7 +73,7 @@ h2 {
   width: 50%;
   height: 100%;
   justify-content: space-evenly; /* Add this line */
-  background: gray;
+  background-color: #F1C232;
 }
 
 
@@ -82,7 +87,7 @@ header {
   justify-content: center;
   align-items: center;
   height: 20%;
-  background-color: gray;
+  background-color: #F1C232;
 }
 
 .brand-name {
@@ -141,21 +146,22 @@ header {
 
 .register-link a,
 .form-links a {
-  color: black;
+  color: #F38181;
   text-decoration: underline;
 }
 
+.register-link a:hover {
+  color: white;
+}
+
+
 .form-inputs input[type="email"],
 .form-inputs input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  font-family: 'Jost', sans-serif;
-  outline: none;
+  background-color: #F38181;
+  color: white;
+  border: 2px solid #F38181;
 }
+
 
 .form-inputs input[type="email"]:focus,
 .form-inputs input[type="password"]:focus {
@@ -170,10 +176,11 @@ header {
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 2px;
+  color: #F16262;
 }
 
 .form-inputs input[type=checkbox]:checked {
-  background-color: #000000;
+  background-color:#F16262;
 }
 
 
@@ -196,6 +203,16 @@ header {
 
 }
 
+.form-actions input[type="submit"] {
+  background-color: #F38181;
+  color: white;
+  border: none;
+}
+
+.form-actions input[type="submit"]:hover {
+  background-color: #F16262;
+  cursor: pointer;
+}
 
 
 </style>
