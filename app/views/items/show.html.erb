@@ -80,22 +80,23 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-center">
+        <div >
           <% if @item.user_id != current_user.id %>
-            <% if @item.archived == true %>
-              <%= link_to "Return to search", items_path, class: "item-btn" %>
-            <% else %>
-              <br>
-              <h3>Is this what you're looking for?</h3>
-              <div class="my-2 pt-2">
-                <h5>Trés chic!</h5>
-                <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "item-btn" %>
-              </div>
-              <div>
-                <h5>Not quite?</h5>
+            <div class="text-center">
+              <% if @item.archived == true %>
                 <%= link_to "Return to search", items_path, class: "item-btn" %>
-              </div>
-            <% end %>
+              <% else %>
+                <br>
+                <h3>Is this what you're looking for?</h3>
+                <div class="my-2 pt-2">
+                  <h5>Trés chic!</h5>
+                  <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "item-btn" %>
+                </div>
+                <div>
+                  <h5>Not quite?</h5>
+                  <%= link_to "Return to search", items_path, class: "item-btn" %>
+                </div>
+              <% end %>
           <% elsif @requests.count < 1 %>
             <p><%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %></p>
             <p><%= link_to "Edit", edit_item_path(@item), class: "item-btn" %></p>
@@ -149,7 +150,7 @@
 }
 
 .item-btn:hover {
-  background-color: #cfcdcd;
+  background-color: #c39d56;
   color: #fff;
   text-decoration: none;
 }
