@@ -9,7 +9,7 @@
       <% end %>
     </p>
     <h3 class="request-title"> <%= @request.title%> </h3>
-    <p class="request-dates"><%= @request.start_date%>-<%= @request.end_date%></p>
+    <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
     <p class="request-description"><%= @request.description%></p>
 
 <%# "Closed" request display %><%# "Item requested"  display %>
@@ -21,25 +21,16 @@
 <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
   <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
 <%# everyone%>
-    <%# Chatroom placeholder %>
-  <div class="chatroom-div">
-    <h2 class="chatbox-title">What do you think?</h2>
 
-    <%= render :partial => 'shared/chatroom_requests',
-                :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
-  </div>
 </div>
 
 <%# visitor or everyone?%>
 <% elsif @request.status == "Closed" %>
-<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
+<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma by going with
   <% choice = Item.find(@request.item_id) %>
-  <%= User.find(@request.user_id)[:first_name]%> went with <%=User.find(choice.user_id)[:first_name]%>'s choice
+  <%=User.find(choice.user_id)[:first_name]%>'s choice!
   <div>
-    <%= User.find(choice.user_id)[:first_name]%>'s choice
     <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-    <%= choice.category %>
-    <%= choice.size %>
     <%= link_to "View", item_path(choice), class: "btn frame-5" %>
   </div>
 
@@ -99,15 +90,13 @@
 <%# Everyone %>
   <%# Suggestions display %>
   <div class="suggestions-container">
-    <h2>Suggestions</h2>
+    <h2 class="chatbox-title">Suggestions</h2>
     <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
       <p>Be the first one to suggest an outfit! </p>
     <% elsif  @request.suggestions.empty? %>
       <p>No suggestions yet</p>
     <% else %>
-      <ol>
         <% @request.items.each do |item| %>
-          <li>
             <div>
               <%= User.find(item.user_id)[:first_name]%>'s choice:
               <%= item.category %>
@@ -124,11 +113,14 @@
                 <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn frame-5" %>
               </div>
             </div>
-          </li>
         <% end %>
-      </ol>
     <% end %>
   </div>
+</div>
+<div class="chatroom-div">
+  <h2 class="chatbox-title">What do you think?</h2>
+  <%= render :partial => 'shared/chatroom_requests',
+  :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
 </div>
 <%# TO DO
 
@@ -140,49 +132,54 @@ Add forms here to ass javascript to?
 <style>
 
 .main-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    height: 100%;
-    margin-top: 5%;
-    gap: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  margin-top: 5%;
+  gap: 60px;
 }
 
-
-  .frame-5 {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-start;
-    width: 140px;
-    height: 33px;
-    background: #000000;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: white;
+.frame-5 {
+  display: flex;
+  flex-direction: row;
+  width: 140px;
+  height: 33px;
+  background: #000000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
 }
 
 .request-info-container,
 .suggestions-container {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.suggestions-container {
+  display: flex;
+  /* justify-content: space-evenly; */
+  align-items: center;
 }
 
 .request-info-container {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 10px;
 }
 
 .chatroom-placeholder {
-    border: 2px dashed #ccc;
-    padding: 1rem;
-    margin-top: 1rem;
-    text-align: center;
-    margin-top: 20px;
+  border: 2px dashed #ccc;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .black-button {
@@ -211,14 +208,17 @@ Add forms here to ass javascript to?
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     /* Light */
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .chatbox-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    /* Semi Bold */
-    font-size: 36px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  /* Semi Bold */
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .group-4 {
@@ -229,6 +229,13 @@ Add forms here to ass javascript to?
 }
 
 .chatroom-div {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.suggestions-container,
+.chatroom-div {
+  margin: 60px 10px 10px;
   padding: 10px;
 }
 
