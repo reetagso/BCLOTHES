@@ -1,140 +1,121 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-      <% if User.find(@item.user_id) == current_user %>
-        <p class="text-muted wardrobe-info">From your wardrobe</p>
-      <% else %>
-        <p class="text-muted wardrobe-info">From <%= User.find(@item.user_id)[:first_name]%>'s wardrobe</p>
-      <% end %>
-
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="padding: 30px;">
-        <div class="carousel-inner">
-          <%# this could be refactored with .each_with_index and if index=1 then add aclass "active" %>
-          <% additional_classes = ["active"] %>
-          <% @item.photos.each do |photo| %>
-            <div class="carousel-item <%= additional_classes.pop %>">
-              <p class="d-flex justify-content-center"> <%= cl_image_tag(photo.key, height: 600, width: 500, crop: :pad, background: "auto" )%></p>
-            </div>
-            <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
-                          method: :delete,
-                          data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            <span class="visually-hidden">Next</span>
-          </button>
+    <div class="col-md-6 h5 clothing-card-main shadow rounded">
+      <div class="h3 pt-2 text-center">
+        <% if User.find(@item.user_id) == current_user %>
+          From your wardrobe
+        <% else %>
+          From <%= User.find(@item.user_id)[:first_name]%>'s wardrobe
+        <% end %>
       </div>
-
-
+      <div>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="padding: 30px;">
+          <div class="carousel-inner">
+            <% additional_classes = ["active"] %>
+            <% @item.photos.each do |photo| %>
+              <div class="carousel-item <%= additional_classes.pop %>">
+                <p class="d-flex justify-content-center"> <%= cl_image_tag(photo.key, height: 600, width: 500, crop: :pad, background: "auto" )%></p>
+              </div>
+              <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </div>
+          <div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <i class="fas fa-arrow-left" aria-hidden="true"></i>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
     </div>
 
     <div class="col-md-6">
-      <div class="question">Is this what you were looking for?</div>
-      <div class="item-details">
-        <p><span>Category:</span> <%= @item.category%></p>
-        <p><span>Size:</span> <%= @item.size%></p>
-        <p><span>Description:</span> <%= @item.description%></p>
-        <p><span>Colour:</span> <%= @item.colour%></p>
-        <p><span>Occasion:</span> <%= @item.occasion%></p>
-        <p><span>Brand:</span> <%= @item.brand%></p>
-        <p><span>Condition:</span> <%= @item.condition%></p>
+      <div class="pl-4 pt-4">
+        <div>
+          <%= image_tag User.find(@item.user_id).photo.key ? User.find(@item.user_id).photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          Emma says:
+          <div class="">
+            <br><p><em>"<%= @item.description%>"</p></em>
+          </div>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">Category</th>
+              <td><%= @item.category%></td>
+            </tr>
+            <tr>
+              <th scope="row">Size</th>
+              <td><%= @item.size%></td>
+            </tr>
+            <tr>
+              <th scope="row">Colour</th>
+              <td><%= @item.colour%></td>
+            </tr>
+            <tr>
+              <th scope="row">Occasion</th>
+              <td><%= @item.occasion%></td>
+            </tr>
+            <tr>
+              <th scope="row">Brand</th>
+              <td><%= @item.brand%></td>
+            </tr>
+            <tr>
+              <th scope="row">Condition</th>
+              <td><%= @item.condition%></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <% if @item.user_id != current_user.id %>
+            <br>
+            <h3>Is this what you're looking for?</h3>
+            <div>
+              Trés chic! <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "text-decoration-none" %>
+            </div>
+            <div>
+              Not quite <%= link_to "Return to search", items_path, class: "text-decoration-none" %>
+            </div>
+          <% elsif @requests.count < 1 %>
+            <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %>
+            <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
+            <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
+          <% else %>
+            <%= link_to "Archive", archive_item_path(@item), class: "item-btn" %>
+            <%= link_to "View your requests", requests_path, class: "item-btn" %>
+            <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
+            <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
+          <% end %>
+        </div>
       </div>
-
-
-<% if @item.user_id != current_user.id %>
-  <div>
-    <%= link_to "Request #{User.find(@item.user_id)[:first_name]}'s #{@item.category}", new_item_requests_path(item_id: @item), class: "text-decoration-none item-btn" %>
-  </div>
-  <div>
-    <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
-  </div>
-<% elsif @requests.count < 1 %>
-  <%= link_to "Remove", item_path(@item), data: {turbo_method: :delete}, class: "item-btn"  %>
-  <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
-  <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
-<% else %>
-
-  <%= link_to "Archive", archive_item_path(@item), class: "item-btn" %>
-  <%= link_to "View your requests", requests_path, class: "item-btn" %>
-  <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
-  <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
-<% end %>
-
     </div>
   </div>
 </div>
+
 <style>
 
 *{
   font: Inter;
 }
 
-.container{
-  margin-top: 60px;
-}
-
-.wardrobe-info {
-  font-style: bold !important;
-  color: black !important;
-  font-weight: bold;
-  font-size: 22px;
-  text-transform: uppercase;
-}
-
-  .item-info {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .question{
-    font-size: 22px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  .item-info p {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .item-info span {
-    font-weight: bold;
-    margin-right: 5px;
-  }
-
-  .item-info .col-md-6 {
+.clothing-card-main {
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-  }
-
-  .item-info .col-md-6 p:last-child {
-    margin-bottom: 0;
-  }
-
-.item-details {
-  display: flex;
-  flex-direction: column;
+    gap: 10px;
+    min-width: 303px;
+    max-height: height: 420px;
+    background: #F8F7F7;
+    border-radius: 5px;
 }
-
-.item-details p {
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin: 5px 0;
-}
-
-
-  .item-details p span {
-    margin-right: 10px;
-    font-weight: bold !important;
-    font-size: 20px;
-  }
 
 .btn {
   background-color: black;
