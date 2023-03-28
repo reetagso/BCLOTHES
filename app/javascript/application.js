@@ -2,4 +2,4 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
-import "./controllers/chatroom_subscription_controller"
+// import "./controllers/chatroom_subscription_controller"
