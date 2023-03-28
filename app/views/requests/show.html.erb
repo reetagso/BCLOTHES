@@ -19,13 +19,15 @@
   <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
 
 <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
 <%# everyone%>
     <%# Chatroom placeholder %>
-  <h2 class="chatbox-title">What do you think?</h2>
+  <div class="chatroom-div">
+    <h2 class="chatbox-title">What do you think?</h2>
 
-  <%= render :partial => 'shared/chatroom_requests',
-              :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
+    <%= render :partial => 'shared/chatroom_requests',
+                :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
+  </div>
 </div>
 
 <%# visitor or everyone?%>
@@ -38,7 +40,7 @@
     <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
     <%= choice.category %>
     <%= choice.size %>
-    <%= link_to "View", item_path(choice), class: "btn" %>
+    <%= link_to "View", item_path(choice), class: "btn frame-5" %>
   </div>
 
 <%# suggestion owner%>
@@ -52,8 +54,12 @@
     <%= choice.category %>
     <%=choice.size%>
   </div>
-  <%= link_to "View", item_path(choice), class: "btn" %>
-  <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+
+  <div>
+    <%= link_to "View", item_path(choice), class: "btn frame-5" %>
+    <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
+  </div>
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn frame-5"  %>
 
 
 <%# request owner%>
@@ -64,8 +70,10 @@
     <%= Item.find(@request.item_id).category %>
     <%= Item.find(@request.item_id).size%>
   </div>
-  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
-  <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+  <div>
+    <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
+    <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame -5" %>
+  </div>
 
 <%# visitor%>
 <% else %>
@@ -75,8 +83,10 @@
     <%= Item.find(@request.item_id).category %>
     <%= Item.find(@request.item_id).size%>
   </div>
-  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
-  <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn" %>
+  <div>
+    <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
+    <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn frame-5" %>
+  </div>
 <% end %>
 
   <%# owner of requested item link to accept request %>
@@ -98,12 +108,22 @@
       <ol>
         <% @request.items.each do |item| %>
           <li>
-            <%= User.find(item.user_id)[:first_name]%>'s choice
-            <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
-            <%= item.category %>
-            <%= item.size %>
-            <%= link_to "View", item_path(item), class: "btn" %>
-            <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn" %>
+            <div>
+              <%= User.find(item.user_id)[:first_name]%>'s choice:
+              <%= item.category %>
+              <%= item.size %>
+            </div>
+            <div>
+              <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
+            </div>
+            <div class="group-4">
+              <div>
+                <%= link_to "View", item_path(item), class: "btn frame-5" %>
+              </div>
+              <div>
+                <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn frame-5" %>
+              </div>
+            </div>
           </li>
         <% end %>
       </ol>
@@ -116,3 +136,100 @@ Add card
 Add link
 Add forms here to ass javascript to?
 %>
+
+<style>
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    margin-top: 5%;
+    gap: 60px;
+}
+
+
+  .frame-5 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 140px;
+    height: 33px;
+    background: #000000;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+}
+
+.request-info-container,
+.suggestions-container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.request-info-container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.chatroom-placeholder {
+    border: 2px dashed #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.black-button {
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.request-owner {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.request-title,
+.request-description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    /* Light */
+    font-size: 20px;
+}
+
+.request-dates {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    /* Light */
+    font-size: 16px;
+}
+
+.chatbox-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    /* Semi Bold */
+    font-size: 36px;
+}
+
+.group-4 {
+    height: 33px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.chatroom-div {
+  padding: 10px;
+}
+
+</style>
