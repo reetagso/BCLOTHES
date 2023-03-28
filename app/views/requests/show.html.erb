@@ -19,7 +19,7 @@
   <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
 
 <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn frame-5"  %>
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
 <%# everyone%>
     <%# Chatroom placeholder %>
   <div class="chatroom-div">
@@ -47,17 +47,20 @@
 <%# does not work because of choice variable%>
 <% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
   <% choice = Item.find(@request.item_id) %>
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
   <div>
     You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
     <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
     <%= choice.category %>
     <%=choice.size%>
   </div>
+
   <div>
     <%= link_to "View", item_path(choice), class: "btn frame-5" %>
     <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
   </div>
   <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "btn frame-5"  %>
+
 
 <%# request owner%>
 <% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>

@@ -47,6 +47,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def archive
+    @item = Item.find(params[:id])
+    @item.update(archived: true)
+    redirect_to item_path(@item)
+  end
+
 
   #not working
   # def delete_image_attachment
@@ -59,7 +65,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:size, :colour, :occasion, :category, :brand, :description, :condition, photos: [])
+    params.require(:item).permit(:size, :colour, :occasion, :category, :brand, :description, :condition, :archived, photos: [])
   end
 
 end

@@ -1,51 +1,59 @@
-<% if user_signed_in? %>
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid d-flex justify-content-around w-100">
-<%= link_to root_path, class: "navbar-brand" do %>
-  <span style="font-family: Inter, sans-serif; font-size: 35px; font-weight: 400;">Bclothes</span>
-<% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <%# if user_signed_in? %>
-          <li class="nav-item dropdown">
-            <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Browse all wardrobes", items_path, class: "dropdown-item" %>
-              <%= link_to "My wardrobe", "#", class: "dropdown-item" %>
-              <%= link_to "All Requests", all_requests_path, class: "dropdown-item" %>
-              <%= link_to "My Requests", my_requests_requests_path, class: "dropdown-item" %>
-              <%= link_to "Settings", "/users/edit", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
-            </div>
-          </li>
-        <%# else %>
-          <!--li class="nav-item"-->
-            <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
-          <!--/li-->
-        <%# end %>
-      </ul>
+  <% if user_signed_in? %>
+    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon ">
+      <div class="container-fluid d-flex justify-content-around w-100">
+        <%= link_to root_path, class: "navbar-brand" do %>
+        <span style="font-family: Inter, sans-serif; font-size: 35px; font-weight: 400;">Bclothes</span>
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <%# if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <%= link_to "Browse all wardrobes", items_path, class: "dropdown-item" %>
+                  <%= link_to "My wardrobe", "#", class: "dropdown-item" %>
+                  <%= link_to "All Requests", all_requests_path, class: "dropdown-item" %>
+                  <%= link_to "My Requests", my_requests_requests_path, class: "dropdown-item" %>
+                  <%= link_to "Settings", "/users/edit", class: "dropdown-item" %>
+                  <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+                </div>
+              </li>
+            <%# else %>
+              <!--li class="nav-item"-->
+                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+              <!--/li-->
+            <%# end %>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<% end %>
+  <% end %>
+
 
 <style>
 
 .navbar {
   width: 100%;
-  height: 20%;
-  background-color: grey;
+  height: 50%;
+  background-color: #FFC65A;
   margin: 0;
   padding: 0;
 }
 .container-fluid {
-  background-color : grey;
+  background-color: #FFC65A;
   height: 100px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .navbar-lewagon {

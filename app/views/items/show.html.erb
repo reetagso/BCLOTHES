@@ -7,12 +7,31 @@
         <p class="text-muted wardrobe-info">From <%= User.find(@item.user_id)[:first_name]%>'s wardrobe</p>
       <% end %>
 
-      <% @item.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-        <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %>
-      <% end %>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="padding: 30px;">
+        <div class="carousel-inner">
+          <%# this could be refactored with .each_with_index and if index=1 then add aclass "active" %>
+          <% additional_classes = ["active"] %>
+          <% @item.photos.each do |photo| %>
+            <div class="carousel-item <%= additional_classes.pop %>">
+              <p class="d-flex justify-content-center"> <%= cl_image_tag(photo.key, height: 600, width: 500, crop: :pad, background: "auto" )%></p>
+            </div>
+            <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span class="visually-hidden">Next</span>
+          </button>
+      </div>
+
+
+
     </div>
 
     <div class="col-md-6">
@@ -40,7 +59,8 @@
   <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
   <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
 <% else %>
-  <p> Cannot be deleted requests attached (add archive button?) </p>
+
+  <%= link_to "Archive", archive_item_path(@item), class: "item-btn" %>
   <%= link_to "View your requests", requests_path, class: "item-btn" %>
   <%= link_to "Edit", edit_item_path(@item), class: "item-btn" %>
   <%= link_to "Return to search", items_path, class: "text-decoration-none item-btn" %>
@@ -49,7 +69,6 @@
     </div>
   </div>
 </div>
-
 <style>
 
 *{
@@ -142,5 +161,8 @@
   color: #fff;
 }
 
-
+.carousel-item{
+    float:none;
+    transition: 0.15s !important;
+}
 </style>
