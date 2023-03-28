@@ -13,7 +13,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
-            <%# if user_signed_in? %>
+              <%if user_signed_in? %>
+<li class="nav-item">
+  <%= link_to "Ask the Community!", new_request_path, class: "btn create-request-btn mt-2", style: "border: none; margin-right: 20px;" %>
+  <%= link_to "Upgrade your Wardrobe", new_item_path, class: "btn upgrade-btn mt-2", style: "border: none; margin-right: 40px;" %>
+</li>
               <li class="nav-item dropdown">
                 <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -25,11 +29,8 @@
                   <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
                 </div>
               </li>
-            <%# else %>
-              <!--li class="nav-item"-->
-                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
-              <!--/li-->
-            <%# end %>
+
+            <% end %>
           </ul>
         </div>
       </div>
@@ -70,7 +71,7 @@
 }
 
 .navbar-lewagon .dropdown-menu {
-  background-color: white;
+  background-color: #F1C232;
   border: none;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   padding: 0.5rem 0;
@@ -80,15 +81,23 @@
   font-family: Inter, sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: black;
+  color: #F38181;
   padding: 0.5rem 1rem;
+  font-weight: bold;
 }
 
 .navbar-lewagon .dropdown-menu a:hover,
 .navbar-lewagon .dropdown-menu a:focus {
-  color: white;
-  background-color: grey;
+  color: #0D6EFD;
+  background-color: #F1C232;
 }
+
+.navbar-lewagon .avatar:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
 
 .navbar-lewagon .dropdown-menu .dropdown-item:last-child {
   border-top: 1px solid #e9ecef;
@@ -106,17 +115,24 @@
 
 }
 
-
 .dropdown-menu-end {
   right: 0;
   left: auto;
 }
 
-.navbar-brand {
+.btn {
+  color: #F38181;
+  font-weight: bold;
 
 }
 
-
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  color: #0D6EFD;
+  text-decoration: none;
+}
 
 
 
