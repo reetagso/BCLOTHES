@@ -1,5 +1,5 @@
 <%# #Request info for everyone %>
-<div class="main-container">
+<div class="main-container center-content">
   <div class="request-info-container">
     <p class="request-owner">
       <% if User.find(@request.user_id) == current_user %>
@@ -16,10 +16,10 @@
 
 <%# visitor%>
 <% if @request.user_id != current_user.id && @request.status == "Open" %>
-  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
+  <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button frame-5" %>
 
 <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
 <%# everyone%>
     <%# Chatroom placeholder %>
   <h2 class="chatbox-title">What do you think?</h2>
@@ -30,53 +30,67 @@
 
 <%# visitor or everyone?%>
 <% elsif @request.status == "Closed" %>
-<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma
+<%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma!
   <% choice = Item.find(@request.item_id) %>
   <%= User.find(@request.user_id)[:first_name]%> went with <%=User.find(choice.user_id)[:first_name]%>'s choice
   <div>
-    <%= User.find(choice.user_id)[:first_name]%>'s choice
     <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-    <%= choice.category %>
-    <%= choice.size %>
-    <%= link_to "View", item_path(choice), class: "btn" %>
+    <div>
+      <%= User.find(choice.user_id)[:first_name]%>'s choice
+      <%= choice.category %>
+      <%= choice.size %>
+    </div>
+      <%= link_to "View", item_path(choice), class: "btn frame-5 padding-5" %>
   </div>
 
 <%# suggestion owner%>
 <%# does not work because of choice variable%>
 <% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
   <% choice = Item.find(@request.item_id) %>
-  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
+  <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn frame-5"  %>
   <div>
-    You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
+    <div>
+      You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
+      <%= choice.category %>
+      <%=choice.size%>
+    </div>
     <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-    <%= choice.category %>
-    <%=choice.size%>
   </div>
-  <%= link_to "View", item_path(choice), class: "btn" %>
-  <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+  <div>
+    <%= link_to "View", item_path(choice), class: "btn frame-5" %>
+    <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
+  </div>
 
 
 <%# request owner%>
 <% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
   <div>
-    <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
+  <div>
+      <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
+      <%= Item.find(@request.item_id).category %>
+      <%= Item.find(@request.item_id).size%>
+    </div>
     <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-    <%= Item.find(@request.item_id).category %>
-    <%= Item.find(@request.item_id).size%>
   </div>
-  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
-  <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
+  <%= link_to "Edit Request", edit_request_path(@request), class: "btn frame-5" %>
 
 <%# visitor%>
 <% else %>
   <div>
-    <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
+    <div>
+      <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
+      <%= Item.find(@request.item_id).category %>
+      <%= Item.find(@request.item_id).size%>
+    </div>
     <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-    <%= Item.find(@request.item_id).category %>
-    <%= Item.find(@request.item_id).size%>
   </div>
-  <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn" %>
-  <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn" %>
+  <div>
+    <div>
+      <%= link_to "View", item_path(Item.find(@request.item_id)), class: "btn frame-5" %>
+    </div>
+    <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "btn frame-5" %>
+  </div>
 <% end %>
 
   <%# owner of requested item link to accept request %>
@@ -88,7 +102,7 @@
 
 <%# Everyone %>
   <%# Suggestions display %>
-  <div class="suggestions-container">
+  <div class="suggestions-container" style="padding: 5px; margin: 15px;">
     <h2>Suggestions</h2>
     <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
       <p>Be the first one to suggest an outfit! </p>
@@ -102,8 +116,8 @@
             <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
             <%= item.category %>
             <%= item.size %>
-            <%= link_to "View", item_path(item), class: "btn" %>
-            <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn" %>
+            <%= link_to "View", item_path(item), class: "btn frame-5" %>
+            <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn frame-5" %>
           </li>
         <% end %>
       </ol>
@@ -116,3 +130,32 @@ Add card
 Add link
 Add forms here to ass javascript to?
 %>
+
+<style>
+
+.frame-5 {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 230px;
+  height: 33px;
+  background: #000000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-5 {
+  padding: 5px;
+}
+
+</style>

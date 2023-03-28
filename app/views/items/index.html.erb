@@ -13,7 +13,9 @@
                 <%= submit_tag "Search", name: ""%>
               </div>
       <% end %>
-      <%= link_to "Create an open request", new_request_path, class: "btn" %>
+      <div>
+        <%= link_to "Create an open request", new_request_path, class: "btn frame-5" %>
+      </div>
       <%# search results %>
     </div>
   </div>
@@ -25,5 +27,19 @@
 
 <style>
 /* CSS */
+.frame-5 {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  height: 33px;
+  background: #000000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
 </style>
 <%# TO DO Styling %>
