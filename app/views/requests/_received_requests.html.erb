@@ -21,14 +21,16 @@
           <p class="text-secondary">(<%= request.status %>)</p>
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
           <p><%= request.description%><p>
-          <div class="frame-4" style="text-decoration: none;">
-            <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "btn"  %>
-          </div>
-          <div class="frame-4" style="text-decoration: none;">
-            <%= link_to "View Request", request_path(request), class: "btn" %>
-          </div>
-          <div class="frame-4" style="text-decoration: none;">
-            <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
+          <div>
+            <div class="frame-4" style="text-decoration: none;">
+              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "btn"  %>
+            </div>
+            <div class="frame-4" style="text-decoration: none;">
+              <%= link_to "View Request", request_path(request), class: "btn" %>
+            </div>
+            <div class="frame-4" style="text-decoration: none;">
+              <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
+            </div>
           </div>
         </div>
       </div>
