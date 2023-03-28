@@ -1,27 +1,33 @@
 <div class="h5 my-4">
-<% if @requests_sent_open == nil %>
-  You have no open Bclothes requests
-<% else %>
-  You have <%=@requests_sent_open.length%> open Bclothes requests
+  <% if @requests_sent_open == nil %>
+    You have no open Bclothes requests
+  <% else %>
+    You have <%=@requests_sent_open.length%> open Bclothes requests
 </div>
 
-  <ul>
+  <div class="rounded-3 ">
     <% @requests_sent_open.each do |request| %>
-      <li>
-      <div>
-      <%= request.title%>
-      <%= request.start_date%>-<%= request.end_date%>
-      <%= request.description%>
-      <%= request.status %>
+      <div class="d-flex rounded-3 shadow my-4 pl-3">
+        <div class="flex-grow-1">
+          <h5><%= request.title%></h5>
+          <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
+          <p><%= request.description%><p>
+          <p><%= request.suggestions.length%> suggestions</p>
+        </div>
+        <%# line below can be reinstated when new specific requests are workign  %>
+        <%# <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %>
+        <div class=" pr-3">
+          <div >
+            <%= link_to "View Request", request_path(request), class: "" %>
+          </div>
+          <div>
+            <%= link_to "Edit Request", edit_request_path(request), class: "" %>
+          </div>
+          <div>
+            <%= link_to "Cancel Request", request_path(request), data: {turbo_method: :delete}, class: ""  %>
+          </div>
+        </div>
       </div>
-      <div>
-      <%# line below can be reinstated when new specific requests are workign  %>
-      <%# <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %>
-      <%= link_to "View Request", request_path(request), class: "btn" %>
-      <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
-      <%= link_to "Cancel Request", request_path(request), data: {turbo_method: :delete}, class: "btn"  %>
-      <div>
-      </li>
       <% end %>
-  </ul>
+  </div>
 <% end %>
