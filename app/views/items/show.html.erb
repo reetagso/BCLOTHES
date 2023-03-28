@@ -13,7 +13,7 @@
           <% additional_classes = ["active"] %>
           <% @item.photos.each do |photo| %>
             <div class="carousel-item <%= additional_classes.pop %>">
-              <p class="d-flex justify-content-center"> <%= cl_image_tag(photo.key, width: 500, crop: :fill)%></p>
+              <p class="d-flex justify-content-center"> <%= cl_image_tag(photo.key, height: 600, width: 500, crop: :pad, background: "auto" )%></p>
             </div>
             <%# <%= link_to 'Remove image', delete_image_attachment_item_path(photo.id),
                           method: :delete,
