@@ -24,6 +24,7 @@ emma = User.create!(email: "emma@example.com", password: "emma_password", first_
 
 louise_item = Item.new(size: 10, colour: "Multi", occasion: "Casual", category: "Swimwear", brand: "Other", condition: "Used but good", description: "H&M colourful swimming costume", user_id: louise.id)
 louise_pic1 = File.open("app/assets/images/lousie_pic1.jpeg")
+louise_pic1.resize_to_fit(300, 400)
 louise_item.photos.attach([io: louise_pic1, filename: "louise_pic1.jpg", content_type: "image/jeg"])
 louise_item.save!
 louise_pic2 = File.open("app/assets/images/louise_pic2.jpeg")

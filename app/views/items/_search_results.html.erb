@@ -16,7 +16,7 @@
                   </div>
                   </div>
                 <div>
-                  <%= cl_image_tag item.photos.first.key,  crop: :scale, style: "width: 200px; max-height: 356px;" %>
+                  <%= cl_image_tag item.photos.first.key, height: 356, width: 270, crop: :pad, background: "auto"  %>
                 </div>
                 <div class="group-2">
                   <h3 class="subheader">

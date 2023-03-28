@@ -6,30 +6,30 @@
 <% else %>
   You have received <%=@requests_received.length%> Bclothes requests:
 </div>
-  <div>
+  <div class="rounded-3">
     <% @requests_received.each do |request| %>
       <div class="d-flex align-items-center pl-3 my-4 h5">
         <%= image_tag User.find(request.user_id).photo.key ? User.find(request.user_id).photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <h4 class="pl-2"><%= User.find(request.user_id)[:first_name]%></h4>
       </div>
       <div class="d-flex shadow rounded">
-        <div>
-          <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
+        <div class="shadow m-3">
+          <%= cl_image_tag Item.find(request.item_id).photos.first.key, height: 300, width: 300, crop: :pad, background: "auto" %>
         </div>
-        <div class="ms-4">
+        <div class="ms-4 my-3">
           <h5><%= request.title%></h5>
           <p class="text-secondary">(<%= request.status %>)</p>
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
           <p><%= request.description%><p>
           <div>
-            <div class="frame-4" style="text-decoration: none;">
-              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "btn"  %>
+            <div>
+              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: ""  %>
             </div>
-            <div class="frame-4" style="text-decoration: none;">
-              <%= link_to "View Request", request_path(request), class: "btn" %>
+            <div>
+              <%= link_to "View Request", request_path(request), class: "" %>
             </div>
-            <div class="frame-4" style="text-decoration: none;">
-              <%= link_to "Edit Request", edit_request_path(request), class: "btn" %>
+            <div>
+              <%= link_to "Edit Request", edit_request_path(request), class: "" %>
             </div>
           </div>
         </div>
@@ -37,203 +37,3 @@
     <% end %>
   </div>
 <% end %>
-
-<%# .strftime("%B %d, %Y") %>
-<style>
-/* CSS */
-.button-56 {
-  align-items: center;
-  background-color: #F38181;
-  border: 2px solid #111;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: #111;
-  cursor: pointer;
-  display: flex;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  height: 48px;
-  justify-content: center;
-  line-height: 24px;
-  max-width: 100%;
-  padding: 0 25px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-56:after {
-  background-color: #111;
-  border-radius: 8px;
-  content: "";
-  display: block;
-  height: 48px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  top: -2px;
-  transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
-  z-index: -1;
-}
-
-.button-56:hover:after {
-  transform: translate(0, 0);
-}
-
-.button-56:active {
-  background-color: #F38181;
-  outline: 0;
-}
-
-.button-56:hover {
-  outline: 0;
-}
-
-@media (min-width: 768px) {
-  .button-56 {
-    padding: 0 40px;
-  }
-}
-
-/* clothing_card so I don't have 2 different card layouts */
-/* class="row justify-content-center"  */
-
-.clothing-card-main {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    gap: 10px;
-    min-width: 303px;
-    max-height: height: 420px;
-    background: #F8F7F7;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    margin: 5px;
-}
-
-.group-3 {
-    width: 264px;
-    height: 33px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.name {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 29px;
-    color: #000000;
-}
-
-.frame-4 {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 4px;
-    margin-top: 4px;
-    width: 150px;
-    height: 33px;
-    background: #000000;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.button {
-    width: 49px;
-    height: 21px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    color: #FFFFFF !important;
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.rectangle-10 {
-    width: 263px;
-    height: 350px;
-    background: #D6D5D5;
-    border-radius: 16px;
-}
-
-.group-2 {
-    width: 263px;
-    height: 74px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.size {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: right;
-    color: #000000;
-}
-
-.subheader {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: #000000;
-}
-
-.description {
-    width: 263px;
-    max-height: 57px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #000000;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 16px;
-}
-
-@media(max-width: 992px) {
-  .cards {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media(max-width: 768px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-img {
-  border-radius: 5px;
-}
-
-</style>
