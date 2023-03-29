@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <h1 class="my-4">Create New Request</h1>
+      <h1 class="my-4">Make a request!</h1>
 
       <% if params[:id] %>
         <%= render :partial => 'create_specific_form',
@@ -15,15 +15,19 @@
 </div>
 
 <style>
+
 .container{
   font-family: Inter !important;
   margin-top: 30px;
+  border: none;
 }
 .my-4{
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 36px;
-
 }
 
-</style >
+.col-md-8.offset-md-2 {
+  border: none;
+}
+</style>

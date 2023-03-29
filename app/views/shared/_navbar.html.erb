@@ -10,7 +10,7 @@
               <% end %>
             </div>
             <div>
-              <%= link_to "Ask the Community!", new_request_path, class: "nav-btn nav-item mt-2", style: "border: none; margin-right: 20px;" %>
+              <%= link_to "Ask the Community!", new_request_path, class: "nav-btn nav-item mt-2", style: "border: none; margin-right: 40px; margin-left: 20px;" %>
             </div>
             <div>
               <%= link_to "Upgrade your Wardrobe", new_item_path, class: "nav-btn nav-item mt-2", style: "border: none; margin-right: 40px;" %>
@@ -88,14 +88,13 @@
   font-size: 14px;
   color: black;
   padding: 0.5rem 1rem;
+  font-weight: bold;
 
 }
 
 .navbar-lewagon .dropdown-menu a:hover,
 .navbar-lewagon .dropdown-menu a:focus {
-  color: #white;
   transform: translateY(-3px);
-  color: #white;
   text-decoration: none;
 }
 
@@ -130,16 +129,16 @@
 
 .nav-btn {
   color: black !important;
-  font-weight: ;
-  position: relative;
+  font-weight: bold;
 }
 
 
 .nav-btn:hover {
-  transform: translateY(-3px) !important;
-  color: gray !important;
+  transform: translateX(-3px) !important;
   text-decoration: none !important;
+  box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
 }
+
 
 
 </style>
