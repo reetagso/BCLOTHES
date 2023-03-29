@@ -8,7 +8,7 @@
       <% end %>
     </p>
     <h3 class="request-chatbox-title"> <%= @request.title%> </h3>
-    <p class="request-description"><%= " #{@request.description} "%></p>
+    <p class="request-description">"<%= @request.description %>"</p>
     <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
   </div>
 
@@ -42,7 +42,9 @@
         <div class="suggestions-card">
           <div class="responsive">
             <%= cl_image_tag choice.photos.first.key, crop: :fill %>
-            <%= link_to "View", item_path(choice), class: "item-btn view-accept-btn view-only-format" %>
+            <div class="centers">
+              <%= link_to "View", item_path(choice), class: "item-btn view-accept-btn view-only-format" %>
+            </div>
           </div>
         </div>
     </div>
@@ -57,17 +59,17 @@
     <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "item-btn"  %>
         You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
       <div class="suggestions-card">
-        <div>
+        <div class="centers">
           <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
         </div>
-        <div>
+        <div class="centers">
           <%= choice.category %>
           <%=choice.size%>
         </div>
       </div>
     </div>
 
-    <div>
+    <div class="centers">
       <%= link_to "View", item_path(choice), class: "item-btn view-accept-format" %>
       <%= link_to "Edit Request", edit_request_path(@request), class: "item-btn view-accept-format" %>
     </div>
@@ -78,9 +80,11 @@
   <% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
     <div>
       <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
+      <div class="centers">
       <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
       <%= Item.find(@request.item_id).category %>
       <%= Item.find(@request.item_id).size%>
+      </div>
     </div>
     <div>
       <%= link_to "View", item_path(Item.find(@request.item_id)), class: "item-btn view-accept-btn view-accept-format" %>
@@ -92,20 +96,21 @@
       <div>
         <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
         <div class="suggestions-card">
-            <div>
+            <div class="centers">
                 <%= Item.find(@request.item_id).category %>
                 <%= Item.find(@request.item_id).size%>
             </div>
             <div>
                 <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
             </div>
-          <div>
+          <div class="centers">
               <%= link_to "View", item_path(Item.find(@request.item_id)), class: "item-btn view-accept-btn view-accept-format" %>
           </div>
         </div>
       </div>
-
-      <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "item-btn" %>
+      <div class="padding-below">
+        <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "item-btn" %>
+      </div>
   <% end %>
 
     <%# owner of requested item link to accept request %>
@@ -126,8 +131,8 @@
         <% else %>
             <% @request.items.each do |item| %>
                 <div class="suggestions-card">
-                  <div>
-                    <%= User.find(item.user_id)[:first_name]%>'s choice:
+                  <div class="centers">
+                    <%= User.find(item.user_id)[:first_name]%>'s choice,
                     <%= item.category %>
                     <%= item.size %>
                   </div>
@@ -225,6 +230,7 @@ Add forms here to ass javascript to?
 }
 
 .request-chatbox-title {
+  background-color: #FFC65A;;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   /* Semi Bold */
@@ -232,6 +238,10 @@ Add forms here to ass javascript to?
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-color: #FFC65A;
+  border-style: solid;
+  border-width: 15px;
+  border-radius: 5px;
 }
 
 .request-description {
@@ -299,38 +309,15 @@ Add forms here to ass javascript to?
   justify-content: center;
 }
 
-.frame-6 {
-  width: 170px;
-}
-
-
-.frame-5 {
-  display: flex;
-  flex-direction: row;
-  width: 140px;
-  height: 33px;
-  background-color: black;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
-}
-
-.frame-5:hover {
-  background-color: #F16262;
-  cursor: pointer;
-  color: white;
-}
-
 /* end buttons */
 
 .suggestions-card {
     box-sizing: border-box;
     padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
     margin: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+    font-family: 'Merienda', cursive;
     /* border-radius: 10px; */
     /* display: flex;
     flex-direction: column;
@@ -341,11 +328,12 @@ Add forms here to ass javascript to?
     height: 420px;
     left: 76px;
     top: 525px; */
-
 }
 
 img {
   border-radius: 10px;
+  max-width: 300px;
+  height: auto;
 }
 
 .responsive {
@@ -354,9 +342,13 @@ img {
   height: auto;
 }
 
-img {
-  max-width: 300px;
-  height: auto;
+.centers {
+  display: flex;
+  justify-content: center;
+}
+
+.padding-below {
+  padding: 0px 0px 50px 0px;
 }
 
 </style>
