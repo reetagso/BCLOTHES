@@ -2,40 +2,46 @@
 
   <% if user_signed_in? %>
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon ">
-      <div class="container-fluid d-flex justify-content-around w-100">
-        <%= link_to root_path, class: "navbar-brand" do %>
-        <span style="font-family: Satisfy, sans-serif; font-size: 60px; font-weight: 400; color: black;">Bclothes</span>
-        <% end %>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto">
-              <%if user_signed_in? %>
-<li class="nav-item">
-  <%= link_to "Ask the Community!", new_request_path, class: "btn create-request-btn mt-2", style: "border: none; margin-right: 20px;" %>
-  <%= link_to "Upgrade your Wardrobe", new_item_path, class: "btn upgrade-btn mt-2", style: "border: none; margin-right: 40px;" %>
-</li>
-              <li class="nav-item dropdown">
-                <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <%= link_to "Browse all wardrobes", items_path, class: "dropdown-item" %>
-                  <%= link_to "My wardrobe", my_items_items_path, class: "dropdown-item" %>
-                  <%= link_to "All Requests", all_requests_path, class: "dropdown-item" %>
-                  <%= link_to "My Requests", my_requests_requests_path, class: "dropdown-item" %>
-                  <%= link_to "Settings", "/users/edit", class: "dropdown-item" %>
-                  <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
-                </div>
-              </li>
-
-            <% end %>
-          </ul>
+        <div class="container-fluid d-flex flex-row justify-content-around w-100">
+          <div class="uk-navbar-left d-flex align-items-center">
+            <div>
+              <%= link_to root_path, class: "navbar-brand" do %>
+              <span style="font-family: Satisfy, sans-serif; font-size: 60px; font-weight: 400; color: black;">Bclothes</span>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to "Ask the Community!", new_request_path, class: "nav-btn nav-item mt-2", style: "border: none; margin-right: 20px;" %>
+            </div>
+            <div>
+              <%= link_to "Upgrade your Wardrobe", new_item_path, class: "nav-btn nav-item mt-2", style: "border: none; margin-right: 40px;" %>
+            </div>
+          </div>
+          <div class="uk-navbar-right d-flex align-items-center">
+            <div class="search--container mt-4 mb-4 pr-5">
+              <%= render :partial => 'items/search', :locals => {item: @item} %>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto">
+                <%if user_signed_in? %>
+                  <li class="nav-item dropdown">
+                    <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <%= link_to "Browse all wardrobes", items_path, class: "dropdown-item" %>
+                      <%= link_to "My wardrobe", my_items_items_path, class: "dropdown-item" %>
+                      <%= link_to "All Requests", all_requests_path, class: "dropdown-item" %>
+                      <%= link_to "My Requests", my_requests_requests_path, class: "dropdown-item" %>
+                      <%= link_to "Settings", "/users/edit", class: "dropdown-item" %>
+                      <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   <% end %>
+
 
 
 <style>
@@ -71,7 +77,7 @@
 }
 
 .navbar-lewagon .dropdown-menu {
-  background-color: #FFC65A;
+  background-color: #f2eddc;
   border: none;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
   padding: 0.5rem 0;
@@ -80,10 +86,8 @@
 .navbar-lewagon .dropdown-menu a {
   font-family: Inter, sans-serif;
   font-size: 14px;
-  font-weight: 400;
   color: black;
   padding: 0.5rem 1rem;
-  font-weight: bold;
 
 }
 
@@ -108,6 +112,7 @@
 
 .navbar-lewagon .dropdown-menu .dropdown-item {
   border: none;
+  font-weight: ;
 }
 
 .navbar-lewagon .avatar {
@@ -123,17 +128,17 @@
   left: auto;
 }
 
-.btn {
-  color: black;
-  font-weight: bold;
+.nav-btn {
+  color: black !important;
+  font-weight: ;
   position: relative;
 }
 
 
-.nav-item .btn:hover {
-  transform: translateY(-3px);
-  color: white;
-  text-decoration: none;
+.nav-btn:hover {
+  transform: translateY(-3px) !important;
+  color: gray !important;
+  text-decoration: none !important;
 }
 
 

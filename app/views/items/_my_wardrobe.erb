@@ -2,25 +2,10 @@
 <div class="container">
 
     <%# search %>
-  <div class="d-flex justify-content-evenly" style="margin: 15px;">
-    <div style="padding: 5px; min-width: 500px;">
-      <%= form_with url: items_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "I have nothing to wear" %>
-              <div style="padding: 5px;">
-                <%= submit_tag "Search", name: ""%>
-              </div>
-      <% end %>
-      <%= link_to "Create an open request", new_request_path, class: "btn" %>
-      <%# search results %>
-    </div>
-  </div>
 
-  <div>
-    <%= render :partial => 'search_results', :locals => {item: @item, submit_text: "Available!"} %>
-  </div>
+
+  TO DO
+
 </div>
 
 <style>

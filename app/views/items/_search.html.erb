@@ -3,11 +3,8 @@
       <div class="input">
         <%= text_field_tag :query,
           params[:query],
-          class: "form-control search-input",
-          placeholder: "I have nothing to wear" %>
-          <div style="padding: 5px;">
-            <%= submit_tag "Search", name: ""%>
-          </div>
+          class: "form-control me-2 search-box",
+          placeholder: "Browse all items" %>
       </div>
     <% end %>
         <%# search results %>
@@ -15,33 +12,19 @@
 
   <style>
 
-  .search-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  .search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+
+  .search-box {
+    border-radius: 25px !important;
+
   }
 
 
-  .input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
 .search-input {
   margin-right: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border: 2px solid #ccc;
+  border-radius: 25px;
   padding: 10px;
   font-size: 16px;
   color: #333;
@@ -59,5 +42,6 @@
   cursor: pointer;
   color: white;
 }
+
 
 </style>
