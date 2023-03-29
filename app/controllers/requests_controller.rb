@@ -64,6 +64,7 @@ class RequestsController < ApplicationController
     if @request.save && Item.find_by(id: params[:id])
       @item = Item.find(params[:id])
       @request.item = @item
+      @request.status = "Item Requested"
       @request.save
       redirect_to request_path(@request)
     elsif @request.save
