@@ -1,23 +1,5 @@
 <div class="container">
-  <div class="search-container">
-    <%= form_with url: items_path, method: :get, class: "search-form" do %>
-      <div class="input">
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control search-input",
-          placeholder: "I have nothing to wear" %>
-          <div style="padding: 5px;">
-            <%= submit_tag "Search", name: ""%>
-          </div>
-      <% end %>
-      <div>
-        <%= link_to "Create an open request", new_request_path, class: "btn frame-5" %>
-      </div>
-        <%# search results %>
-      </div>
-        <button class="btn search-btn" type="submit">Search</button>
-    </div>
-  </div>
+
 
   <div class="search-results-container mt-4 mb-4">
     <%= render :partial => 'search_results', :locals => {item: @item, submit_text: "Available!"} %>
@@ -40,47 +22,3 @@
   justify-content: center;
   text-decoration: none;
 }
-  .search-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  .search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  .input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-.search-input {
-  margin-right: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  border: 2px solid #ccc;
-  padding: 10px;
-  font-size: 16px;
-  color: #333;
-}
-.search-btn {
-  background-color: #F38181;
-  color: white;
-  border: none;
-  outline: none;
-  width: 150px;
-}
-
-.search-btn:hover {
-  background-color: #F16262;
-  cursor: pointer;
-  color: white;
-}
-
-</style>
