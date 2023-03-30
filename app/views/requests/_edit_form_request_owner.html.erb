@@ -1,7 +1,29 @@
-<%= simple_form_for request, data: { controller: 'flatpickr' }, html: { class: 'form edit-form' } do |f| %>
+<%= simple_form_for request, data: { controller: 'flatpickr' }, html: { class: 'form edit-form', style: 'background-color: white;' } do |f| %>
   <%= f.input :title %>
   <%= f.input :description %>
   <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } }  %>
   <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endTime" } }   %>
-  <%= f.submit submit_text, class: 'btn btn-primary btn-block', style: 'background-color: black; color: white; border-radius: 10px; border: none;' %>
+  <%= f.submit submit_text, class: 'btn btn-primary btn-block' %>
 <% end %>
+
+<style>
+
+.btn.btn-primary.btn-block {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  padding: 10px 5px;
+
+  text-align: center;
+  width: 250px;
+  border: none;
+}
+
+.btn.btn-primary.btn-block:hover {
+  background-color: #c39d56;
+  color: #fff;
+  text-decoration: none;
+}
+
+</style>
