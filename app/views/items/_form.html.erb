@@ -1,30 +1,30 @@
 <%# input form for creating (new) or editing an item %>
-<div style="padding: 23px 120px;background-color: #F4F4F4;border: 1px black dashed;margin: 42px;">
+<div style="padding: 23px 120px;background-color: #F4F4F4;border: 1px black dashed;margin: 42px; font-size: 20px;">
   <%= simple_form_for(item) do |f| %>
 
     <%= f.input :category,
-          as: :radio_buttons,
-          collection_wrapper_tag: 'div',
-          collection_wrapper_class: 'category-wrapper',
-          item_wrapper_class: 'category-item',
-          input_html: {class: 'category-selector'},
-          collection: Item::CATEGORIES %>
+        as: :radio_buttons,
+        collection_wrapper_tag: 'div',
+        collection_wrapper_class: 'category-wrapper',
+        item_wrapper_class: 'category-item',
+        input_html: {class: 'category-selector'},
+        collection: Item::CATEGORIES %>
 
     <%= f.input :colour,
-              as: :radio_buttons,
-              collection_wrapper_tag: 'div',
-              collection_wrapper_class: 'colour-wrapper',
-              item_wrapper_class: 'colour-item',
-              input_html: {class: 'colour-selector'},
-              collection: Item::COLOURS %>
+        as: :radio_buttons,
+        collection_wrapper_tag: 'div',
+        collection_wrapper_class: 'colour-wrapper',
+        item_wrapper_class: 'colour-item',
+        input_html: {class: 'colour-selector'},
+        collection: Item::COLOURS %>
 
     <%= f.input :occasion,
-          as: :radio_buttons,
-          collection_wrapper_tag: 'div',
-          collection_wrapper_class: 'occasion-wrapper',
-          item_wrapper_class: 'occasion-item',
-          input_html: {class: 'occasion-selector'},
-          collection: Item::OCCASIONS %>
+        as: :radio_buttons,
+        collection_wrapper_tag: 'div',
+        collection_wrapper_class: 'occasion-wrapper',
+        item_wrapper_class: 'occasion-item',
+        input_html: {class: 'occasion-selector'},
+        collection: Item::OCCASIONS %>
 
     <%= f.input :condition,
       as: :radio_buttons,
@@ -50,14 +50,12 @@
 
     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
 
-    <div>
+    <div class="occasion-wrapper">
       <%= f.submit submit_text, class: "item-btn", role: "button" %>
     </div>
 
   <% end %>
 </div>
-
-
 
 
 <style>
@@ -84,7 +82,6 @@
   cursor: pointer;
   box-sizing: border-box;
   width: 100%;
-  font-size: 20px;
   text-align: center;
   padding: 10px 10px 10px 10px;
   border: 1px solid #EAEAEA;
@@ -104,7 +101,7 @@
 }
 
 #item_category_ruby:checked + label {
-  background-background-color: #FFC65A;
+  background-color: #FFC65A;
   border-color: #FD1015;
 }
 
@@ -163,7 +160,6 @@
   background-color: #FFC65A !important;
   font-weight: 700;
 }
-
 
 #item_colour_ruby + label {
   color: #FD1015;
@@ -362,5 +358,11 @@ $orange: #E67E22;
 $green: #1EDD88;
 $gray: #0E0000;
 $light-gray: #F4F4F4;
+
+.save-delete-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
 </style>
