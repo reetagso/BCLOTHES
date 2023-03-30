@@ -1,5 +1,3 @@
-
-
 <div class="h5 my-4">
 <% if @requests_received == nil %>
   You haven't receieved any Bclothes requests
@@ -22,18 +20,36 @@
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
           <p><%= request.description%><p>
           <div>
-            <div>
-              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: ""  %>
-            </div>
-            <div>
-              <%= link_to "View Request", request_path(request), class: "" %>
-            </div>
-            <div>
-              <%= link_to "Edit Request", edit_request_path(request), class: "" %>
-            </div>
+<div class="d-flex justify-content-start my-custom-class">
+  <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "item-btn mr-2 mb-2"  %>
+  <%= link_to "View Request", request_path(request), class: "item-btn mr-2 mb-2" %>
+  <%= link_to "Edit Request", edit_request_path(request), class: "item-btn mb-2" %>
+</div>
+
+
           </div>
         </div>
       </div>
     <% end %>
   </div>
 <% end %>
+
+<style>
+
+.item-btn {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  padding: 10px 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.item-btn:hover {
+  background-color: #c39d56;
+  color: #fff;
+  text-decoration: none;
+}
+
+<style>
