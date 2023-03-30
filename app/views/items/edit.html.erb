@@ -1,7 +1,8 @@
 
 <div class="container">
   <div class="centers" style="padding: 40px 0px 0px;">
-    <h1> Update your item </h1>
+    <h1> Update this item <br> from your wardrobe  </h1>
+    <%= cl_image_tag @item.photos.first.key, height: 200, width: 170, crop: :pad, background: "auto", class: "rounded" %>
   </div>
 
   <%= render :partial => 'form',
@@ -9,10 +10,13 @@
 
 </div>
 
-
 <style>
-  .centers {
+.centers {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+h1 {
+  margin-top: 35px;
 }
 </style>
