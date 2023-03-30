@@ -17,17 +17,48 @@
         <%# line below can be reinstated when new specific requests are workign  %>
         <%# <%= link_to "View", item_path(Item.find(request.item_id)), class: "btn"  %>
         <div class=" pr-3">
+        <div class="container-button">
           <div >
-            <%= link_to "View Request", request_path(request), class: "" %>
+            <%= link_to "View Request", request_path(request), class: "btn-request" %>
           </div>
           <div>
-            <%= link_to "Edit Request", edit_request_path(request), class: "" %>
+            <%= link_to "Edit Request", edit_request_path(request), class: "btn-request" %>
           </div>
           <div>
-            <%= link_to "Cancel Request", request_path(request), data: {turbo_method: :delete}, class: ""  %>
+            <%= link_to "Cancel Request", request_path(request), data: {turbo_method: :delete}, class: "btn-request"  %>
           </div>
+        </div>
         </div>
       </div>
       <% end %>
   </div>
 <% end %>
+
+<style>
+
+.container-button{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 30px;
+  margin-right: 30px;
+}
+
+.btn-request {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  padding: 10px 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.btn-request:hover {
+  background-color: #c39d56;
+  color: #fff;
+  text-decoration: none;
+}
+
+</style>

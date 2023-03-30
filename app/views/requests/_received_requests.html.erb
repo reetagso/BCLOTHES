@@ -1,6 +1,6 @@
 <div class="h5 my-4">
 <% if @requests_received == nil %>
-  You haven't receieved any Bclothes requests
+  You haven't received any Bclothes requests
 <% else %>
   You have received <%=@requests_received.length%> Bclothes requests:
 </div>
@@ -20,13 +20,17 @@
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
           <p><%= request.description%><p>
           <div>
-<div class="d-flex justify-content-start my-custom-class">
-  <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "item-btn mr-2 mb-2"  %>
-  <%= link_to "View Request", request_path(request), class: "item-btn mr-2 mb-2" %>
-  <%= link_to "Edit Request", edit_request_path(request), class: "item-btn mb-2" %>
-</div>
-
-
+          <div class="container-button">
+            <div>
+              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "btn-request"  %>
+            </div>
+            <div>
+              <%= link_to "View Request", request_path(request), class: "btn-request" %>
+            </div>
+            <div>
+              <%= link_to "Edit Request", edit_request_path(request), class: "btn-request" %>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -36,7 +40,14 @@
 
 <style>
 
-.item-btn {
+.container-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 40px;
+}
+
+.btn-request {
   display: inline-block;
   color: black;
   background: #e9e2e2;
@@ -46,10 +57,10 @@
   width: 150px;
 }
 
-.item-btn:hover {
+.btn-request:hover {
   background-color: #c39d56;
   color: #fff;
   text-decoration: none;
 }
 
-<style>
+</style>

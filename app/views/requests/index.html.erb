@@ -2,16 +2,16 @@
   <%# Add search? %>
   <div class="request-list">
     <% @requests.each do |request| %>
-      <div class="request-item shadow p-3 bg-white rounded d-flex justify-content-between align-items-center">
+      <div class="request-item shadow p-3 rounded d-flex justify-content-between align-items-center <%= 'you-requested' if current_user == User.find(request.user_id) %>">
         <div>
           <% if current_user == User.find(request.user_id) %>
             <div class="request-owner text-black ml-5">
               You requested
             </div>
           <% else %>
-            <div class="request-user d-flex align-items-center font-weight-bold text-uppercase">
+            <div class="request-user d-flex align-items-center">
               <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle me-3", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-              <%= User.find(request.user_id)[:first_name].upcase %> REQUESTED : <div class="request-title ms-2">
+              <%= User.find(request.user_id)[:first_name] %> requested : <div class="request-title ms-2">
                 <span><%= request.title %></span>
               </div>
             </div>
@@ -32,7 +32,8 @@
 
 .container {
   margin-top: 40px;
-  margin-bottom : 60px;
+  margin-bottom: 60px;
+  font-weight: 400;
 }
 
 .request-list {
@@ -45,10 +46,37 @@
 
 .request-item {
   font-family: 'Inter', sans-serif;
+  background-color: #ffffff; /* Default background color */
+}
+
+.you-requested {
+  background-color: #FFF2CC; /* Background color for "You requested" */
 }
 
 .date-italic {
   font-style: italic;
+}
+
+.request-user {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2em;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.request-title {
+  font-weight: 400;
+  font-size: 1.2em;
+  color: black;
+}
+
+.request-owner {
+  font-weight: 400;
+  font-size: 1.2em;
+  color: black;
+  padding-left: 5px;
+  border-left: 1px solid black;
 }
 
 .request-details {
