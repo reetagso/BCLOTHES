@@ -1,8 +1,6 @@
-
-
 <div class="h5 my-4">
 <% if @requests_received == nil %>
-  You haven't receieved any Bclothes requests
+  You haven't received any Bclothes requests
 <% else %>
   You have received <%=@requests_received.length%> Bclothes requests:
 </div>
@@ -22,18 +20,47 @@
           <p><em><%= request.start_date.strftime("%b %d, %Y")%>-<%= request.end_date.strftime("%b %d, %Y")%></p></em>
           <p><%= request.description%><p>
           <div>
+          <div class="container-button">
             <div>
-              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: ""  %>
+              <%= link_to "View Item", item_path(Item.find(request.item_id)), class: "btn-request"  %>
             </div>
             <div>
-              <%= link_to "View Request", request_path(request), class: "" %>
+              <%= link_to "View Request", request_path(request), class: "btn-request" %>
             </div>
             <div>
-              <%= link_to "Edit Request", edit_request_path(request), class: "" %>
+              <%= link_to "Edit Request", edit_request_path(request), class: "btn-request" %>
             </div>
+          </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 <% end %>
+
+<style>
+
+.container-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 40px;
+}
+
+.btn-request {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  padding: 10px 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.btn-request:hover {
+  background-color: #c39d56;
+  color: #fff;
+  text-decoration: none;
+}
+
+</style>
