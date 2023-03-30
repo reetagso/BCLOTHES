@@ -1,9 +1,18 @@
 
 <div class="container">
-
-  <h1> Edit </h1>
+  <div class="centers" style="padding: 40px 0px 0px;">
+    <h1> Update your item </h1>
+  </div>
 
   <%= render :partial => 'form',
             :locals => {item: @item, submit_text: "Save changes"} %>
 
 </div>
+
+
+<style>
+  .centers {
+  display: flex;
+  justify-content: center;
+}
+</style>
