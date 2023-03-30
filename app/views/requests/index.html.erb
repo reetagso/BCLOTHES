@@ -1,114 +1,74 @@
-<%# Add search? %>
-<div class="request-list">
-  <% @requests.each do |request| %>
-    <div class="request-item">
-      <% if current_user == User.find(request.user_id) %>
-        <div class="bg-warning bg-gradient request-owner">
-          You requested
-        </div>
-      <% else %>
-        <div class="request-user">
-          <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <%= User.find(request.user_id)[:first_name].upcase %> REQUESTED | <div class="request-title">
-            <span><%= request.title %></span>
+<div class="container special-name">
+  <%# Add search? %>
+  <div class="request-list">
+    <% @requests.each do |request| %>
+      <div class="request-item shadow p-3 bg-white rounded d-flex justify-content-between align-items-center">
+        <div>
+          <% if current_user == User.find(request.user_id) %>
+            <div class="request-owner text-black ml-5">
+              You requested
+            </div>
+          <% else %>
+            <div class="request-user d-flex align-items-center font-weight-bold text-uppercase">
+              <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle me-3", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <%= User.find(request.user_id)[:first_name].upcase %> REQUESTED : <div class="request-title ms-2">
+                <span><%= request.title %></span>
+              </div>
+            </div>
+          <% end %>
+          <div class="request-details">
+            <p class="fs-6 mb-3 date-italic ml-5"><%= request.start_date.strftime('%B %d, %Y') %> to <%= request.end_date.strftime('%B %d, %Y') %></p>
+            <p class="fs-6 ml-5"> <%= request.description %></p>
+            <p class="fs-6 ml-5 font-weight-bold"><strong>Status :</strong> <%= request.status %></p>
           </div>
         </div>
-      <% end %>
-      <div class="request-details">
-          <p style="font-size: 1.2rem; margin-bottom: 1rem;"><%= request.start_date %> - <%= request.end_date %></p>
-        <p> <%= request.description %></p>
-        <p><strong>Status:</strong> <%= request.status %></p>
-        <%= link_to "View", request_path(request), class: "btn btn-black btn-view" %>
+        <%= link_to "View", request_path(request), class: "item-btn mr-4" %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
+
 <style>
 
-  .request-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin: 0 auto;
-    max-width: 1200px;
-  }
-
-  .request-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background-color: #f7f7f7;
-    padding: 1rem;
-    border-radius: 0.25rem;
-  }
-
-  .request-owner {
-    color: #fff;
-    font-weight: bold;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-  }
-  
-
-  .request-user {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-  }
-
-  .request-details h3 {
-    margin-top: 0;
-  }
-
-#navbarDropdown{
-  margin-right: 12px;
+.container {
+  margin-top: 40px;
+  margin-bottom : 60px;
 }
-  .btn {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 0.5rem;
-    text-decoration: none;
-    cursor: pointer;
-    width: 200px;
-    display: inline-block;
-  }
 
-  .btn:hover {
-    background-color: #333;
-  }
-
-  .btn-view {
-    margin-top: 1rem;
-  }
-
-  .request-user {
+.request-list {
   display: flex;
-  align-items: center;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 1.2rem;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-.user-details {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
+.request-item {
+  font-family: 'Inter', sans-serif;
 }
 
-.user-name {
-  margin-right: 1rem;
+.date-italic {
+  font-style: italic;
 }
 
-.request-text {
-  margin-right: 0.5rem;
+.request-details {
+  width: 800px;
 }
 
-.request-title {
-  font-weight: normal;
-  font-size : 20px;
-  margin-left : 8px;
+.item-btn {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  padding: 10px 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.item-btn:hover {
+  background-color: #c39d56;
+  color: #fff;
+  text-decoration: none;
 }
 
 </style>
