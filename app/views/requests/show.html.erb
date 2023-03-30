@@ -1,22 +1,32 @@
 <%# #Request info for everyone %>
 <div class="container">
-  <%= image_tag @request_owner.photo.key ? @request_owner.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-  <p class="h4">
-    <% if @request_owner_name == "You" %>
-      Your request
-    <% else %>
-      <%= @request_owner_name%>'s request
-    <% end %>
-  </p>
-  <h5><%= @request.title%></h5>
-  <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
-  <p class="request-description"><%= @request.description%></p>
+  <div class="" >
+    <div class="d-flex mt-4 h5 justify-content-center align-items-center">
+      <%= image_tag @request_owner.photo.key ? @request_owner.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <div class="pl-3">
+        <% if @request_owner_name == "You" %>
+          Your request
+        <% else %>
+          <%= @request_owner_name%>'s request
+        <% end %>
+      </div>
+    </div>
+    <div class="pt-4 text-center border-top border-bottom border-3">
+      <div class="h5 fw-bold">
+        <%= @request.title%>
+      </div>
+      <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
+      <p><%= @request.description%></p>
+    </div>
+  </div>
+
+
 
   <%# "Closed" request display %><%# "Item requested"  display %>
   <%# visitor%>
-  <div class="d-flex">
-    <div>
-      <% if @request.status == "Closed" || @request.status == "Item Requested" %>
+  <div class="d-flex justify-content-between pt-4">
+    <div class="col-4">
+      <div class="h5 fw-bolder text-center">
         <% if @request.status == "Closed" %>
           <%= @request_owner_name %> solved
           <% if @request_owner_name == "You" %>
@@ -24,60 +34,133 @@
           <% else %>
             her
           <% end %>
-          outfit dilemma
-          <%= @request_owner_name %> went with <%=@item_owner_name%>'s choice
-        <% else %>
-          A Bclothes request has been sent to <%=@item_owner_name%> for:
+          outfit dilemma and went with <%=@item_owner_name%>'s choice
         <% end %>
-        <div>
-          <%= @item_owner_name%>'s
-          <%= cl_image_tag(@choice.photos.first.key, height: 400, width: 300, crop: :pad, background: "auto" )%>
-          <%= @choice.category %>
-          <%= @choice.size %>
+        <% if @request.status == "Item Requested"%>
+          <%= @request_owner_name %> sent a BClothes request for
+        <% elsif @request.status == "Open" %>
+          No suggestions yet
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <div class=" shadow">
+          <% if @request.status == "Closed" || @request.status == "Item Requested" %>
+            <%= link_to item_path(@choice) do %>
+                <div class="card-title ">
+                  <%= @item_owner_name%>'s choice
+                </div>
+                <%= cl_image_tag(@choice.photos.first.key, height: 400, width: 300, crop: :pad, background: "auto" )%>
+                <div class="d-flex justify-content-between p-3">
+                  <div class="">
+                    <%= @choice.category %>
+                  </div>
+                  <div class="text-muted ">
+                    (Size <%= @choice.size%>)
+                  </div>
+                </div>
+            <% end %>
+          <% end %>
         </div>
-      <% end %>
+      </div>
+        <div class="d-flex justify-content-center align-items-center pt-4">
+          <% if (@request.status == "Item Requested" || @request.status == "Open") && @request_owner_name == "You" %>
+            <div class="ps-3">
+              <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
+              <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+            </div>
+          <% elsif (@request.status == "Item Requested" || @request.status == "Open") && @item_owner == current_user %>
+            <div class="ps-3">
+              <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+            </div>
+          <% end %>
+        </div>
     </div>
-    <div>
-      <% if (@request.status == "Item Requested" || @request.status == "Open") && (@request_owner_name == "You" || @item_owner == current_user) %>
-        <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
-      <% elsif (@request.status == "Item Requested" || @request.status == "Open") && @request_owner_name == "You" %>
-        <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
-      <% elsif (@request.status == "Item Requested" || @request.status == "Open") && @request_owner != current_user %>
-        <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn " %>
-      <% elsif (@request.status == "Item Requested" || @request.status == "Open") %>
-        <%= link_to "View", item_path(@choice), class: "btn" %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="d-flex">
-    <div>
-      <h2 class="chatbox-title">What do you think?</h2>
+    <div class="col-8 border-left">
+      <div class="h5 fw-bolder yellow-text">
+        <% if current_user == @request_owner && @request.status == "Closed" %>
+          Chat with friends
+        <% elsif @request.status == "Closed"  %>
+          Chat with friends
+        <% elsif current_user == @request_owner %>
+          See what your friends think
+        <% else %>
+          What should <%= @request_owner_name %> choose?
+        <% end %>
+      </div>
       <%= render :partial => 'shared/chatroom_requests',
                     :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
     </div>
-    <%# visitor or everyone?%>
+  </div>
+
+
+  <div class="d-flex justify-content-center align-items-center py-4">
+
+  </div>
+
+  <div>
     <div>
-      <h2>Suggestions</h2>
-      <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
-        <p>Be the first one to suggest an outfit! </p>
-      <% elsif  @request.suggestions.empty? %>
-        <p>No suggestions yet</p>
-      <% else %>
-        <ol>
-          <% @request.items.each do |item| %>
-            <li>
-              <%= User.find(item.user_id)[:first_name]%>'s choice
-              <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
-              <%= item.category %>
-              <%= item.size %>
-              <%= link_to "View", item_path(item), class: "btn" %>
-              <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn" %>
-            </li>
+      <div class="d-flex justify-content-between ps-5 align-items-center">
+        <div class="d-flex h5 fw-bolder">
+          Suggestions
+          <% if @request.suggestions.empty? == false %>
+            <div class="yellow-text">
+              (<%= @request.suggestions.length %>)
+            </div>
           <% end %>
-        </ol>
+        </div>
+        <div class="d-flex justify-content-end align-items-center pr-5">
+          <% if (@request.status == "Item Requested" || @request.status == "Open") && @request_owner != current_user %>
+            <div class="ps-3">
+              <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "suggest-btn btn " %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% if @request.suggestions.empty? %>
+        <div class="pl-5">
+          No suggestions
+        </div>
+      <% else %>
+      <div>
+          <div class="d-flex justify-content-center align-items-center">
+              <% @request.items.each do |item| %>
+                <%= link_to item_path(item) do %>
+                  <div class="cards-suggestion">
+                    <div class="shadow m-3">
+                      <div class="card-title d-flex justify-content-between pt-3 ps-3 ">
+                        <div>
+                          <%= User.find(item.user_id)[:first_name]%>'s choice
+                        </div>
+                        <div>
+                          <% if current_user == @request_owner %>
+                            <%= link_to "I want this!", assign_item_path(id: @request, item_id: item.id), class: "accept-btn" %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <%= link_to item_path(item) do %>
+                        <%= cl_image_tag(item.photos.first.key, height: 400, width: 300, crop: :pad, background: "auto" ) %>
+                      <% end %>
+                      <div class="d-flex justify-content-between p-3">
+                        <div class="">
+                          <%= item.category %>
+                        </div>
+                        <div class="text-muted ">
+                          (Size <%=item.size%>)
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+          </div>
+      </div>
       <% end %>
     </div>
+
+    <%# <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn" %>
+
+
+
   </div>
 </div>
 
@@ -90,9 +173,8 @@
   background: #e9e2e2;
   border-radius: 5px;
   padding: 10px 5px;
-
   text-align: center;
-  width: 250px;
+  width: 120px;
 }
 
 .btn:hover {
@@ -100,4 +182,53 @@
   color: #fff;
   text-decoration: none;
 }
+
+.suggest-btn {
+  width: 200px;
+}
+
+.accept-btn {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: normal;
+  width: 100px;
+  height: 25px;
+  margin-right: 20px;
+}
+
+.accept-btn:hover {
+  background-color: #60d394;
+  color: #fff;
+  text-decoration: none;
+}
+
+.card-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.yellow-text {
+  color: #c39d56;
+}
+.cards-suggestion{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+}
+
+a {
+  color: black;
+}
+a:hover{
+  color: #c39d56;
+  text-decoration: none !important;
+}
+
+
 </style>
