@@ -1,354 +1,232 @@
-<div class="container m-3">
-  <div class="header">
-    <p class="request-owner">
-      <% if User.find(@request.user_id) == current_user %>
-        Your request:
-      <% else %>
-        <%= User.find(@request.user_id)[:first_name]%>'s request
-      <% end %>
-    </p>
-    <h3 class="request-chatbox-title"> <%= @request.title%> </h3>
-    <p class="request-description">"<%= @request.description %>"</p>
-    <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
+<%# #Request info for everyone %>
+<div class="container">
+  <div class="" >
+    <div class="d-flex mt-4 h5 justify-content-center align-items-center">
+      <%= image_tag @request_owner.photo.key ? @request_owner.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <div class="pl-3">
+        <% if @request_owner_name == "You" %>
+          Your request
+        <% else %>
+          <%= @request_owner_name%>'s request
+        <% end %>
+      </div>
+    </div>
+    <div class="pt-4 text-center border-top border-bottom border-3">
+      <div class="h5 fw-bold">
+        <%= @request.title%>
+      </div>
+      <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
+      <p><%= @request.description%></p>
+    </div>
   </div>
 
-  <%# #Request info for everyone %>
-  <div class="main-container">
-    <div class="request-info-container">
+
 
   <%# "Closed" request display %><%# "Item requested"  display %>
-
-
-    <%# visitor%>
-    <% if @request.user_id != current_user.id && @request.status == "Open" %>
-      <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn btn-dark black-button" %>
-
-    <% elsif @request.user_id == current_user.id && @request.status == "Open" %>
-      <h3 class="request-chatbox-title">
-        Not interested?
-      </h3>
-      <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "item-btn"  %>
-    <%# everyone%>
-
-
-  </div>
-
-  <%# visitor or everyone?%>
-
-  <% elsif @request.status == "Closed" %>
-      <%= User.find(@request.user_id)[:first_name] %> solved her outfit dilemma by going with
-        <% choice = Item.find(@request.item_id) %>
-        <%=User.find(choice.user_id)[:first_name]%>'s choice!
-        <div class="suggestions-card">
-          <div class="responsive">
-            <%= cl_image_tag choice.photos.first.key, crop: :fill %>
-            <div class="centers">
-              <%= link_to "View", item_path(choice), class: "item-btn view-accept-btn view-only-format" %>
-            </div>
-          </div>
-        </div>
-    </div>
-
-  <%# suggestion owner%>
-  <%# does not work because of choice variable%>
-  <% elsif @request.status == "Item Requested" && @request.user_id == current_user.id %>
-    <% choice = Item.find(@request.item_id) %>
-    <p>
-      I've changed my mind
-    </p>
-    <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "item-btn"  %>
-        You have sent a Bclothes request to <%=User.find(choice.user_id)[:first_name]%> for:
-      <div class="suggestions-card">
-        <div class="centers">
-          <%= cl_image_tag choice.photos.first.key, height: 300, width: 400, crop: :fill %>
-        </div>
-        <div class="centers">
-          <%= choice.category %>
-          <%=choice.size%>
-        </div>
-      </div>
-    </div>
-
-    <div class="centers">
-      <%= link_to "View", item_path(choice), class: "item-btn view-accept-format" %>
-      <%= link_to "Edit Request", edit_request_path(@request), class: "item-btn view-accept-format" %>
-    </div>
-    <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete}, class: "item-btn"  %>
-
-
-  <%# request owner%>
-  <% elsif @request.status == "Item Requested" && User.find(Item.find(@request.item_id).user_id).id == current_user.id %>
-    <div>
-      <%= User.find(@request.user_id)[:first_name]%> has sent you a BClothes request for:
-      <div class="centers">
-      <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-      <%= Item.find(@request.item_id).category %>
-      <%= Item.find(@request.item_id).size%>
-      </div>
-    </div>
-    <div>
-      <%= link_to "View", item_path(Item.find(@request.item_id)), class: "item-btn view-accept-btn view-accept-format" %>
-      <%= link_to "Edit Request", edit_request_path(@request), class: "item-btn" %>
-    </div>
-
   <%# visitor%>
-  <% else %>
-      <div>
-        <%= User.find(@request.user_id)[:first_name]%> sent a BClothes request for:
-        <div class="suggestions-card">
-            <div class="centers">
-                <%= Item.find(@request.item_id).category %>
-                <%= Item.find(@request.item_id).size%>
-            </div>
-            <div>
-                <%= cl_image_tag Item.find(@request.item_id).photos.first.key, height: 300, width: 400, crop: :fill %>
-            </div>
-          <div class="centers">
-              <%= link_to "View", item_path(Item.find(@request.item_id)), class: "item-btn view-accept-btn view-accept-format" %>
-          </div>
-        </div>
+  <div class="d-flex justify-content-between pt-4">
+    <div class="col-4">
+      <div class="h5 fw-bolder text-center">
+        <% if @request.status == "Closed" %>
+          <%= @request_owner_name %> solved
+          <% if @request_owner_name == "You" %>
+            your
+          <% else %>
+            her
+          <% end %>
+          outfit dilemma and went with <%=@item_owner_name%>'s choice
+        <% end %>
+        <% if @request.status == "Item Requested"%>
+          <%= @request_owner_name %> sent a BClothes request for
+        <% elsif @request.status == "Open" %>
+          No suggestions yet
+        <% end %>
       </div>
-      <div class="padding-below">
-        <%= link_to "Make another suggestion", new_request_suggestion_path(@request), class: "item-btn" %>
-      </div>
-  <% end %>
-
-    <%# owner of requested item link to accept request %>
-  <%# <% elsif @request.item_id != "" && User.find(choice.user_id) == current_user %>
-    <%# <%= link_to "Edit", edit_request_path(@request), class: "btn" %>
-    <%# <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "btn" %>
-
-  <%# "Open" display %>
-
-  <%# Everyone %>
-    <%# Suggestions display %>
-    <div class="suggestions-container">
-      <h3 class="request-chatbox-title">Suggestions</h3>
-        <% if @request.user_id != current_user.id && @request.suggestions.empty? %>
-          <p>Be the first one to suggest an outfit! </p>
-        <% elsif  @request.suggestions.empty? %>
-          <p>No suggestions yet</p>
-        <% else %>
-            <% @request.items.each do |item| %>
-                <div class="suggestions-card">
-                  <div class="centers">
-                    <%= User.find(item.user_id)[:first_name]%>'s choice,
-                    <%= item.category %>
-                    <%= item.size %>
+      <div class="d-flex justify-content-center align-items-center">
+        <div class=" shadow">
+          <% if @request.status == "Closed" || @request.status == "Item Requested" %>
+            <%= link_to item_path(@choice) do %>
+                <div class="card-title ">
+                  <%= @item_owner_name%>'s choice
+                </div>
+                <%= cl_image_tag(@choice.photos.first.key, height: 400, width: 300, crop: :pad, background: "auto" )%>
+                <div class="d-flex justify-content-between p-3">
+                  <div class="">
+                    <%= @choice.category %>
                   </div>
-                  <div>
-                    <%= cl_image_tag item.photos.first.key, height: 300, width: 400, crop: :fill %>
-                  </div>
-                  <div class="view-accept-format">
-                    <div>
-                      <%= link_to "View", item_path(item), class: "item-btn view-accept-btn view-accept-format" %>
-                    </div>
-                  <div>
-                      <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "item-btn view-accept-btn" %>
-                  </div>
+                  <div class="text-muted ">
+                    (Size <%= @choice.size%>)
                   </div>
                 </div>
             <% end %>
+          <% end %>
+        </div>
+      </div>
+        <div class="d-flex justify-content-center align-items-center pt-4">
+          <% if (@request.status == "Item Requested" || @request.status == "Open") && @request_owner_name == "You" %>
+            <div class="ps-3">
+              <%= link_to "Cancel Request", request_path(@request), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn"  %>
+              <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+            </div>
+          <% elsif (@request.status == "Item Requested" || @request.status == "Open") && @item_owner == current_user %>
+            <div class="ps-3">
+              <%= link_to "Edit Request", edit_request_path(@request), class: "btn" %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+    <div class="col-8 border-left">
+      <div class="h5 fw-bolder yellow-text">
+        <% if current_user == @request_owner && @request.status == "Closed" %>
+          Chat with friends
+        <% elsif @request.status == "Closed"  %>
+          Chat with friends
+        <% elsif current_user == @request_owner %>
+          See what your friends think
+        <% else %>
+          What should <%= @request_owner_name %> choose?
         <% end %>
-
+      </div>
+      <%= render :partial => 'shared/chatroom_requests',
+                    :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
     </div>
   </div>
-  <div class="chatroom-div">
-    <h2 class="request-chatbox-title">What do you think?</h2>
-    <%= render :partial => 'shared/chatroom_requests',
-    :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
+
+
+  <div class="d-flex justify-content-center align-items-center py-4">
+
+  </div>
+
+  <div>
+    <div>
+      <div class="d-flex justify-content-between ps-5 align-items-center">
+        <div class="d-flex h5 fw-bolder">
+          Suggestions
+          <% if @request.suggestions.empty? == false %>
+            <div class="yellow-text">
+              (<%= @request.suggestions.length %>)
+            </div>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-end align-items-center pr-5">
+          <% if (@request.status == "Item Requested" || @request.status == "Open") && @request_owner != current_user %>
+            <div class="ps-3">
+              <%= link_to "Make a suggestion", new_request_suggestion_path(@request), class: "suggest-btn btn " %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% if @request.suggestions.empty? %>
+        <div class="pl-5">
+          No suggestions
+        </div>
+      <% else %>
+      <div>
+          <div class="d-flex justify-content-center align-items-center">
+              <% @request.items.each do |item| %>
+                <%= link_to item_path(item) do %>
+                  <div class="cards-suggestion">
+                    <div class="shadow m-3">
+                      <div class="card-title d-flex justify-content-between pt-3 ps-3 ">
+                        <div>
+                          <%= User.find(item.user_id)[:first_name]%>'s choice
+                        </div>
+                        <div>
+                          <% if current_user == @request_owner %>
+                            <%= link_to "I want this!", assign_item_path(id: @request, item_id: item.id), class: "accept-btn" %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <%= link_to item_path(item) do %>
+                        <%= cl_image_tag(item.photos.first.key, height: 400, width: 300, crop: :pad, background: "auto" ) %>
+                      <% end %>
+                      <div class="d-flex justify-content-between p-3">
+                        <div class="">
+                          <%= item.category %>
+                        </div>
+                        <div class="text-muted ">
+                          (Size <%=item.size%>)
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+          </div>
+      </div>
+      <% end %>
+    </div>
+
+    <%# <%= link_to "Accept", assign_item_path(id: @request, item_id: item.id), class: "btn" %>
+
+
+
   </div>
 </div>
-<%# TO DO
-
-Add card
-Add link
-Add forms here to ass javascript to?
-%>
 
 <style>
-
-.main-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  height: 100%;
-  gap: 60px;
-}
-
-.request-info-container,
-.suggestions-container {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.suggestions-container {
-  display: flex;
-  /* justify-content: space-evenly; */
-  align-items: center;
-  margin: 10px 10px 10px;
-  padding: 10px;
-}
-
-.request-info-container {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  padding: 10px;
-  margin: 10px 10px 10px;
-}
-
-.header {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px 10px 10px;
-}
-
-.chatroom-placeholder {
-  border: 2px dashed #ccc;
-  padding: 1rem;
-  margin-top: 1rem;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.black-button {
-    color: white;
-    border-radius: 10px;
-    width: 200px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.request-owner {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 36px;
-}
-
-.request-chatbox-title {
-  background-color: #FFC65A;;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  /* Semi Bold */
-  font-size: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-color: #FFC65A;
-  border-style: solid;
-  border-width: 15px;
-  border-radius: 5px;
-}
-
-.request-description {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  /* Light */
-  font-size: 20px;
-}
-
-.request-dates {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  /* Light */
-  font-size: 12px;
-}
-
-.view-accept-format {
-    height: 33px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 5px;
-}
-
-.view-only-format {
-    height: 33px;
-    display: flex;
-    align-items: center;
-    margin: 5px;
-}
-
-.chatroom-div {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  margin: 10px 10px 10px;
-  padding: 10px;
-}
-
-/* buttons */
-
-.item-btn {
+.btn {
   display: inline-block;
   color: black;
   background: #e9e2e2;
   border-radius: 5px;
   padding: 10px 5px;
-
   text-align: center;
-  width: 250px;
+  width: 120px;
 }
 
-.item-btn:hover {
+.btn:hover {
   background-color: #c39d56;
   color: #fff;
   text-decoration: none;
 }
 
-.view-accept-btn {
-  display: flex;
-  flex-direction: row;
-  width: 140px;
-  height: 33px;
+.suggest-btn {
+  width: 200px;
+}
+
+.accept-btn {
+  display: inline-block;
+  color: black;
+  background: #e9e2e2;
   border-radius: 5px;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  font-weight: normal;
+  width: 100px;
+  height: 25px;
+  margin-right: 20px;
 }
 
-/* end buttons */
-
-.suggestions-card {
-    box-sizing: border-box;
-    padding: 20px;
-    /* border: 1px solid rgba(0, 0, 0, 0.3); */
-    margin: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
-    font-family: 'Merienda', cursive;
-    /* border-radius: 10px; */
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    position: absolute;
-    width: 303px;
-    height: 420px;
-    left: 76px;
-    top: 525px; */
+.accept-btn:hover {
+  background-color: #60d394;
+  color: #fff;
+  text-decoration: none;
 }
 
-img {
-  border-radius: 10px;
-  max-width: 300px;
-  height: auto;
+.card-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.responsive {
-  width: 50%;
-  max-width: 400px;
-  height: auto;
+.yellow-text {
+  color: #c39d56;
+}
+.cards-suggestion{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
 }
 
-.centers {
-  display: flex;
-  justify-content: center;
+a {
+  color: black;
+}
+a:hover{
+  color: #c39d56;
+  text-decoration: none !important;
 }
 
-.padding-below {
-  padding: 0px 0px 50px 0px;
-}
 
 </style>

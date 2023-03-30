@@ -25,6 +25,20 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
+    if current_user == User.find(@request.user_id)
+      @request_owner = current_user
+      @request_owner_name = "You"
+    else
+      @request_owner = User.find(@request.user_id)
+      @request_owner_name = User.find(@request.user_id)[:first_name]
+    end
+
+    if @request.item_id != nil
+      @choice = Item.find(@request.item_id)
+      @item_owner = User.find(Item.find(@request.item_id).user_id)
+      @item_owner_name = User.find(Item.find(@request.item_id).user_id)[:first_name]
+    end
+
     # @items = Item.where(request_id: params[:id])
     if @request.chatroom.nil?
       @chatroom = Chatroom.create(request: @request)
@@ -50,6 +64,7 @@ class RequestsController < ApplicationController
     if @request.save && Item.find_by(id: params[:id])
       @item = Item.find(params[:id])
       @request.item = @item
+      @request.status = "Item Requested"
       @request.save
       redirect_to request_path(@request)
     elsif @request.save
