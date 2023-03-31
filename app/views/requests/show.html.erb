@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="pt-4 text-center border-top border-bottom border-3">
-      <div class=s"h5 fw-bold">
+      <div class="h5 fw-bold">
         <%= @request.title%>
       </div>
       <p><em><%= @request.start_date.strftime("%b %d, %Y")%>-<%= @request.end_date.strftime("%b %d, %Y")%></p></em>
@@ -38,8 +38,10 @@
         <% end %>
         <% if @request.status == "Item Requested"%>
           <%= @request_owner_name %> sent a BClothes request for
-        <% elsif @request.status == "Open" %>
+        <% elsif @request.status == "Open" && @request.suggestions.first.nil? %>
           No suggestions yet
+        <% elsif @request.status == "Open" && @request.suggestions.first.nil? == false %>
+          See suggestions below
         <% end %>
       </div>
       <div class="d-flex justify-content-center align-items-center">
@@ -77,21 +79,12 @@
     </div>
     <div class="col-8 border-left">
       <div class="h5 fw-bolder yellow-text">
-        <% if current_user == @request_owner && @request.status == "Closed" %>
           Chat with friends
-        <% elsif @request.status == "Closed"  %>
-          Chat with friends
-        <% elsif current_user == @request_owner %>
-          See what your friends think
-        <% else %>
-          What should <%= @request_owner_name %> choose?
-        <% end %>
       </div>
       <%= render :partial => 'shared/chatroom_requests',
                     :locals => {request: @request, message: @message, chatroom: @chatroom, user: @user} %>
     </div>
   </div>
-
 
   <div class="d-flex justify-content-center align-items-center py-4">
 
