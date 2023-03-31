@@ -145,7 +145,7 @@ louise_hiking_boots_1_photo_3 = File.open("app/assets/images/hiking_boots_1_3.jp
 louise_hiking_boots_1.photos.attach([io: louise_hiking_boots_1_photo_3, filename: "hiking_boots_1_3", content_type: "image/jeg"])
 louise_hiking_boots_1.save!
 
-emma_suit_1 = Item.new(size: 10, colour: "Black", occasion: "Workwear", category: "Suits", brand: "Top Shop", condition: "Like new", description: "Great suit, haven't worn it bc I'm WFH", user_id: emma.id, archived: false)
+emma_suit_1 = Item.new(size: 10, colour: "Black", occasion: "Workwear", category: "Suits", brand: "Top Shop", condition: "Like new", description: "Great suit, haven't worn it bc I'm WFH now", user_id: emma.id, archived: false)
 emma_suit_1_photo_1 = File.open("app/assets/images/suit_1_1.jpeg")
 emma_suit_1.photos.attach([io: emma_suit_1_photo_1, filename: "suit_1_1", content_type: "image/jeg"])
 emma_suit_1.save!
@@ -153,13 +153,28 @@ emma_suit_1_photo_2 = File.open("app/assets/images/suit_1_2.jpeg")
 emma_suit_1.photos.attach([io: emma_suit_1_photo_2, filename: "suit_1_2", content_type: "image/jeg"])
 emma_suit_1.save!
 
-louise_suit_1 = Item.new(size: 10, colour: "Black", occasion: "Workwear", category: "Suits", brand: "Esprit", condition: "Like new", description: "Worn it to work once but apparently programmers don't wear suits...", user_id: louise.id, archived: false)
+louise_suit_1 = Item.new(size: 10, colour: "Black", occasion: "Workwear", category: "Suits", brand: "Esprit", condition: "Like new", description: "Super smart suit! Don't need it since I'm became a developer", user_id: louise.id, archived: false)
 louise_suit_1_photo_1 = File.open("app/assets/images/suit_2_1.jpeg")
 louise_suit_1.photos.attach([io: louise_suit_1_photo_1, filename: "suit_2_1", content_type: "image/jeg"])
 louise_suit_1.save!
 louise_suit_1_photo_2 = File.open("app/assets/images/suit_2_2.jpeg")
 louise_suit_1.photos.attach([io: louise_suit_1_photo_2, filename: "suit_2_2", content_type: "image/jeg"])
 louise_suit_1.save!
+
+emma_bag_1 = Item.new(size: 1, colour: "Black", occasion: "Workwear", category: "Bags", brand: "Esprit", condition: "Like new", description: "Love this bag", user_id: emma.id, archived: false)
+emma_bag_1_photo_1 = File.open("app/assets/images/bag1.png")
+emma_bag_1.photos.attach([io: emma_bag_1_photo_1, filename: "bag1", content_type: "image/jeg"])
+emma_bag_1.save!
+
+marie_bag_1 = Item.new(size: 1, colour: "Black", occasion: "Workwear", category: "Bags", brand: "Top Shop", condition: "Used but good", description: "Cute but never used it", user_id: marie.id, archived: false)
+marie_bag_1_photo_1 = File.open("app/assets/images/bag2.png")
+marie_bag_1.photos.attach([io: marie_bag_1_photo_1, filename: "bag2", content_type: "image/jeg"])
+marie_bag_1.save!
+
+paula_bag_1 = Item.new(size: 1, colour: "Brown", occasion: "Workwear", category: "Bags", brand: "Chanel", condition: "Used but good", description: "Never used it", user_id: paula.id, archived: false)
+paula_bag_1_photo_1 = File.open("app/assets/images/bag3.png")
+paula_bag_1.photos.attach([io: paula_bag_1_photo_1, filename: "bag3", content_type: "image/jeg"])
+paula_bag_1.save!
 
 #request seeds
 
@@ -169,11 +184,12 @@ emma_request = Request.create!(title: "Red Dress", description: "I need a dress 
 emma_request.save!
 
 #item requested
-louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have another wedding please could I borrow this again?", user_id: louise.id, item_id: paula_item.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
+louise_request = Request.create!(title: "Wedding outfit", description: "Hi, please could I borrow it for J&As wedding", user_id: louise.id, item_id: paula_red_dress_1.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
+marie_request_1 = Request.create!(title: "J&A's wedding", description: "Hey guys, I kinda wanted to wear a suit to the wedding (??) can anyone suggest something nice", user_id: marie.id, item_id: emma_suit_1.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
 
 #closed
-
-louise_request = Request.create!(title: "Wedding outfit", description: "Hi paula, I have a wedding to attend next week, please could I borrow your jacket?", user_id: louise.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
+louise_request_1 = Request.create!(title: "Smart bag?", description: "Can I borrow this bag", user_id: emma.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
+emma_request_1 = Request.create!(title: "Party!", description: "Party this Friday? Have a big presentation and wanna celebrate", user_id: emma.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 
@@ -184,12 +200,20 @@ suggestion_2 = Suggestion.new(request_id: emma_request.id, item_id: paula_item.i
 suggestion_3 = Suggestion.new(request_id: marie_request.id, item_id: louise_item.id)
 suggestion_4 = Suggestion.new(request_id: marie_request.id, item_id: emma_item_2.id)
 suggestion_5 = Suggestion.new(request_id: marie_request.id, item_id: elise_item_1.id)
+suggestion_6 = Suggestion.new(request_id: marie_request_1.id, item_id: emma_suit_1.id)
+suggestion_7 = Suggestion.new(request_id: louise_request.id, item_id: paula_red_dress_1.id)
+suggestion_8 = Suggestion.new(request_id: louise_request.id, item_id: marie_red_dress_1.id)
+suggestion_9 = Suggestion.new(request_id: louise_request.id, item_id: emma_red_dress_1.id)
 
 suggestion_1.save
 suggestion_2.save
 suggestion_3.save
 suggestion_4.save
 suggestion_5.save
+suggestion_6.save
+suggestion_7.save
+suggestion_8.save
+suggestion_9.save
 
 #chatroom seeds
 
