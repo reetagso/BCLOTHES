@@ -91,11 +91,81 @@ emma_item_2_photo_2 = File.open("app/assets/images/emma_item_2_photo_2.jpeg")
 emma_item_2.photos.attach([io: emma_item_2_photo_2, filename: "emma_item_2_photo_2", content_type: "image/jeg"])
 emma_item_2.save!
 
+elise_red_dress_1 = Item.new(size: 10, colour: "Red", occasion: "Wedding", category: "Dresses", brand: "Zara", condition: "Past its best", description: "Long red dress with pretty knot/bow, good for weddings/formals", user_id: elise.id, archived: false)
+elise_red_dress_1_photo_1 = File.open("app/assets/images/red_dress_1_1.jpg")
+elise_red_dress_1.photos.attach([io: elise_red_dress_1_photo_1, filename: "red_dress_1_1", content_type: "image/jeg"])
+elise_red_dress_1.save!
+elise_red_dress_1_photo_2 = File.open("app/assets/images/red_dress_1_2.jpg")
+elise_red_dress_1.photos.attach([io: elise_red_dress_1_photo_2, filename: "red_dress_1_2", content_type: "image/jeg"])
+elise_red_dress_1.save!
+
+emma_red_dress_1 = Item.new(size: 8, colour: "Red", occasion: "Wedding", category: "Dresses", brand: "Top Shop", condition: "Used but good", description: "Maxi formal dress", user_id: emma.id, archived: false)
+emma_red_dress_1_photo_1 = File.open("app/assets/images/red_dress_2_1.jpg")
+emma_red_dress_1.photos.attach([io: emma_red_dress_1_photo_1, filename: "red_dress_2_1", content_type: "image/jeg"])
+emma_red_dress_1.save!
+emma_red_dress_1_photo_2 = File.open("app/assets/images/red_dress_2_2.jpg")
+emma_red_dress_1.photos.attach([io: emma_red_dress_1_photo_2, filename: "red_dress_2_2", content_type: "image/jeg"])
+emma_red_dress_1.save!
+
+paula_red_dress_1 = Item.new(size: 10, colour: "Red", occasion: "Summer", category: "Dresses", brand: "Mango", condition: "Like new", description: "Cute flowery dress, bit long on me", user_id: paula.id, archived: false)
+paula_red_dress_1_photo_1 = File.open("app/assets/images/red_dress_4_1.jpeg")
+paula_red_dress_1.photos.attach([io: paula_red_dress_1_photo_1, filename: "red_dress_4_1", content_type: "image/jeg"])
+paula_red_dress_1.save!
+paula_red_dress_1_photo_2 = File.open("app/assets/images/red_dress_4_2.jpeg")
+paula_red_dress_1.photos.attach([io: paula_red_dress_1_photo_2, filename: "red_dress_4_2", content_type: "image/jeg"])
+paula_red_dress_1.save!
+paula_red_dress_1_photo_3 = File.open("app/assets/images/red_dress_4_3.jpeg")
+paula_red_dress_1.photos.attach([io: paula_red_dress_1_photo_3, filename: "red_dress_4_3", content_type: "image/jeg"])
+paula_red_dress_1.save!
+
+marie_red_dress_1 = Item.new(size: 12, colour: "Red", occasion: "Wedding", category: "Dresses", brand: "Serafin", condition: "Like new", description: "Formal dress, really long but stunning x", user_id: marie.id, archived: false)
+marie_red_dress_1_photo_1 = File.open("app/assets/images/red_dress_5_1.jpeg")
+marie_red_dress_1.photos.attach([io: marie_red_dress_1_photo_1, filename: "red_dress_5_1", content_type: "image/jeg"])
+marie_red_dress_1.save!
+marie_red_dress_1_photo_2 = File.open("app/assets/images/red_dress_5_2.jpeg")
+marie_red_dress_1.photos.attach([io: marie_red_dress_1_photo_2, filename: "red_dress_5_2", content_type: "image/jeg"])
+marie_red_dress_1.save!
+marie_red_dress_1_photo_3 = File.open("app/assets/images/red_dress_5_3.jpeg")
+marie_red_dress_1.photos.attach([io: marie_red_dress_1_photo_3, filename: "red_dress_5_3", content_type: "image/jeg"])
+marie_red_dress_1.save!
+
+marie_multi_trousers_1 = Item.new(size: 8, colour: "Multi", occasion: "Casual", category: "Trousers", brand: "Salutation Cachée", condition: "Like new", description: "Great for a demo or presentation day", user_id: marie.id, archived: false)
+marie_multi_trousers_photo_1 = File.open("app/assets/images/multi_trousers_1_1.jpeg")
+marie_multi_trousers_1.photos.attach([io: marie_multi_trousers_photo_1, filename: "multi_trousers_1_1", content_type: "image/jeg"])
+marie_multi_trousers_1.save!
+
+louise_hiking_boots_1 = Item.new(size: 6, colour: "Brown", occasion: "Winter", category: "Shoes", brand: "Patagonia", condition: "Used but good", description: "Comfy shoes but not hiking so much since the kid", user_id: louise.id, archived: false)
+louise_hiking_boots_1_photo_1 = File.open("app/assets/images/hiking_boots_1_1.jpeg")
+louise_hiking_boots_1.photos.attach([io: louise_hiking_boots_1_photo_1, filename: "hiking_boots_1_1", content_type: "image/jeg"])
+louise_hiking_boots_1.save!
+louise_hiking_boots_1_photo_2 = File.open("app/assets/images/hiking_boots_1_2.jpeg")
+louise_hiking_boots_1.photos.attach([io: louise_hiking_boots_1_photo_2, filename: "hiking_boots_1_2", content_type: "image/jeg"])
+louise_hiking_boots_1.save!
+louise_hiking_boots_1_photo_3 = File.open("app/assets/images/hiking_boots_1_3.jpeg")
+louise_hiking_boots_1.photos.attach([io: louise_hiking_boots_1_photo_3, filename: "hiking_boots_1_3", content_type: "image/jeg"])
+louise_hiking_boots_1.save!
+
+emma_suit_1 = Item.new(size: 10, colour: "Black", occasion: "Workwear", category: "Suits", brand: "Top Shop", condition: "Like new", description: "Great suit, haven't worn it bc I'm WFH", user_id: emma.id, archived: false)
+emma_suit_1_photo_1 = File.open("app/assets/images/suit_1_1.jpeg")
+emma_suit_1.photos.attach([io: emma_suit_1_photo_1, filename: "suit_1_1", content_type: "image/jeg"])
+emma_suit_1.save!
+emma_suit_1_photo_2 = File.open("app/assets/images/suit_1_2.jpeg")
+emma_suit_1.photos.attach([io: emma_suit_1_photo_2, filename: "suit_1_2", content_type: "image/jeg"])
+emma_suit_1.save!
+
+louise_suit_1 = Item.new(size: 10, colour: "Black", occasion: "Workwear", category: "Suits", brand: "Esprit", condition: "Like new", description: "Worn it to work once but apparently programmers don't wear suits...", user_id: louise.id, archived: false)
+louise_suit_1_photo_1 = File.open("app/assets/images/suit_2_1.jpeg")
+louise_suit_1.photos.attach([io: louise_suit_1_photo_1, filename: "suit_2_1", content_type: "image/jeg"])
+louise_suit_1.save!
+louise_suit_1_photo_2 = File.open("app/assets/images/suit_2_2.jpeg")
+louise_suit_1.photos.attach([io: louise_suit_1_photo_2, filename: "suit_2_2", content_type: "image/jeg"])
+louise_suit_1.save!
+
 #request seeds
 
 #open
 elise_request = Request.create!(title: "Hiking Boots", description: "I am going hiking in Patagonia in July, does anyone have any size 6 hiking boots I could borrow?", user_id: elise.id, start_date: "04/01/2022", end_date: "04/01/2022")
-emma_request = Request.create!(title: "Red Dress", description: "I need a dress for Charles birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id, start_date: "04/01/2022", end_date: "04/01/2022")
+emma_request = Request.create!(title: "Red Dress", description: "I need a dress for Charles' birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id, start_date: "04/01/2022", end_date: "04/01/2022")
 emma_request.save!
 
 #item requested
