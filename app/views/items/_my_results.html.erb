@@ -2,7 +2,7 @@
     <% if @items.any? %>
 
         <% @items.each do |item| %>
-          <% if item.archived == false %>
+          <% if User.find(item.user_id) == current_user %>
 
             <%= link_to item_path(item) do %>
 
