@@ -179,16 +179,17 @@ paula_bag_1.save!
 #request seeds
 
 #open
-elise_request = Request.create!(title: "Hiking Boots", description: "I am going hiking in Patagonia in July, does anyone have any size 6 hiking boots I could borrow?", user_id: elise.id, start_date: "04/01/2022", end_date: "04/01/2022")
-emma_request = Request.create!(title: "Red Dress", description: "I need a dress for Charles' birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id, start_date: "04/01/2022", end_date: "04/01/2022")
+emma_request = Request.create!(title: "Party Dress", description: "I need a dress for Charles' birthday party next weekend. I want to wear my new red heels so would love maybe something red?", user_id: emma.id, start_date: "04/01/2022", end_date: "04/01/2022")
+louise_request = Request.create!(title: "Wedding outfit", description: "Hi, does anyone have a red dress I could borrow for a wedding?", user_id: louise.id, status: "Open", start_date: "04/01/2022", end_date: "04/01/2022")
+
 emma_request.save!
 
 #item requested
-louise_request = Request.create!(title: "Wedding outfit", description: "Hi, please could I borrow it for J&As wedding", user_id: louise.id, item_id: paula_red_dress_1.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
+elise_request = Request.create!(title: "Hiking Boots", description: "Hi Louise, I am going hiking in Patagonia can I borow these boots?", user_id: elise.id, item_id: louise_hiking_boots_1.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
 marie_request_1 = Request.create!(title: "J&A's wedding", description: "Hey guys, I kinda wanted to wear a suit to the wedding (??) can anyone suggest something nice", user_id: marie.id, item_id: emma_suit_1.id, status: "Item Requested", start_date: "04/01/2022", end_date: "04/01/2022")
 
 #closed
-louise_request_1 = Request.create!(title: "Smart bag?", description: "Can I borrow this bag", user_id: emma.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
+louise_request_1 = Request.create!(title: "Smart bag?", description: "Can I borrow this bag", user_id: louise.id, item_id: paula_bag_1.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 emma_request_1 = Request.create!(title: "Party!", description: "Party this Friday? Have a big presentation and wanna celebrate", user_id: emma.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
@@ -202,8 +203,8 @@ suggestion_4 = Suggestion.new(request_id: marie_request.id, item_id: emma_item_2
 suggestion_5 = Suggestion.new(request_id: marie_request.id, item_id: elise_item_1.id)
 suggestion_6 = Suggestion.new(request_id: marie_request_1.id, item_id: emma_suit_1.id)
 suggestion_7 = Suggestion.new(request_id: louise_request.id, item_id: paula_red_dress_1.id)
-suggestion_8 = Suggestion.new(request_id: louise_request.id, item_id: marie_red_dress_1.id)
-suggestion_9 = Suggestion.new(request_id: louise_request.id, item_id: emma_red_dress_1.id)
+suggestion_8 = Suggestion.new(request_id: louise_request.id, item_id: emma_red_dress_1.id)
+
 
 suggestion_1.save
 suggestion_2.save
@@ -213,7 +214,6 @@ suggestion_5.save
 suggestion_6.save
 suggestion_7.save
 suggestion_8.save
-suggestion_9.save
 
 #chatroom seeds
 
