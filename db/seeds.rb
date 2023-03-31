@@ -191,7 +191,7 @@ marie_request_1 = Request.create!(title: "J&A's wedding", description: "Hey guys
 #closed
 louise_request_1 = Request.create!(title: "Smart bag?", description: "Can I borrow this bag", user_id: louise.id, item_id: paula_bag_1.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 emma_request_1 = Request.create!(title: "Party!", description: "Party this Friday? Have a big presentation and wanna celebrate", user_id: emma.id, item_id: paula_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
-paula_request = Request.create!(title: "Sport shirt", description: "Hola amiga, love this top, could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
+paula_request = Request.create!(title: "Swimming costume", description: "Hola amiga, love this! could I borrow it from you next Weds?", user_id: paula.id, item_id: louise_item.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 marie_request = Request.create!(title: "Beach holiday", description: "Hey does anyone have something I could borrow for a beach party?", user_id: marie.id, item_id: emma_item_2.id, status: "Closed", start_date: "04/01/2022", end_date: "04/01/2022")
 
 #suggestion seeds
