@@ -1,4 +1,4 @@
-<div class="h5 my-4">
+<div class="h5 my-4 yellow-text fw-bold">
 <% if @requests_received == nil %>
   You haven't received any Bclothes requests
 <% else %>
@@ -8,7 +8,7 @@
     <% @requests_received.each do |request| %>
       <div class="d-flex align-items-center pl-3 my-4 h5">
         <%= image_tag User.find(request.user_id).photo.key ? User.find(request.user_id).photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-        <h4 class="pl-2"><%= User.find(request.user_id)[:first_name]%></h4>
+        <h4 class="pl-2"><%= User.find(request.user_id)[:first_name]%> requested</h4>
       </div>
       <div class="d-flex shadow rounded">
         <div class="shadow m-3">
@@ -62,5 +62,10 @@
   color: #fff;
   text-decoration: none;
 }
+
+.yellow-text {
+color: #FFC65A;
+}
+
 
 </style>
