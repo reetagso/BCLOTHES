@@ -11,7 +11,7 @@
             </div>
           <% else %>
             <div class="request-user d-flex align-items-center border-bottom pb-2">
-              <%= image_tag current_user.photo.key ? current_user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle me-3", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <%= image_tag request.user.photo.key ? request.user.photo.url : "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle me-3", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
               <%= User.find(request.user_id)[:first_name] %> requested
             </div>
           <% end %>
